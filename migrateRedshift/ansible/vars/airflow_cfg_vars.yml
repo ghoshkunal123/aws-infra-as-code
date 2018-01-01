@@ -1,8 +1,0 @@
-s3_bucket_name: lisahu-finr-dataeng
-rds_user: etluser
-rds_pw: Welcome123
-rds_endpoint_host_name: tf-perf-rds
-rabbitmq_user: etluser
-rabbitmq_pw: Welcome123
-rabbitmq_host: 10.131.129.13
-rabbitmq_port: 5672
