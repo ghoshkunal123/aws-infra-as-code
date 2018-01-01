@@ -65,3 +65,7 @@ variable "elb_interval" {}
 variable "route53_hosted_zone_id" {}
 variable "route53_airflow_domain_name" {}
 variable "route53_flower_domain_name" {}
+variable "ansible_airflow_cfg_vars_file" {}
+variable "ansible_airflow_directory" {}
+variable "finr_cidr_10" {}
+variable "finr_cidr_172" {}

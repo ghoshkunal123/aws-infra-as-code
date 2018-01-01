@@ -1,7 +1,8 @@
 resource "aws_alb" "airflow" {
   name = "${var.alb_airflow_name}" 
   subnets = ["${var.subnet_private1_id}", "${var.subnet_private2_id}"]
-  security_groups = ["${var.aws_security_group_http_https_id}"]
+#  security_groups = ["${var.aws_security_group_http_https_id}"]
+  security_groups = ["${aws_security_group.airflow_alb.id}"]
   internal = true
   tags = {
       app = "${var.tag_app}"
@@ -45,7 +46,8 @@ resource "aws_alb_target_group_attachment" "airflow" {
 resource "aws_alb" "flower" {
   name = "${var.alb_flower_name}"
   subnets = ["${var.subnet_private1_id}", "${var.subnet_private2_id}"]
-  security_groups = ["${var.aws_security_group_http_https_id}"]
+#  security_groups = ["${var.aws_security_group_http_https_id}"]
+  security_groups = ["${aws_security_group.airflow_alb.id}"]
   internal = true
   tags = {
       app = "${var.tag_app}"

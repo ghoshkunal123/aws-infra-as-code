@@ -1,0 +1,91 @@
+resource "aws_security_group" "airflow_ec2" {
+  name = "tf_securityg_airflow_ec2"
+  description = "Used by airflow master and workers instances"
+  vpc_id   = "${var.vpc_id}"
+
+  #ssh-only
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+
+  #Flower_Ports
+  ingress {
+    from_port   = 5555
+    to_port     = 5555
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+
+  #postgres
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}"]
+  }
+
+  #RabbitMQ
+  ingress {
+    from_port   = 5672
+    to_port     = 5672
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}"]
+  }
+  #RabbitMQ
+  ingress {
+    from_port   = 15672
+    to_port     = 15672
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+
+  #Airflow_Ports
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+  #Airflow_Ports
+  ingress {
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+resource "aws_security_group" "airflow_alb" {
+  name = "tf_securityg_airflow_alb"
+  description = "Used by airflow alb"
+  vpc_id   = "${var.vpc_id}"
+
+  #http
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+  #https
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

@@ -74,3 +74,8 @@ elb_interval            = "30"
 route53_hosted_zone_id = "Z308WL0Y3G1YGT"
 route53_flower_domain_name = "tf-flower"
 route53_airflow_domain_name = "tf-airflow"
+
+ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible/"
+ansible_airflow_cfg_vars_file = "vars/airflow_cfg_vars.yml"
+finr_cidr_10  = "10.0.0.0/8"
+finr_cidr_172  = "172.24.0.0/22"
