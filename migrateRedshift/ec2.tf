@@ -22,8 +22,8 @@ resource "aws_instance" "master" {
       command = <<EOD
 cat <<EOF > ${var.ansible_airflow_directory}${var.ansible_airflow_cfg_vars_file}
 s3_bucket_name: ${var.s3_bucket_name}
-rds_user: ${var.dbuser}
-rds_pw: ${var.dbpassword}
+rds_user: ${var.rds_user}
+rds_pw: ${var.rds_password}
 rds_endpoint_host_name: ${var.rds_identifier}
 rabbitmq_user: ${var.rabbitmq_user}
 rabbitmq_pw: ${var.rabbitmq_password}

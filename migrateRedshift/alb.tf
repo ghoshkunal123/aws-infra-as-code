@@ -30,11 +30,11 @@ resource "aws_alb_target_group" "airflow" {
   vpc_id   = "${var.vpc_id}"
 #  target_type = "instance" #default, do not need to set
   health_check {
-    healthy_threshold = "${var.elb_healthy_threshold}"
-    unhealthy_threshold = "${var.elb_unhealthy_threshold}"
-    timeout = "${var.elb_timeout}"
+    healthy_threshold = "${var.alb_healthy_threshold}"
+    unhealthy_threshold = "${var.alb_unhealthy_threshold}"
+    timeout = "${var.alb_timeout}"
     path = "/static/pin_100.png"
-    interval = "${var.elb_interval}"
+    interval = "${var.alb_interval}"
   }
 }
 resource "aws_alb_target_group_attachment" "airflow" {
@@ -73,11 +73,11 @@ resource "aws_alb_target_group" "flower" {
   protocol = "HTTP"
   vpc_id   = "${var.vpc_id}"
   health_check {
-    healthy_threshold = "${var.elb_healthy_threshold}"
-    unhealthy_threshold = "${var.elb_unhealthy_threshold}"
-    timeout = "${var.elb_timeout}"
+    healthy_threshold = "${var.alb_healthy_threshold}"
+    unhealthy_threshold = "${var.alb_unhealthy_threshold}"
+    timeout = "${var.alb_timeout}"
     path = "/"
-    interval = "${var.elb_interval}"
+    interval = "${var.alb_interval}"
   }
 }
 resource "aws_alb_target_group_attachment" "flower" {

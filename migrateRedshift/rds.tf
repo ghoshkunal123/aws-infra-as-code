@@ -3,11 +3,11 @@ resource "aws_db_instance" "db" {
   allocated_storage     = 20
   engine                = "postgres"
   engine_version        = "9.6.2"
-  instance_class        = "${var.db_instance_class}"
-  name                  = "${var.dbname}"
-  username              = "${var.dbuser}"
-  password              = "${var.dbpassword}"
-  db_subnet_group_name  = "${var.db_subnet_group_name}"
+  instance_class        = "${var.rds_instance_class}"
+  name                  = "${var.rds_name}"
+  username              = "${var.rds_user}"
+  password              = "${var.rds_password}"
+  db_subnet_group_name  = "${var.rds_subnet_group_name}"
   vpc_security_group_ids = ["${var.rds_vpc_security_group_id}"]
   backup_retention_period  = 0 # day
   multi_az              = false
