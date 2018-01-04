@@ -7,7 +7,11 @@ subnet_private1_id      = "subnet-0fca106a"
 subnet_private2_id      = "subnet-e206d3ba"
 finr_cidr_10  = "10.0.0.0/8"
 finr_cidr_172  = "172.24.0.0/22"
+finr_cidr_sn1  = "10.131.129.0/24"
+finr_cidr_sn2  = "10.131.143.0/24"
+finr_cidr_advisor_center_store = "172.21.0.0/16" 
 route53_hosted_zone_id = "Z308WL0Y3G1YGT"
+rds_subnet_group_name    = "default-vpc-d671b7b3"
 
 #ec2 key pair: you need to configure your own ec2 key pair
 ec2_key_name                = "lisahu_ec2_key"
@@ -28,8 +32,6 @@ ec2_worker_count  = "2"
 
 # rds
 rds_identifier          = "tf-perf-rds"
-rds_vpc_security_group_id  = "sg-9f5399f9"
-rds_subnet_group_name    = "default-vpc-d671b7b3"
 rds_instance_class       = "db.t2.large"
 rds_name                  = "airflow"
 rds_user                  = "etluser"

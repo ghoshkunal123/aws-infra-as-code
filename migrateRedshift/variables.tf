@@ -7,7 +7,11 @@ variable "subnet_private1_id" {}
 variable "subnet_private2_id" {}
 variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}
+variable "finr_cidr_sn1" {} #TBD: should use sn1 data source
+variable "finr_cidr_sn2" {} #TBD: should use sn2 data source
+variable "finr_cidr_advisor_center_store" {} 
 variable "route53_hosted_zone_id" {}
+variable "rds_subnet_group_name" {}
 
 #s3
 variable "s3_bucket_name" {}
@@ -26,8 +30,6 @@ variable "ec2_worker_count" {}
 variable "iam_instance_profile" {}
 
 #rds
-variable "rds_vpc_security_group_id" {}
-variable "rds_subnet_group_name" {}
 variable "rds_instance_class" {}
 variable "rds_name" {}
 variable "rds_user" {}
