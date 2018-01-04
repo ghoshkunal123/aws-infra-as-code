@@ -8,7 +8,6 @@ resource "aws_db_instance" "db" {
   username              = "${var.rds_user}"
   password              = "${var.rds_password}"
   db_subnet_group_name  = "${var.rds_subnet_group_name}"
-#  vpc_security_group_ids = ["${var.rds_vpc_security_group_id}"]
   vpc_security_group_ids = ["${aws_security_group.airflow_rds.id}"]
   backup_retention_period  = 0 # day
   multi_az              = false
