@@ -2,6 +2,14 @@ resource "aws_security_group" "airflow_ec2" {
   name = "tf_securityg_airflow_ec2"
   description = "Used by airflow master and workers instances"
   vpc_id   = "${var.vpc_id}"
+  tags = {
+      app = "${var.tag_app}"
+      Project = "${var.tag_Project}"
+      Owner = "${var.tag_Owner}"
+      CostCenter = "${var.tag_CostCenter}"
+      env = "${var.tag_env}"
+      Name = "tf_securityg_airflow"
+  }
 
   #ssh-only
   ingress {

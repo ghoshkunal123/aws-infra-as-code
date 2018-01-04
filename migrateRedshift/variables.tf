@@ -8,18 +8,19 @@ variable "ec2_pw" {}
 variable "ec2_private_key_name" {}
 variable "ec2_instance_type" {}
 variable "ec2_ami" {}
+variable "ec2_worker_count" {}
+
+#network
 variable "vpc_id" {}
 variable "subnet_private1_id" {}
 variable "subnet_private2_id" {}
-variable "aws_security_group_sshonly_id" {}
-variable "aws_security_group_Flower_Ports_id" {}
-variable "aws_security_group_Postgres_id" {}
-variable "aws_security_group_RabbitMQ_id" {}
-variable "aws_security_group_Airflow_Ports_id" {}
-variable "aws_security_group_http_https_id" {}
-variable "iam_instance_profile" {}
-variable "gitlab_private_token" {}
+variable "finr_cidr_10" {}
+variable "finr_cidr_172" {}
 
+#iam
+variable "iam_instance_profile" {}
+
+#rds
 variable "rds_vpc_security_group_id" {}
 variable "db_subnet_group_name" {}
 variable "db_instance_class" {}
@@ -27,6 +28,8 @@ variable "dbname" {}
 variable "dbuser" {}
 variable "dbpassword" {}
 variable "rds_identifier" {}
+
+#tags
 variable "tag_app" {}
 variable "tag_Project" {}
 variable "tag_Owner" {}
@@ -35,9 +38,10 @@ variable "tag_env" {}
 variable "rds_tag_Name" {} 
 variable "rs_tag_Name" {}
 variable "ec2_master_tag_Name" {}
-variable "ec2_agent_tag_Name" {}
+variable "ec2_worker_tag_Name" {}
 variable "ec2_tag_patch_group" {}
 
+#redshift
 variable "rs_cluster_name" {}
 variable "rs_db_name" {}
 variable "rs_master_user" {}
@@ -55,7 +59,6 @@ variable "alb_airflow_name" {}
 variable "targetgroup_airflow_name" {}
 variable "alb_flower_name" {}
 variable "targetgroup_flower_name" {}
-variable "domain_name" {}
 
 variable "elb_healthy_threshold" {}
 variable "elb_unhealthy_threshold" {}
@@ -67,5 +70,3 @@ variable "route53_airflow_domain_name" {}
 variable "route53_flower_domain_name" {}
 variable "ansible_airflow_cfg_vars_file" {}
 variable "ansible_airflow_directory" {}
-variable "finr_cidr_10" {}
-variable "finr_cidr_172" {}

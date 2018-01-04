@@ -53,7 +53,7 @@
   - name: Install unixodbc-dev
     become_user: root
     apt: name=unixodbc-dev state=installed
-  - name: install pyodbc, pandas, boto3, awscli, flask-bcrypt using pip
+  - name: install pyodbc, pandas, boto3, awscli, flask-bcrypt, flower using pip
     become_user: root
     pip:
       name: "{{ item }}"

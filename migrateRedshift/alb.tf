@@ -1,7 +1,6 @@
 resource "aws_alb" "airflow" {
   name = "${var.alb_airflow_name}" 
   subnets = ["${var.subnet_private1_id}", "${var.subnet_private2_id}"]
-#  security_groups = ["${var.aws_security_group_http_https_id}"]
   security_groups = ["${aws_security_group.airflow_alb.id}"]
   internal = true
   tags = {
@@ -40,13 +39,12 @@ resource "aws_alb_target_group" "airflow" {
 }
 resource "aws_alb_target_group_attachment" "airflow" {
     target_group_arn = "${aws_alb_target_group.airflow.arn}"
-    target_id        = "${aws_instance.master1.id}"
+    target_id        = "${aws_instance.master.id}"
     port             = 8080
 }
 resource "aws_alb" "flower" {
   name = "${var.alb_flower_name}"
   subnets = ["${var.subnet_private1_id}", "${var.subnet_private2_id}"]
-#  security_groups = ["${var.aws_security_group_http_https_id}"]
   security_groups = ["${aws_security_group.airflow_alb.id}"]
   internal = true
   tags = {
@@ -84,6 +82,6 @@ resource "aws_alb_target_group" "flower" {
 }
 resource "aws_alb_target_group_attachment" "flower" {
     target_group_arn = "${aws_alb_target_group.flower.arn}"
-    target_id        = "${aws_instance.master1.id}"
+    target_id        = "${aws_instance.master.id}"
     port             = 5555
 }
