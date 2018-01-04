@@ -1,0 +1,49 @@
+---
+- name: Microsoft SQL Server  ODBC driver
+  become_user: root
+  become: yes
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+- name: test if rabbitmq apt-key is added
+  shell: apt-key list |grep Microsoft
+  register: hello
+- debug: msg="{{ hello.stdout }}"
+- name: download mssql-release.list
+  become_user: root
+  get_url: url=https://packages.microsoft.com/config/ubuntu/16.04/prod.list dest=/etc/apt/sources.list.d/mssql-release.list
+- name: Upgrade apt  if needed.
+  become_user: root
+  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+- name: Install SQL Server prerequisites
+  become_user: root
+  apt:
+    name: "{{item}}"
+    state: present
+    update_cache: yes
+  with_items:
+    - msodbcsql
+    - mssql-tools
+  environment:
+    ACCEPT_EULA: Y
+- name: ensure .bash_profile exists
+  copy:
+    content: ""
+    dest: "{{ remote_home }}/.bash_profile"
+    force: no
+- name: ensure .bashrc exists
+  copy:
+    content: ""
+    dest: "{{ remote_home }}/.bashrc"
+    force: no
+- name: append a line to .bash_profile if the line does not exist
+  lineinfile:
+    path: "{{ remote_home }}/.bash_profile"
+    line: 'export PATH="$PATH:/opt/mssql-tools/bin"'
+- name: add a line to .bash_rc if the line does not exist
+  lineinfile:
+    path: "{{ remote_home }}/.bashrc"
+    line: 'export PATH="$PATH:/opt/mssql-tools/bin"'
+- name: source "{{ remote_home }}/.bashrc"
+  shell: . "{{ remote_home }}/.bashrc"
+

@@ -1,0 +1,53 @@
+---
+- name: download erlang-solutions_1.0_all.deb
+  become_user: root
+  get_url: url=https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb dest=/tmp
+- name: install deb
+  become_user: root
+  apt:
+    deb: /tmp/erlang-solutions_1.0_all.deb
+- name: Update apt if needed.
+  become_user: root
+  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+- name: install erlang, erlong-nox
+  become_user: root
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+  - erlang
+  - erlang-nox
+- name: ensure rabbitmq.list exists
+  become_user: root
+  copy:
+    content: ""
+    dest: /etc/apt/sources.list.d/rabbitmq.list
+    force: no
+- name: append the line to rabbitmq.list if that line does not exist
+  become_user: root
+  lineinfile:
+    path: /etc/apt/sources.list.d/rabbitmq.list
+    line: 'deb http://www.rabbitmq.com/debian/ testing main'
+- name: wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
+  become_user: root
+  apt_key:
+    url: https://www.rabbitmq.com/rabbitmq-release-signing-key.asc
+    state: present
+- name: test if rabbitmq apt-key is added
+  shell: apt-key list |grep RabbitMQ
+  register: hello
+- debug: msg="{{ hello.stdout }}"
+- name: Update and upgrade apt if needed.
+  become_user: root
+  apt: update_cache=yes upgrade=dist cache_valid_time=3600
+- name: install rabbitmq-server
+  become_user: root
+  apt: name=rabbitmq-server state=installed
+- name: add rabbitmq users
+  become_user: root
+  rabbitmq_user: user="{{ rabbitmq_user }}" password="{{ rabbitmq_pw }}" tags=administrator,"{{ rabbitmq_user }}" vhost=/ configure_priv=.* write_priv=.* read_priv=.* state=present
+- name: Enables the rabbitmq_management plugin
+  become_user: root
+  rabbitmq_plugin:
+    names: rabbitmq_management
+    state: enabled

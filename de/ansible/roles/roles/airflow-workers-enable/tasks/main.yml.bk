@@ -1,0 +1,12 @@
+---
+- name: systemctl enable airflow-worker.service
+  become_user: root
+  systemd:
+    name: airflow-worker.service
+    enabled: yes
+  notify: start service airflow-worker
+#- name: start service airflow-worker
+#  become_user: root
+#  service:
+#    name: airflow-worker
+#    state: started

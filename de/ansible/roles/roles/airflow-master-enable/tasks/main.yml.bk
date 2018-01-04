@@ -1,0 +1,19 @@
+---
+- name: systemctl enable airflow-webserver.service airflow-scheduler.service,airflow-flower.service
+  become_user: root
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+  - 'airflow-webserver.service'
+  - 'airflow-scheduler.service'
+  - 'airflow-flower.service'
+  notify: start service airflow-webserver and service airflow-flower
+#- name: start service airflow-webserver and service airflow-flower
+#  become_user: root
+#  service:
+#    name: "{{ item }}"
+#    state: started
+#  with_items:
+#  - 'airflow-webserver'
+#  - 'airflow-flower'
