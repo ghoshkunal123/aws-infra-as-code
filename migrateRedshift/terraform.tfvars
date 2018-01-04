@@ -17,6 +17,10 @@ rds_subnet_group_name    = "default-vpc-d671b7b3"
 ec2_key_name                = "lisahu_ec2_key"
 ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/lisahu_ec2_key.pem" 
 
+#ansible
+ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible/"
+ansible_airflow_cfg_vars_file = "vars/airflow_cfg_vars.yml"
+
 #s3
 s3_bucket_name          = "lisahu-finr-dataeng"
 
@@ -77,7 +81,3 @@ rs_tag_Name            = "finr-dw-perf"
 ec2_master_tag_Name = "tf-airflow-master"
 ec2_worker_tag_Name = "tf-airflow-worker"
 ec2_tag_patch_group = "ANLY-2717-Ubuntu"
-
-#ansible
-ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible/"
-ansible_airflow_cfg_vars_file = "vars/airflow_cfg_vars.yml"
