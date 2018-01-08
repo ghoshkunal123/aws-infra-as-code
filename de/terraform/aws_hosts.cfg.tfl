@@ -1,6 +1,0 @@
-[master]
-${master_host}
-[workers]
-${workers_hosts}
-[local]
-localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python
