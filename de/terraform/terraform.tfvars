@@ -7,8 +7,6 @@ subnet_private1_id      = "subnet-0fca106a"
 subnet_private2_id      = "subnet-e206d3ba"
 finr_cidr_10  = "10.0.0.0/8"
 finr_cidr_172  = "172.24.0.0/22"
-finr_cidr_sn1  = "10.131.129.0/24"
-finr_cidr_sn2  = "10.131.143.0/24"
 finr_cidr_advisor_center_store = "172.21.0.0/16" 
 route53_hosted_zone_id = "Z308WL0Y3G1YGT"
 rds_subnet_group_name    = "default-vpc-d671b7b3"
@@ -18,11 +16,12 @@ ec2_key_name                = "lisahu_ec2_key"
 ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/lisahu_ec2_key.pem" 
 
 #ansible
+#TBD: may not need to configure, terraform will figure out the location
 ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible/"
 ansible_airflow_cfg_vars_file = "vars/airflow_cfg_vars.yml"
 
 #s3
-s3_bucket_name          = "lisahu-finr-dataeng"
+s3_bucket_name          = "tf-finr-dataeng"
 
 #iam
 iam_instance_profile  = "iAirFlowDev" 
@@ -49,7 +48,6 @@ rs_master_password      = "Welcome123"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
 rs_number_of_nodes      = 4
-rs_vpc_security_group_id  = "sg-6b09d00c"
 rs_iam_role            = "arn:aws:iam::224919220385:role/eRedshiftFinrAdmin"
 
 #rabbitmq

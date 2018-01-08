@@ -1,10 +1,10 @@
-resource "aws_redshift_subnet_group" "perf" {
+resource "aws_redshift_subnet_group" "analytics" {
   name       = "tf-perf-us-west-1a"
   subnet_ids = ["${var.subnet_private1_id}"]
 }
-resource "aws_redshift_cluster" "perf" {
+resource "aws_redshift_cluster" "analytics" {
   cluster_identifier = "${var.rs_cluster_name}"
-  database_name      = "${var.dbname}"
+  database_name      = "${var.rs_db_name}"
   master_username    = "${var.rs_master_user}" 
   master_password    = "${var.rs_master_password}"
   node_type          = "${var.rs_node_type}"
@@ -13,8 +13,8 @@ resource "aws_redshift_cluster" "perf" {
   preferred_maintenance_window  = "Thu:11:30-Thu:12:00" 
   cluster_parameter_group_name  = "de-parameter-group"
   availability_zone  = "us-west-1a"
-  vpc_security_group_ids = ["${var.rs_vpc_security_group_id}"]
-  cluster_subnet_group_name = "${aws_redshift_subnet_group.perf.id}"
+  vpc_security_group_ids = ["${aws_security_group.airflow_redshift.id}"]
+  cluster_subnet_group_name = "${aws_redshift_subnet_group.analytics.id}"
 
   publicly_accessible = false
   encrypted          = true

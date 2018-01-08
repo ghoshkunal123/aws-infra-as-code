@@ -1,0 +1,11 @@
+#!/bin/bash
+# ---------- create a etluser with group de
+sudo groupadd de
+sudo useradd -m -d /home/${ec2_user}/ -G sudo,de ${ec2_user}
+echo -e "${ec2_pw}\n${ec2_pw}\n" | sudo passwd ${ec2_user}
+#this is to allow the user login with password
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.bk
+sudo sed -i -e '/^PasswordAuthentication / s/ .*/ yes/' /etc/ssh/sshd_config 
+sudo service sshd reload
+#this is to let the user run sudo without password
+sudo echo "${ec2_user} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/90-cloud-init-${ec2_user}

@@ -5,10 +5,9 @@ variable "aws_profile" {}
 variable "vpc_id" {}
 variable "subnet_private1_id" {}
 variable "subnet_private2_id" {}
+
 variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}
-variable "finr_cidr_sn1" {} #TBD: should use sn1 data source
-variable "finr_cidr_sn2" {} #TBD: should use sn2 data source
 variable "finr_cidr_advisor_center_store" {} 
 variable "route53_hosted_zone_id" {}
 variable "rds_subnet_group_name" {}
@@ -45,7 +44,6 @@ variable "rs_node_type" {}
 variable "rs_cluster_type" {}
 variable "rs_number_of_nodes" {}
 variable "rs_iam_role" {}
-variable "rs_vpc_security_group_id" {}
 
 #rabbitmq
 variable "rabbitmq_user" {}

@@ -1,4 +1,4 @@
-resource "aws_db_instance" "db" {
+resource "aws_db_instance" "rds" {
   identifier            =  "${var.rds_identifier}"
   allocated_storage     = 20
   engine                = "postgres"
@@ -26,4 +26,7 @@ resource "aws_db_instance" "db" {
       env = "${var.tag_env}"
       Name = "${var.rds_tag_Name}"     
   }
+}
+output "rds_address" {
+    value = ["${aws_db_instance.rds.address}"]
 }
