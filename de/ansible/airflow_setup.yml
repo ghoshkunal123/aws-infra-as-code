@@ -20,6 +20,7 @@
     - python3-pip-setup # root
     - python-depended-tools-setup # root
     - airflow-setup #root
+    - ssm-agent-setup #root
 ######### Setting up RabbitMQ: master only
 - hosts: master
   remote_user: etluser
