@@ -5,7 +5,7 @@ resource "aws_instance" "master" {
   key_name = "${var.ec2_key_name}"
   vpc_security_group_ids = ["${aws_security_group.airflow_ec2.id}"]
 
-  subnet_id = "${var.subnet_private1_id}"
+  subnet_id = "${data.aws_subnet.finr_private1.id}"
   iam_instance_profile = "${var.iam_instance_profile}"
   user_data = "${data.template_file.user_data.rendered}"
   tags = {
@@ -25,7 +25,7 @@ resource "aws_instance" "worker" {
   
   key_name = "${var.ec2_key_name}"
   vpc_security_group_ids = ["${aws_security_group.airflow_ec2.id}"]  
-  subnet_id = "${var.subnet_private1_id}"
+  subnet_id = "${data.aws_subnet.finr_private1.id}"
   iam_instance_profile = "${var.iam_instance_profile}"
   user_data = "${data.template_file.user_data.rendered}"
   tags = {
@@ -50,7 +50,7 @@ data "template_file" "user_data" {
       template = "${file("templates/airflow_setup_adduser.sh.tfl")}"
       vars {
         ec2_user = "${var.ec2_user}"
-        ec2_pw = "${var.ec2_pw}"
+        ec2_pw = "${var.ec2_password}"
       }
 }
 # this template creates aws_hosts inventory used by ansible

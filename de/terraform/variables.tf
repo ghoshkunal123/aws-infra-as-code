@@ -20,7 +20,7 @@ variable "ec2_key_name" {}
 variable "ec2_private_key_name" {}
 
 variable "ec2_user" {}
-variable "ec2_pw" {}
+variable "ec2_password" {}
 variable "ec2_instance_type" {}
 variable "ec2_ami" {}
 variable "ec2_worker_count" {}

@@ -5,16 +5,16 @@ resource "null_resource" "ansible" {
 
 # this local-exec creates aws_hosts so that ansible knows who are masters and workers.
     provisioner "local-exec" {
-      command = "echo '${ data.template_file.aws_hosts.rendered }' > ${var.ansible_airflow_directory}aws_hosts"
+      command = "echo '${ data.template_file.aws_hosts.rendered }' > ${var.ansible_airflow_directory}/aws_hosts"
     }
     provisioner "local-exec" {
-      command = "sleep 60 && ansible-playbook -i ${var.ansible_airflow_directory}aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}setup_ssh_authorized_key.yml --extra-vars \"user=etluser\""
+      command = "sleep 1 && ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}/setup_ssh_authorized_key.yml --extra-vars \"user=etluser\""
     }
 
 # this local-exec creates ansible airflow vars file, which will be used by ansible jinja2 to create airflow.cfg
     provisioner "local-exec" {
       command = <<EOD
-cat <<EOF > ${var.ansible_airflow_directory}${var.ansible_airflow_cfg_vars_file}
+cat <<EOF > ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file}
 s3_bucket_name: ${var.s3_bucket_name}
 rds_user: ${var.rds_user}
 rds_pw: ${var.rds_password}
@@ -28,11 +28,11 @@ EOD
     }
 # this local-exec encrypts the ansible airflow vars file to protect the sensitive information
     provisioner "local-exec" {
-      command = "ansible-vault encrypt ${var.ansible_airflow_directory}${var.ansible_airflow_cfg_vars_file} --ask-vault-pass"
+      command = "ansible-vault encrypt ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file} --ask-vault-pass"
     }
 
 # uncomment it if you want to run ansible in terraform
 #    provisioner "local-exec" {
-#       command = "ansible-playbook -i ${var.ansible_airflow_directory}aws_hosts ${var.ansible_airflow_directory}airflow_setup.yml --skip-tags gitlab"
+#       command = "ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts ${var.ansible_airflow_directory}/airflow_setup.yml --ask-vault-pass"
 #    }
 }
