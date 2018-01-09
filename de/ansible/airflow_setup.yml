@@ -1,15 +1,13 @@
 - name: a play that runs entirely on the ansible host
   hosts: 127.0.0.1
   connection: local
-  vars:
-    local_ansible_dir: /Users/lhu/Documents/source_code/ansible
   tasks:
   - name: check out a git repository
     git:
       repo: git@gitlab.feicore.io:DataEngineering/de-datapipeline.git
-      #repo: git://gitlab.feicore.io:DataEngineering/de-datapipeline.git
-      dest: "{{ local_ansible_dir }}/git_download/workspace/de-datapipeline"
+      dest: "{{ git_checkout_dir }}"
       update: no
+      version: "{{ git_commit_version }}"
     tags: gitlab
 ######## Upgrade OS and install required python packages
 - hosts: master:workers
@@ -18,9 +16,6 @@
   become_user: etluser #TBD: should I change it to root? 
 #  become_method: sudo
   gather_facts: no
-  vars:
-    remote_home: /home/etluser
-    local_ansible_dir: /Users/lhu/Documents/source_code/ansible
   roles:
     - python3-pip-setup # root
     - python-depended-tools-setup # root
@@ -29,11 +24,11 @@
 - hosts: master
   remote_user: etluser
   become: yes
-  become_user: etluser #TBD: should I change it to root?
+  become_user: etluser 
   become_method: sudo
   gather_facts: no
   vars_files:
-  - vars/airflow_cfg_vars.yml
+  - group_vars/airflow_cfg_vars.yml
 
   roles: 
     - rabbitmq-setup #root
@@ -44,15 +39,12 @@
   become_user: etluser
   become_method: sudo
   gather_facts: no
-  vars:
-    remote_home: /home/etluser
-    local_ansible_dir: /Users/lhu/Documents/source_code/ansible
   vars_files: 
-  - vars/airflow_cfg_vars.yml
+  - group_vars/airflow_cfg_vars.yml
 
   tasks:
   - name: modify parameters of remote airflow.cfg
-    template: src=files/airflow.cfg.j2 dest={{ remote_home }}/airflow/airflow.cfg owner=etluser group=etluser mode=664
+    template: src=templates/airflow.cfg.j2 dest={{ remote_home }}/airflow/airflow.cfg owner=etluser group=etluser mode=664
 - hosts: master
   remote_user: etluser
   become: yes
@@ -72,9 +64,6 @@
   become_user: etluser
   become_method: sudo
   gather_facts: no
-  vars:
-    remote_home: /home/etluser
-    local_ansible_dir: /Users/lhu/Documents/source_code/ansible
   pre_tasks:
   - name: Creates directory dags
     file: path="{{ remote_home }}/airflow/dags" state=directory
@@ -84,7 +73,7 @@
     file: path="{{ remote_home }}/airflow/run" state=directory mode=0777
   - name: copy from local directory to remote
     copy:
-      src: "{{ local_ansible_dir }}/git_download/workspace/de-datapipeline/Airflow/dags/"
+      src: "{{ git_checkout_dir }}/Airflow/dags/"
       dest: "{{ remote_home }}/airflow/dags/"
       force: no
   - name: Creates directory /mnt/etl
@@ -102,21 +91,21 @@
   tasks:
   - name: Creates directory /etc/systemd/system if not exist (should already be there)
     file: path=/etc/systemd/system state=directory
-  - name: copy airflow files from local git_download to remote /etc/systemd/system
+  - name: copy airflow files from local git_checkout_dir to remote /etc/systemd/system
     become_user: root 
     copy:
       src: "{{ item }}"
       dest: /etc/systemd/system
       force: no
     with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
-      - "{{ local_ansible_dir }}/git_download/workspace/de-datapipeline/Airflow/airflow-*.service"
+      - "{{ git_checkout_dir }}/Airflow/airflow-*.service"
   - name: Creates directory /etc/sysconfig if not exist (should be new)
     become_user: root 
     file: path=/etc/sysconfig state=directory
   - name: copy airflow files from source to remote /etc/sysconfig
     become_user: root 
     copy: #copy airflow (it is a file) to /etc/sysconfig (it is a directory)
-      src: "{{ local_ansible_dir }}/git_download/workspace/de-datapipeline/Airflow/airflow"
+      src: "{{ git_checkout_dir }}/Airflow/airflow"
       dest: /etc/sysconfig/
       force: no
 ######### Setting up Airflow Services to Run on Machine Startup
