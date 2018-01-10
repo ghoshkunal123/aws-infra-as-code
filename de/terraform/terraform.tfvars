@@ -15,6 +15,11 @@ rds_subnet_group_name    = "default-vpc-d671b7b3"
 ec2_key_name                = "lisahu_ec2_key"
 ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/lisahu_ec2_key.pem" 
 
+#ansible
+#TBD: may not need to configure, terraform will figure out the location
+ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible"
+ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
+
 #s3
 s3_bucket_name          = "tf-finr-dataeng"
 
@@ -33,13 +38,11 @@ rds_identifier          = "tf-perf-rds"
 rds_instance_class       = "db.t2.large"
 rds_name                  = "airflow"
 rds_user                  = "etluser"
-#rds_password              = "Welcome123"
 
 # redshift
 rs_cluster_name         = "tf-perf-cluster"
 rs_db_name              = "analytics"
 rs_master_user          = "etluser"
-#rs_master_password      = "Welcome123"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
 rs_number_of_nodes      = 4
@@ -47,7 +50,6 @@ rs_iam_role            = "arn:aws:iam::224919220385:role/eRedshiftFinrAdmin"
 
 #rabbitmq
 rabbitmq_user           = "etluser"
-#rabbitmq_password       = "Welcome123"
 
 #alb
 alb_airflow_name        = "tf-airflow-alb"
@@ -74,7 +76,3 @@ rs_tag_Name            = "finr-dw-perf"
 ec2_master_tag_Name = "tf-airflow-master"
 ec2_worker_tag_Name = "tf-airflow-worker"
 ec2_tag_patch_group = "ANLY-2717-Ubuntu"
-
-#ansible
-ansible_airflow_directory = "../ansible"
-ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
