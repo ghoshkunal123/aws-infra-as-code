@@ -1,0 +1,18 @@
+--- #install ssm-agent for ubuntu 16.4
+- name: Creates directory /tmp/ssm
+  file: path=/tmp/ssm state=directory
+- name: wget https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb
+  become_user: root
+  get_url: url=https://s3.amazonaws.com/ec2-downloads-windows/SSMAgent/latest/debian_amd64/amazon-ssm-agent.deb dest=/tmp/ssm 
+- name: sudo dpkg -i amazon-ssm-agent.deb
+  become_user: root
+  apt: deb=/tmp/ssm/amazon-ssm-agent.deb state=present
+- name: sudo systemctl enable amazon-ssm-agent
+  become_user: root
+  systemd:
+    name: amazon-ssm-agent
+    state: started
+    enabled: yes
+    daemon-reload: yes
+  tags: ssm
+  
