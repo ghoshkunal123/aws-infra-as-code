@@ -1,14 +1,15 @@
 resource "aws_security_group" "airflow_ec2" {
-  name = "tf_securityg_airflow_ec2"
+  name        = "tf_securityg_airflow_ec2"
   description = "Used by airflow master and workers instances"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
+
   tags = {
-      app = "${var.tag_app}"
-      Project = "${var.tag_Project}"
-      Owner = "${var.tag_Owner}"
-      CostCenter = "${var.tag_CostCenter}"
-      env = "${var.tag_env}"
-      Name = "tf_securityg_airflow"
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${var.tag_env}"
+    Name       = "tf_securityg_airflow"
   }
 
   #ssh-only
@@ -42,6 +43,7 @@ resource "aws_security_group" "airflow_ec2" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}"]
   }
+
   #RabbitMQ
   ingress {
     from_port   = 15672
@@ -57,6 +59,7 @@ resource "aws_security_group" "airflow_ec2" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
+
   #Airflow_Ports
   ingress {
     from_port   = 8081
@@ -64,6 +67,7 @@ resource "aws_security_group" "airflow_ec2" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -71,17 +75,19 @@ resource "aws_security_group" "airflow_ec2" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "airflow_alb" {
-  name = "tf_securityg_airflow_alb"
+  name        = "tf_securityg_airflow_alb"
   description = "Used by airflow alb"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
+
   tags = {
-      app = "${var.tag_app}"
-      Project = "${var.tag_Project}"
-      Owner = "${var.tag_Owner}"
-      CostCenter = "${var.tag_CostCenter}"
-      env = "${var.tag_env}"
-      Name = "tf_https"
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${var.tag_env}"
+    Name       = "tf_https"
   }
 
   #http
@@ -91,6 +97,7 @@ resource "aws_security_group" "airflow_alb" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_advisor_center_store}"]
   }
+
   #https
   ingress {
     from_port   = 443
@@ -98,6 +105,7 @@ resource "aws_security_group" "airflow_alb" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_advisor_center_store}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -105,25 +113,30 @@ resource "aws_security_group" "airflow_alb" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "airflow_rds" {
-  name = "tf_securityg_airflow_rds"
-  description = "Used by airflow rds" 
-  vpc_id   = "${var.vpc_id}"
+  name        = "tf_securityg_airflow_rds"
+  description = "Used by airflow rds"
+  vpc_id      = "${var.vpc_id}"
+
   tags = {
-      app = "${var.tag_app}"
-      Project = "${var.tag_Project}"
-      Owner = "${var.tag_Owner}"
-      CostCenter = "${var.tag_CostCenter}"
-      env = "${var.tag_env}"
-      Name = "tf_PostgrePort"
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${var.tag_env}"
+    Name       = "tf_PostgrePort"
   }
+
   ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-#    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}", "${var.finr_cidr_sn2}"]
+    from_port = 5432
+    to_port   = 5432
+    protocol  = "tcp"
+
+    #    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}", "${var.finr_cidr_sn2}"]
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${data.aws_subnet.finr_private1.cidr_block}", "${data.aws_subnet.finr_private2.cidr_block}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -131,25 +144,30 @@ resource "aws_security_group" "airflow_rds" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "airflow_redshift" {
-  name = "tf_securityg_airflow_redshift"
+  name        = "tf_securityg_airflow_redshift"
   description = "Used by airflow redshift"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id      = "${var.vpc_id}"
+
   tags = {
-      app = "${var.tag_app}"
-      Project = "${var.tag_Project}"
-      Owner = "${var.tag_Owner}"
-      CostCenter = "${var.tag_CostCenter}"
-      env = "${var.tag_env}"
-      Name = "tf_RedshiftPort"
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${var.tag_env}"
+    Name       = "tf_RedshiftPort"
   }
+
   ingress {
-    from_port   = 5439
-    to_port     = 5439
-    protocol    = "tcp"
-#    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}"]
+    from_port = 5439
+    to_port   = 5439
+    protocol  = "tcp"
+
+    #    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}"]
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${data.aws_subnet.finr_private1.cidr_block}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
