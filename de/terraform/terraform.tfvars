@@ -12,12 +12,11 @@ route53_hosted_zone_id = "Z308WL0Y3G1YGT"
 rds_subnet_group_name    = "default-vpc-d671b7b3"
 
 #ec2 key pair: you need to configure your own ec2 key pair
-ec2_key_name                = "lisahu_ec2_key"
-ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/lisahu_ec2_key.pem" 
+ec2_key_name                = "finr_devops_keypair"
+ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/finr_devops_keypair.pem"
 
 #ansible
-#TBD: may not need to configure, terraform will figure out the location
-ansible_airflow_directory = "/Users/lhu/Documents/source_code/ansible"
+ansible_airflow_directory = "../ansible"
 ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
 
 #s3

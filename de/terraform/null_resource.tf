@@ -8,7 +8,7 @@ resource "null_resource" "ansible" {
       command = "echo '${ data.template_file.aws_hosts.rendered }' > ${var.ansible_airflow_directory}/aws_hosts"
     }
     provisioner "local-exec" {
-      command = "sleep 1 && ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}/setup_ssh_authorized_key.yml --extra-vars \"user=etluser\""
+      command = "sleep 60 && ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}/setup_ssh_authorized_key.yml -e \"user=etluser\""
     }
 
 # this local-exec creates ansible airflow vars file, which will be used by ansible jinja2 to create airflow.cfg
@@ -31,7 +31,7 @@ EOD
       command = "ansible-vault encrypt ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file} --ask-vault-pass"
     }
 
-# uncomment it if you want to run ansible in terraform
+# uncomment it if you want to let ansible configure airflow from terraform
 #    provisioner "local-exec" {
 #       command = "ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts ${var.ansible_airflow_directory}/airflow_setup.yml --ask-vault-pass"
 #    }
