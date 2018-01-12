@@ -1,14 +1,14 @@
 resource "aws_security_group" "airflow_ec2" {
   name        = "tf_securityg_airflow_ec2"
   description = "Used by airflow master and workers instances"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "tf_securityg_airflow"
   }
 
@@ -79,14 +79,14 @@ resource "aws_security_group" "airflow_ec2" {
 resource "aws_security_group" "airflow_alb" {
   name        = "tf_securityg_airflow_alb"
   description = "Used by airflow alb"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "tf_https"
   }
 
@@ -117,14 +117,14 @@ resource "aws_security_group" "airflow_alb" {
 resource "aws_security_group" "airflow_rds" {
   name        = "tf_securityg_airflow_rds"
   description = "Used by airflow rds"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "tf_PostgrePort"
   }
 
@@ -148,14 +148,14 @@ resource "aws_security_group" "airflow_rds" {
 resource "aws_security_group" "airflow_redshift" {
   name        = "tf_securityg_airflow_redshift"
   description = "Used by airflow redshift"
-  vpc_id      = "${var.vpc_id}"
+  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "tf_RedshiftPort"
   }
 

@@ -9,7 +9,7 @@ resource "aws_alb" "airflow" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "${var.alb_airflow_name}"
   }
 }
@@ -29,7 +29,7 @@ resource "aws_alb_target_group" "airflow" {
   name     = "${var.targetgroup_airflow_name}"
   port     = 8080
   protocol = "HTTP"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id = "${lookup(var.vpc_id, terraform.workspace)}"
 
   #  target_type = "instance" #default, do not need to set
   health_check {
@@ -58,7 +58,7 @@ resource "aws_alb" "flower" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "${var.alb_flower_name}"
   }
 }
@@ -78,7 +78,7 @@ resource "aws_alb_target_group" "flower" {
   name     = "${var.targetgroup_flower_name}"
   port     = 5555
   protocol = "HTTP"
-  vpc_id   = "${var.vpc_id}"
+  vpc_id   = "${lookup(var.vpc_id, terraform.workspace)}"
 
   health_check {
     healthy_threshold   = "${var.alb_healthy_threshold}"

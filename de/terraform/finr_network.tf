@@ -5,8 +5,7 @@ provider "aws" {
 
 # Select a VPC to launch our instances into
 data "aws_vpc" "finr_vpc" {
-  #    id = "vpc-d671b7b3"
-  id = "${var.vpc_id}"
+  id = "${lookup(var.vpc_id, terraform.workspace)}"
 }
 
 output "finr_vpc" {
@@ -17,15 +16,9 @@ output "finr_vpc_cidr" {
   value = "${data.aws_vpc.finr_vpc.cidr_block}"
 }
 
-#subnet - public 
-data "aws_subnet" "finr_public" {
-  id = "subnet-36ca1053"
-}
-
 #subnet - private 1
 data "aws_subnet" "finr_private1" {
-  #    id = "subnet-0fca106a"
-  id = "${var.subnet_private1_id}"
+   id = "${lookup(var.subnet_private1_id, terraform.workspace)}"
 }
 
 output "finr_subnet_private1_cidr" {
@@ -38,8 +31,7 @@ output "finr_subnet_private1_az" {
 
 #subnet - private 2
 data "aws_subnet" "finr_private2" {
-  #    id = "subnet-e206d3ba"
-  id = "${var.subnet_private2_id}"
+   id = "${lookup(var.subnet_private2_id, terraform.workspace)}"
 }
 
 output "finr_subnet_private2_cidr" {

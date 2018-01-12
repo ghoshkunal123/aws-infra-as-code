@@ -1,6 +1,7 @@
 #S3 code bucket
 resource "aws_s3_bucket" "s3" {
-  bucket        = "${var.s3_bucket_name}"
+#  bucket        = "${var.s3_bucket_name}"
+  bucket = "tf-com-fngn-${terraform.workspace}-dataeng"
   acl           = "private"
   force_destroy = true
 
@@ -17,7 +18,7 @@ resource "aws_s3_bucket" "s3" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
   }
 }
 
@@ -34,7 +35,7 @@ resource "aws_s3_bucket_policy" "s3" {
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::${var.s3_bucket_name}/*",
+            "Resource": "arn:aws:s3:::${aws_s3_bucket.s3.bucket}/*",
             "Condition": {
                 "StringNotEquals": {
                     "s3:x-amz-server-side-encryption": "AES256"
@@ -46,7 +47,7 @@ resource "aws_s3_bucket_policy" "s3" {
             "Effect": "Deny",
             "Principal": "*",
             "Action": "s3:PutObject",
-            "Resource": "arn:aws:s3:::${var.s3_bucket_name}/*",
+            "Resource": "arn:aws:s3:::${aws_s3_bucket.s3.bucket}/*",
             "Condition": {
                 "Null": {
                     "s3:x-amz-server-side-encryption": "true"
@@ -56,4 +57,7 @@ resource "aws_s3_bucket_policy" "s3" {
   ]
 }
 POLICY
+}
+output "s3_bucket" {
+  value = "${aws_s3_bucket.s3.bucket}"
 }

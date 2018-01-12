@@ -1,10 +1,10 @@
 resource "aws_redshift_subnet_group" "analytics" {
-  name       = "tf-perf-us-west-1a"
-  subnet_ids = ["${var.subnet_private1_id}"]
+  name       = "tf-redshift-us-west-1a"
+  subnet_ids = ["${lookup(var.subnet_private1_id, terraform.workspace)}"]
 }
 
 resource "aws_redshift_cluster" "analytics" {
-  cluster_identifier           = "${var.rs_cluster_name}"
+  cluster_identifier           = "tf-fngn-${terraform.workspace}-redshift-cluster"
   database_name                = "${var.rs_db_name}"
   master_username              = "${var.rs_master_user}"
   master_password              = "${var.rs_master_password}"
@@ -28,7 +28,7 @@ resource "aws_redshift_cluster" "analytics" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${var.tag_env}"
+    env        = "${terraform.workspace}"
     Name       = "${var.rs_tag_Name}"
   }
 }

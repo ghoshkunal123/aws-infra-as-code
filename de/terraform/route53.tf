@@ -1,5 +1,5 @@
 resource "aws_route53_record" "airflow" {
-  zone_id = "${var.route53_hosted_zone_id}"
+  zone_id = "${lookup(var.route53_hosted_zone_id, terraform.workspace)}"
   name    = "${var.route53_airflow_domain_name}"
   type    = "A"
 
@@ -11,7 +11,7 @@ resource "aws_route53_record" "airflow" {
 }
 
 resource "aws_route53_record" "flower" {
-  zone_id = "${var.route53_hosted_zone_id}"
+  zone_id = "${lookup(var.route53_hosted_zone_id, terraform.workspace)}"
   name    = "${var.route53_flower_domain_name}"
   type    = "A"
 

@@ -1,15 +1,36 @@
 aws_profile             = "default"
 aws_region              = "us-west-1"
 
-#network like vpc. subnet, cidr, etc. you need to configure your own network
-vpc_id                  = "vpc-d671b7b3" 
-subnet_private1_id      = "subnet-0fca106a"
-subnet_private2_id      = "subnet-e206d3ba"
+#network like vpc. subnet, cidr, etc. "you need to configure your own network
+vpc_id = {
+        finr  = "vpc-d671b7b3"
+        test = "you need to set"
+        prod = "you need to set"
+}
+subnet_private1_id      = {
+        finr  = "subnet-0fca106a"
+        test = "you need to set"
+        prod = "you need to set"
+}
+subnet_private2_id      = {
+        finr  = "subnet-e206d3ba"
+        test = "you need to set"
+        prod = "you need to set"
+}
+route53_hosted_zone_id = {
+       finr = "Z308WL0Y3G1YGT"
+       test = "you need to set"
+       prod = "you need to set"
+}
+rds_subnet_group_name    = {
+       finr = "default-vpc-d671b7b3"
+       test = "you need to set"
+       prod = "you need to set"
+}
+
 finr_cidr_10  = "10.0.0.0/8"
 finr_cidr_172  = "172.24.0.0/22"
-finr_cidr_advisor_center_store = "172.21.0.0/16" 
-route53_hosted_zone_id = "Z308WL0Y3G1YGT"
-rds_subnet_group_name    = "default-vpc-d671b7b3"
+finr_cidr_advisor_center_store = "172.21.0.0/16"
 
 #ec2 key pair: you need to configure your own ec2 key pair
 ec2_key_name                = "finr_devops_keypair"
@@ -20,7 +41,7 @@ ansible_airflow_directory = "../ansible"
 ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
 
 #s3
-s3_bucket_name          = "tf-finr-dataeng"
+#s3_bucket_name          = "tf-fngn-finr-de"
 
 #iam
 iam_instance_profile  = "iAirFlowDev" 
@@ -33,13 +54,13 @@ ec2_user                = "etluser"
 ec2_worker_count  = "2"
 
 # rds
-rds_identifier          = "tf-perf-rds"
+#rds_identifier          = "tf-fngn-finr-de-rds"
 rds_instance_class       = "db.t2.large"
 rds_name                  = "airflow"
 rds_user                  = "etluser"
 
 # redshift
-rs_cluster_name         = "tf-perf-cluster"
+#rs_cluster_name         = "tf-fngn-finr-de-dw-cluster"
 rs_db_name              = "analytics"
 rs_master_user          = "etluser"
 rs_node_type            = "ds2.xlarge"
@@ -61,17 +82,16 @@ alb_timeout             = "5"
 alb_interval            = "30"
 
 #route53
-route53_flower_domain_name = "tf-flower"
-route53_airflow_domain_name = "tf-airflow"
+route53_flower_domain_name = "tf-de-flower"
+route53_airflow_domain_name = "tf-de-airflow"
 
 #tags: TBD: not sure whether need these tags in test/prod env or not
 tag_app             = "de"
 tag_Project         = "ANLY-2018"
 tag_Owner           = "feidataengineering@financialengines.com"
 tag_CostCenter      = "270"
-tag_env             = "perf"
-rds_tag_Name            = "rds-airflow"
-rs_tag_Name            = "finr-dw-perf"
+rds_tag_Name            = "tf-rds-airflow"
+rs_tag_Name            = "tf-dw-airflow"
 ec2_master_tag_Name = "tf-airflow-master"
 ec2_worker_tag_Name = "tf-airflow-worker"
 ec2_tag_patch_group = "ANLY-2717-Ubuntu"
