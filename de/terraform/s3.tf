@@ -1,7 +1,9 @@
 #S3 code bucket
+locals {
+  s3_bucket_name = "tf-com-fngn-${terraform.workspace}-dataeng"
+}
 resource "aws_s3_bucket" "s3" {
-#  bucket        = "${var.s3_bucket_name}"
-  bucket = "tf-com-fngn-${terraform.workspace}-dataeng"
+  bucket = "${local.s3_bucket_name}"
   acl           = "private"
   force_destroy = true
 

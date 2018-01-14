@@ -1,10 +1,13 @@
+locals {
+  rs_cluster_identifier = "tf-fngn-${terraform.workspace}-redshift-cluster"
+}
 resource "aws_redshift_subnet_group" "analytics" {
   name       = "tf-redshift-us-west-1a"
   subnet_ids = ["${lookup(var.subnet_private1_id, terraform.workspace)}"]
 }
 
 resource "aws_redshift_cluster" "analytics" {
-  cluster_identifier           = "tf-fngn-${terraform.workspace}-redshift-cluster"
+  cluster_identifier           = "${local.rs_cluster_identifier}"
   database_name                = "${var.rs_db_name}"
   master_username              = "${var.rs_master_user}"
   master_password              = "${var.rs_master_password}"
