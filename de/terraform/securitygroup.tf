@@ -19,6 +19,7 @@ resource "aws_security_group" "airflow_worker" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -26,6 +27,7 @@ resource "aws_security_group" "airflow_worker" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 resource "aws_security_group" "airflow_master" {
   name        = "tf_securityg_airflow_master"
   description = "Used by airflow master and workers instances"
@@ -50,9 +52,9 @@ resource "aws_security_group" "airflow_master" {
 
   #Flower_Ports
   ingress {
-    from_port   = 5555
-    to_port     = 5555
-    protocol    = "tcp"
+    from_port       = 5555
+    to_port         = 5555
+    protocol        = "tcp"
     security_groups = ["${aws_security_group.airflow_alb.id}"]
   }
 
@@ -82,9 +84,9 @@ resource "aws_security_group" "airflow_master" {
 
   #Airflow_Ports
   ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
+    from_port       = 8080
+    to_port         = 8080
+    protocol        = "tcp"
     security_groups = ["${aws_security_group.airflow_alb.id}"]
   }
 
@@ -153,7 +155,7 @@ resource "aws_security_group" "airflow_rds" {
     to_port   = 5432
     protocol  = "tcp"
 
-    security_groups  = ["${aws_security_group.airflow_master.id}"]
+    security_groups = ["${aws_security_group.airflow_master.id}"]
   }
 
   egress {
@@ -183,7 +185,7 @@ resource "aws_security_group" "airflow_redshift" {
     to_port   = 5439
     protocol  = "tcp"
 
-    security_groups  = ["${aws_security_group.airflow_worker.id}"]
+    security_groups = ["${aws_security_group.airflow_worker.id}"]
   }
 
   egress {

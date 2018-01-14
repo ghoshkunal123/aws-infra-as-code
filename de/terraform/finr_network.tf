@@ -18,7 +18,7 @@ output "finr_vpc_cidr" {
 
 #subnet - private 1
 data "aws_subnet" "finr_private1" {
-   id = "${lookup(var.subnet_private1_id, terraform.workspace)}"
+  id = "${lookup(var.subnet_private1_id, terraform.workspace)}"
 }
 
 output "finr_subnet_private1_cidr" {
@@ -31,7 +31,7 @@ output "finr_subnet_private1_az" {
 
 #subnet - private 2
 data "aws_subnet" "finr_private2" {
-   id = "${lookup(var.subnet_private2_id, terraform.workspace)}"
+  id = "${lookup(var.subnet_private2_id, terraform.workspace)}"
 }
 
 output "finr_subnet_private2_cidr" {

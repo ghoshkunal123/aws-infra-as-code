@@ -2,11 +2,25 @@ variable "aws_region" {}
 variable "aws_profile" {}
 
 #network: need to configure your own network
-variable "vpc_id" { type = "map" }
-variable "subnet_private1_id" { type = "map" }
-variable "subnet_private2_id" { type = "map" }
-variable "route53_hosted_zone_id" { type = "map" }
-variable "rds_subnet_group_name" { type = "map" }
+variable "vpc_id" {
+  type = "map"
+}
+
+variable "subnet_private1_id" {
+  type = "map"
+}
+
+variable "subnet_private2_id" {
+  type = "map"
+}
+
+variable "route53_hosted_zone_id" {
+  type = "map"
+}
+
+variable "rds_subnet_group_name" {
+  type = "map"
+}
 
 variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}

@@ -1,6 +1,7 @@
 locals {
   rs_cluster_identifier = "tf-fngn-${terraform.workspace}-redshift-cluster"
 }
+
 resource "aws_redshift_subnet_group" "analytics" {
   name       = "tf-redshift-us-west-1a"
   subnet_ids = ["${lookup(var.subnet_private1_id, terraform.workspace)}"]

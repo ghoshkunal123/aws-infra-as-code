@@ -1,6 +1,7 @@
 locals {
   rds_identifier = "tf-fngn-${terraform.workspace}-rds"
 }
+
 resource "aws_db_instance" "rds" {
   identifier              = "${local.rds_identifier}"
   allocated_storage       = 20
@@ -12,7 +13,7 @@ resource "aws_db_instance" "rds" {
   password                = "${var.rds_password}"
   db_subnet_group_name    = "${lookup(var.rds_subnet_group_name, terraform.workspace)}"
   vpc_security_group_ids  = ["${aws_security_group.airflow_rds.id}"]
-  backup_retention_period = 0                                        # day
+  backup_retention_period = 0                                                           # day
   multi_az                = false
   publicly_accessible     = false
   storage_type            = "gp2"

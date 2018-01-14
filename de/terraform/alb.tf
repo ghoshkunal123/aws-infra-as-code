@@ -29,7 +29,7 @@ resource "aws_alb_target_group" "airflow" {
   name     = "${var.targetgroup_airflow_name}"
   port     = 8080
   protocol = "HTTP"
-  vpc_id = "${lookup(var.vpc_id, terraform.workspace)}"
+  vpc_id   = "${lookup(var.vpc_id, terraform.workspace)}"
 
   #  target_type = "instance" #default, do not need to set
   health_check {

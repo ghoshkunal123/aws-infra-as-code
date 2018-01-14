@@ -2,8 +2,9 @@
 locals {
   s3_bucket_name = "tf-com-fngn-${terraform.workspace}-dataeng"
 }
+
 resource "aws_s3_bucket" "s3" {
-  bucket = "${local.s3_bucket_name}"
+  bucket        = "${local.s3_bucket_name}"
   acl           = "private"
   force_destroy = true
 
@@ -60,6 +61,7 @@ resource "aws_s3_bucket_policy" "s3" {
 }
 POLICY
 }
+
 output "s3_bucket" {
   value = "${aws_s3_bucket.s3.bucket}"
 }
