@@ -1,5 +1,33 @@
-resource "aws_security_group" "airflow_ec2" {
-  name        = "tf_securityg_airflow_ec2"
+resource "aws_security_group" "airflow_worker" {
+  name        = "tf_securityg_airflow_worker"
+  description = "Used by airflow master and workers instances"
+  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${terraform.workspace}"
+    Name       = "tf_securityg_airflow"
+  }
+
+  #ssh-only
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+  }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}
+resource "aws_security_group" "airflow_master" {
+  name        = "tf_securityg_airflow_master"
   description = "Used by airflow master and workers instances"
   vpc_id      = "${data.aws_vpc.finr_vpc.id}"
 
@@ -25,7 +53,7 @@ resource "aws_security_group" "airflow_ec2" {
     from_port   = 5555
     to_port     = 5555
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+    security_groups = ["${aws_security_group.airflow_alb.id}"]
   }
 
   #postgres
@@ -41,7 +69,7 @@ resource "aws_security_group" "airflow_ec2" {
     from_port   = 5672
     to_port     = 5672
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}"]
+    cidr_blocks = ["${data.aws_subnet.finr_private1.cidr_block}"]
   }
 
   #RabbitMQ
@@ -49,7 +77,7 @@ resource "aws_security_group" "airflow_ec2" {
     from_port   = 15672
     to_port     = 15672
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+    cidr_blocks = ["${data.aws_subnet.finr_private1.cidr_block}", "${var.finr_cidr_172}"]
   }
 
   #Airflow_Ports
@@ -57,15 +85,7 @@ resource "aws_security_group" "airflow_ec2" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
-  }
-
-  #Airflow_Ports
-  ingress {
-    from_port   = 8081
-    to_port     = 8081
-    protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+    security_groups = ["${aws_security_group.airflow_alb.id}"]
   }
 
   egress {
@@ -133,8 +153,7 @@ resource "aws_security_group" "airflow_rds" {
     to_port   = 5432
     protocol  = "tcp"
 
-    #    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}", "${var.finr_cidr_sn2}"]
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${data.aws_subnet.finr_private1.cidr_block}", "${data.aws_subnet.finr_private2.cidr_block}"]
+    security_groups  = ["${aws_security_group.airflow_master.id}"]
   }
 
   egress {
@@ -164,8 +183,7 @@ resource "aws_security_group" "airflow_redshift" {
     to_port   = 5439
     protocol  = "tcp"
 
-    #    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_sn1}"]
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${data.aws_subnet.finr_private1.cidr_block}"]
+    security_groups  = ["${aws_security_group.airflow_worker.id}"]
   }
 
   egress {

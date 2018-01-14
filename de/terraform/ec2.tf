@@ -3,7 +3,7 @@ resource "aws_instance" "master" {
   ami           = "${var.ec2_ami}"
 
   key_name               = "${var.ec2_key_name}"
-  vpc_security_group_ids = ["${aws_security_group.airflow_ec2.id}"]
+  vpc_security_group_ids = ["${aws_security_group.airflow_master.id}"]
 
   subnet_id            = "${data.aws_subnet.finr_private1.id}"
   iam_instance_profile = "${var.iam_instance_profile}"
@@ -26,7 +26,7 @@ resource "aws_instance" "worker" {
   ami           = "${var.ec2_ami}"
 
   key_name               = "${var.ec2_key_name}"
-  vpc_security_group_ids = ["${aws_security_group.airflow_ec2.id}"]
+  vpc_security_group_ids = ["${aws_security_group.airflow_worker.id}"]
   subnet_id              = "${data.aws_subnet.finr_private1.id}"
   iam_instance_profile   = "${var.iam_instance_profile}"
   user_data              = "${data.template_file.user_data.rendered}"
