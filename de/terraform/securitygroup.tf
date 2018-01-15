@@ -1,7 +1,7 @@
 resource "aws_security_group" "airflow_worker" {
   name        = "tf_securityg_airflow_worker"
   description = "Used by airflow master and workers instances"
-  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+  vpc_id      = "${data.aws_vpc.vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
@@ -31,7 +31,7 @@ resource "aws_security_group" "airflow_worker" {
 resource "aws_security_group" "airflow_master" {
   name        = "tf_securityg_airflow_master"
   description = "Used by airflow master and workers instances"
-  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+  vpc_id      = "${data.aws_vpc.vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
@@ -71,7 +71,7 @@ resource "aws_security_group" "airflow_master" {
     from_port   = 5672
     to_port     = 5672
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_subnet.finr_private1.cidr_block}"]
+    cidr_blocks = ["${data.aws_subnet.private1.cidr_block}"]
   }
 
   #RabbitMQ
@@ -79,7 +79,7 @@ resource "aws_security_group" "airflow_master" {
     from_port   = 15672
     to_port     = 15672
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_subnet.finr_private1.cidr_block}", "${var.finr_cidr_172}"]
+    cidr_blocks = ["${data.aws_subnet.private1.cidr_block}", "${var.finr_cidr_172}"]
   }
 
   #Airflow_Ports
@@ -101,7 +101,7 @@ resource "aws_security_group" "airflow_master" {
 resource "aws_security_group" "airflow_alb" {
   name        = "tf_securityg_airflow_alb"
   description = "Used by airflow alb"
-  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+  vpc_id      = "${data.aws_vpc.vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
@@ -139,7 +139,7 @@ resource "aws_security_group" "airflow_alb" {
 resource "aws_security_group" "airflow_rds" {
   name        = "tf_securityg_airflow_rds"
   description = "Used by airflow rds"
-  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+  vpc_id      = "${data.aws_vpc.vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
@@ -169,7 +169,7 @@ resource "aws_security_group" "airflow_rds" {
 resource "aws_security_group" "airflow_redshift" {
   name        = "tf_securityg_airflow_redshift"
   description = "Used by airflow redshift"
-  vpc_id      = "${data.aws_vpc.finr_vpc.id}"
+  vpc_id      = "${data.aws_vpc.vpc.id}"
 
   tags = {
     app        = "${var.tag_app}"
