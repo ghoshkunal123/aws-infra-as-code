@@ -58,15 +58,8 @@ resource "aws_security_group" "airflow_master" {
     security_groups = ["${aws_security_group.airflow_alb.id}"]
   }
 
-  #postgres
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}"]
-  }
-
   #RabbitMQ
+  # this port is used to comm with workers
   ingress {
     from_port   = 5672
     to_port     = 5672
@@ -75,11 +68,12 @@ resource "aws_security_group" "airflow_master" {
   }
 
   #RabbitMQ
+  # this port is used by administrator to login(webserver 15672 or CLI 15672) to check, debug (e.g. clean queue) 
   ingress {
     from_port   = 15672
     to_port     = 15672
     protocol    = "tcp"
-    cidr_blocks = ["${data.aws_subnet.private1.cidr_block}", "${var.finr_cidr_172}"]
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
   #Airflow_Ports
