@@ -49,7 +49,7 @@ iam_instance_profile  = "iAirFlowDev"
 # ec2
 #ec2_instance_type       = "m4.large"
 ec2_instance_type       = "t2.micro"
-ec2_ami                 = "ami-45ead225"
+ec2_ami                 = "ami-e3797b83" #this is an encrypted AMI created by @lhu based on public unencrypted AMI
 ec2_user                = "etluser"
 ec2_worker_count  = "2"
 
@@ -65,7 +65,7 @@ rs_db_name              = "analytics"
 rs_master_user          = "etluser"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
-rs_number_of_nodes      = 4
+rs_number_of_nodes      = 2
 rs_iam_role            = "arn:aws:iam::224919220385:role/eRedshiftFinrAdmin"
 
 #rabbitmq
