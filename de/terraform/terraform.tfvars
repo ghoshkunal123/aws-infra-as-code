@@ -3,27 +3,27 @@ aws_region              = "us-west-1"
 
 #network like vpc. subnet, cidr, etc. "you need to configure your own network
 vpc_id = {
-        finr  = "vpc-d671b7b3"
+        dev  = "vpc-d671b7b3"
         test = "you need to set"
         prod = "you need to set"
 }
 subnet_private1_id      = {
-        finr  = "subnet-0fca106a"
+        dev  = "subnet-0fca106a"
         test = "you need to set"
         prod = "you need to set"
 }
 subnet_private2_id      = {
-        finr  = "subnet-e206d3ba"
+        dev  = "subnet-e206d3ba"
         test = "you need to set"
         prod = "you need to set"
 }
 route53_hosted_zone_id = {
-       finr = "Z308WL0Y3G1YGT"
+       dev = "Z308WL0Y3G1YGT"
        test = "you need to set"
        prod = "you need to set"
 }
 rds_subnet_group_name    = {
-       finr = "default-vpc-d671b7b3"
+       dev = "default-vpc-d671b7b3"
        test = "you need to set"
        prod = "you need to set"
 }
@@ -40,9 +40,6 @@ ec2_private_key_name    = "/Users/lhu/Documents/projects/aws_key_credential/finr
 ansible_airflow_directory = "../ansible"
 ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
 
-#s3
-#s3_bucket_name          = "tf-fngn-finr-de"
-
 #iam
 iam_instance_profile  = "iAirFlowDev" 
 
@@ -54,13 +51,11 @@ ec2_user                = "etluser"
 ec2_worker_count  = "2"
 
 # rds
-#rds_identifier          = "tf-fngn-finr-de-rds"
 rds_instance_class       = "db.t2.large"
-rds_name                  = "airflow"
+rds_db_name                  = "airflow"
 rds_user                  = "etluser"
 
 # redshift
-#rs_cluster_name         = "tf-fngn-finr-de-dw-cluster"
 rs_db_name              = "analytics"
 rs_master_user          = "etluser"
 rs_node_type            = "ds2.xlarge"

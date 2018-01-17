@@ -20,10 +20,10 @@ s3_bucket_name: ${aws_s3_bucket.s3.bucket}
 rds_user: ${var.rds_user}
 rds_pw: ${var.rds_password}
 rds_endpoint: ${aws_db_instance.rds.address}
+rds_db_name: ${var.rds_db_name}
 rabbitmq_user: ${var.rabbitmq_user}
 rabbitmq_pw: ${var.rabbitmq_password}
 rabbitmq_host: ${aws_instance.master.private_ip}
-rabbitmq_port: 5672
 EOF
 EOD
   }

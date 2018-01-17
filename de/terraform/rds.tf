@@ -8,7 +8,7 @@ resource "aws_db_instance" "rds" {
   engine                  = "postgres"
   engine_version          = "9.6.2"
   instance_class          = "${var.rds_instance_class}"
-  name                    = "${var.rds_name}"
+  name                    = "${var.rds_db_name}"
   username                = "${var.rds_user}"
   password                = "${var.rds_password}"
   db_subnet_group_name    = "${lookup(var.rds_subnet_group_name, terraform.workspace)}"

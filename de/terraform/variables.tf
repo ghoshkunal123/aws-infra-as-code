@@ -45,7 +45,7 @@ variable "iam_instance_profile" {}
 #rds
 variable "rds_instance_class" {}
 
-variable "rds_name" {}
+variable "rds_db_name" {}
 variable "rds_user" {}
 variable "rds_password" {}
 
