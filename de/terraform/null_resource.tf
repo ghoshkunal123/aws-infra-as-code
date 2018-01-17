@@ -19,7 +19,7 @@ cat <<EOF > ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file
 s3_bucket_name: ${aws_s3_bucket.s3.bucket}
 rds_user: ${var.rds_user}
 rds_pw: ${var.rds_password}
-rds_endpoint_address: ${aws_db_instance.rds.address}
+rds_endpoint: ${aws_db_instance.rds.address}
 rabbitmq_user: ${var.rabbitmq_user}
 rabbitmq_pw: ${var.rabbitmq_password}
 rabbitmq_host: ${aws_instance.master.private_ip}
