@@ -1,3 +1,4 @@
+# this file is to obtain more information from the existing resources
 provider "aws" {
   region  = "${var.aws_region}"
   profile = "${var.aws_profile}"
@@ -44,11 +45,17 @@ output "subnet_private2_az" {
 
 # IAM used by airflow master and workers
 data "aws_iam_role" "airflow" {
-  #  id = "${lookup(var.vpc_id, terraform.workspace)}"
-  #to be mapped with workspace
-  name = "iAirFlowDev"
+  name = "${lookup(var.iam_instance_profile, terraform.workspace)}"
 }
 
 output "iam_arn" {
   value = "${data.aws_iam_role.airflow.arn}"
+}
+
+data "aws_iam_role" "redshift" {
+  name = "${lookup(var.rs_iam_role, terraform.workspace)}"
+}
+
+output "iam_redshift_arn" {
+  value = "${data.aws_iam_role.redshift.arn}"
 }

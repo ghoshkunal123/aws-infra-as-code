@@ -4,7 +4,7 @@ locals {
 
 resource "aws_redshift_subnet_group" "analytics" {
   name       = "tf-redshift-us-west-1a"
-  subnet_ids = ["${lookup(var.subnet_private1_id, terraform.workspace)}"]
+  subnet_ids = ["${data.aws_subnet.private1.id}"]
 }
 
 resource "aws_redshift_cluster" "analytics" {
@@ -29,7 +29,7 @@ resource "aws_redshift_cluster" "analytics" {
   encrypted            = true
   enhanced_vpc_routing = false
   skip_final_snapshot  = true
-  iam_roles            = ["${var.rs_iam_role}"]
+  iam_roles            = ["${data.aws_iam_role.redshift.arn}"]
 
   tags = {
     app        = "${var.tag_app}"

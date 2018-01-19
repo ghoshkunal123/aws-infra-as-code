@@ -1,7 +1,7 @@
 variable "aws_region" {}
 variable "aws_profile" {}
 
-#network: need to configure your own network
+#network
 variable "vpc_id" {
   type = "map"
 }
@@ -14,14 +14,6 @@ variable "subnet_private2_id" {
   type = "map"
 }
 
-variable "route53_hosted_zone_id" {
-  type = "map"
-}
-
-variable "rds_subnet_group_name" {
-  type = "map"
-}
-
 variable "airflow_env_properties" {
   type = "map"
 }
@@ -30,21 +22,24 @@ variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}
 variable "finr_cidr_advisor_center_store" {}
 
-#s3
-
-#ec2: need to configure your own aws key pair
-variable "ec2_key_name" {}
-
-variable "ec2_private_key_name" {}
+#ec2
+variable "ec2_key_name" {
+  type = "map"
+}
 
 variable "ec2_user" {}
 variable "ec2_password" {}
 variable "ec2_instance_type" {}
-variable "ec2_ami" {}
 variable "ec2_worker_count" {}
 
+variable "ec2_ami" {
+  type = "map"
+}
+
 #iam
-variable "iam_instance_profile" {}
+variable "iam_instance_profile" {
+  type = "map"
+}
 
 #rds
 variable "rds_instance_class" {}
@@ -53,15 +48,22 @@ variable "rds_db_name" {}
 variable "rds_user" {}
 variable "rds_password" {}
 
-#redshift
+variable "rds_subnet_group_name" {
+  type = "map"
+}
 
+#redshift
 variable "rs_db_name" {}
+
 variable "rs_master_user" {}
 variable "rs_master_password" {}
 variable "rs_node_type" {}
 variable "rs_cluster_type" {}
 variable "rs_number_of_nodes" {}
-variable "rs_iam_role" {}
+
+variable "rs_iam_role" {
+  type = "map"
+}
 
 #rabbitmq
 variable "rabbitmq_user" {}
@@ -84,6 +86,10 @@ variable "alb_interval" {}
 variable "route53_airflow_domain_name" {}
 
 variable "route53_flower_domain_name" {}
+
+variable "route53_hosted_zone_id" {
+  type = "map"
+}
 
 #tags
 variable "tag_app" {}

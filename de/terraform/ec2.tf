@@ -1,12 +1,12 @@
 resource "aws_instance" "master" {
   instance_type = "${var.ec2_instance_type}"
-  ami           = "${var.ec2_ami}"
+  ami           = "${lookup(var.ec2_ami, terraform.workspace)}"
 
-  key_name               = "${var.ec2_key_name}"
+  key_name               = "${lookup(var.ec2_key_name, terraform.workspace)}"
   vpc_security_group_ids = ["${aws_security_group.airflow_master.id}"]
 
   subnet_id            = "${data.aws_subnet.private1.id}"
-  iam_instance_profile = "${var.iam_instance_profile}"
+  iam_instance_profile = "${lookup(var.iam_instance_profile, terraform.workspace)}"
   user_data            = "${data.template_file.user_data.rendered}"
 
   tags = {
@@ -23,12 +23,12 @@ resource "aws_instance" "master" {
 resource "aws_instance" "worker" {
   count         = "${var.ec2_worker_count}"
   instance_type = "${var.ec2_instance_type}"
-  ami           = "${var.ec2_ami}"
+  ami           = "${lookup(var.ec2_ami, terraform.workspace)}"
 
-  key_name               = "${var.ec2_key_name}"
+  key_name               = "${lookup(var.ec2_key_name, terraform.workspace)}"
   vpc_security_group_ids = ["${aws_security_group.airflow_worker.id}"]
   subnet_id              = "${data.aws_subnet.private1.id}"
-  iam_instance_profile   = "${var.iam_instance_profile}"
+  iam_instance_profile   = "${lookup(var.iam_instance_profile, terraform.workspace)}"
   user_data              = "${data.template_file.user_data.rendered}"
 
   tags = {
