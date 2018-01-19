@@ -22,6 +22,10 @@ variable "rds_subnet_group_name" {
   type = "map"
 }
 
+variable "airflow_env_properties" {
+  type = "map"
+}
+
 variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}
 variable "finr_cidr_advisor_center_store" {}

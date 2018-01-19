@@ -41,3 +41,14 @@ output "subnet_private2_cidr" {
 output "subnet_private2_az" {
   value = "${data.aws_subnet.private2.availability_zone}"
 }
+
+# IAM used by airflow master and workers
+data "aws_iam_role" "airflow" {
+  #  id = "${lookup(var.vpc_id, terraform.workspace)}"
+  #to be mapped with workspace
+  name = "iAirFlowDev"
+}
+
+output "iam_arn" {
+  value = "${data.aws_iam_role.airflow.arn}"
+}

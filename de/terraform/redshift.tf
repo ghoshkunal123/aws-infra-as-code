@@ -21,6 +21,10 @@ resource "aws_redshift_cluster" "analytics" {
   vpc_security_group_ids       = ["${aws_security_group.airflow_redshift.id}"]
   cluster_subnet_group_name    = "${aws_redshift_subnet_group.analytics.id}"
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   publicly_accessible  = false
   encrypted            = true
   enhanced_vpc_routing = false
@@ -35,4 +39,8 @@ resource "aws_redshift_cluster" "analytics" {
     env        = "${terraform.workspace}"
     Name       = "${var.rs_tag_Name}"
   }
+}
+
+output "redshift_endpoint" {
+  value = "${aws_redshift_cluster.analytics.endpoint}"
 }

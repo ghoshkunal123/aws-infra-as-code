@@ -23,6 +23,10 @@ resource "aws_db_instance" "rds" {
   availability_zone       = "us-west-1a"
   copy_tags_to_snapshot   = true
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"

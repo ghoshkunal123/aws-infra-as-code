@@ -24,8 +24,17 @@ rds_db_name: ${var.rds_db_name}
 rabbitmq_user: ${var.rabbitmq_user}
 rabbitmq_pw: ${var.rabbitmq_password}
 rabbitmq_host: ${aws_instance.master.private_ip}
+rs_host: ${aws_redshift_cluster.analytics.endpoint}
+rs_db_name: ${var.rs_db_name}
+ec2_role_arn: ${data.aws_iam_role.airflow.arn}
+env_name: ${lookup(var.airflow_env_properties, terraform.workspace)}
 EOF
 EOD
+  }
+
+  #remove redshift port because dataengineering wants to have rs_host not rs_endpoint
+  provisioner "local-exec" {
+    command = "sed -i -e 's/:5439//' ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file}"
   }
 
   # this local-exec encrypts the ansible airflow vars file to protect the sensitive information

@@ -27,6 +27,12 @@ rds_subnet_group_name    = {
        test = "you need to set"
        prod = "you need to set"
 }
+# here I map dev/test/prod to DEV/TST/PRD, because in de-datapipeline->Airflow->env.properties, DEV/TST/PRD is used instead of dev/test/prod
+airflow_env_properties = {
+       dev = "DEV"
+       test = "TST"
+       prod = "PRD"
+}
 
 finr_cidr_10  = "10.0.0.0/8"
 finr_cidr_172  = "172.24.0.0/22"
@@ -57,7 +63,7 @@ rds_user                  = "etluser"
 
 # redshift
 rs_db_name              = "analytics"
-rs_master_user          = "etluser"
+rs_master_user          = "admin"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
 rs_number_of_nodes      = 2
