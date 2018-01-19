@@ -22,6 +22,11 @@ variable "finr_cidr_10" {}
 variable "finr_cidr_172" {}
 variable "finr_cidr_advisor_center_store" {}
 
+#s3
+variable "s3_bucket_name" {
+  type = "map"
+}
+
 #ec2
 variable "ec2_key_name" {
   type = "map"
@@ -97,6 +102,7 @@ variable "tag_app" {}
 variable "tag_Project" {}
 variable "tag_Owner" {}
 variable "tag_CostCenter" {}
+variable "tag_launcher" {} #whether the resource is launched by Terraform or console, etc.
 variable "rds_tag_Name" {}
 variable "rs_tag_Name" {}
 variable "ec2_master_tag_Name" {}

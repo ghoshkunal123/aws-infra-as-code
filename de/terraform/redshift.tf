@@ -36,6 +36,7 @@ resource "aws_redshift_cluster" "analytics" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
     env        = "${terraform.workspace}"
     Name       = "${var.rs_tag_Name}"
   }

@@ -45,7 +45,6 @@ iam_instance_profile  =  {
 }
 # redshift iam role
 rs_iam_role      = {
-#       dev = "arn:aws:iam::224919220385:role/eRedshiftFinrAdmin"
        dev = "eRedshiftFinrAdmin"
        test = "you need to set"
        prod = "you need to set"
@@ -55,4 +54,11 @@ ec2_ami  = {
        dev = "ami-e3797b83" #this is an encrypted AMI created by @lhu based on public unencrypted ubuntu 16.4 AMI"
        test = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
        prod = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
+}
+s3_bucket_name = {
+# cannot create an s3 called com-fngn-finr-dataeng because it has already existed. 
+# so I name this s3 as com-fngn-finr-tf-dataeng
+       dev = "com-fngn-finr-tf-dataeng"
+       test = "com-fngn-test-dataeng"
+       prod = "com-fngn-prod-dataeng"
 }

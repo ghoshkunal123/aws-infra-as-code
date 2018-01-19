@@ -1,10 +1,7 @@
 #S3 code bucket
-locals {
-  s3_bucket_name = "tf-com-fngn-${terraform.workspace}-dataeng"
-}
 
 resource "aws_s3_bucket" "s3" {
-  bucket        = "${local.s3_bucket_name}"
+  bucket        = "${lookup(var.s3_bucket_name, terraform.workspace)}"
   acl           = "private"
   force_destroy = true
 
@@ -22,6 +19,7 @@ resource "aws_s3_bucket" "s3" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
+    launcher   = "${var.tag_launcher}"
   }
 }
 

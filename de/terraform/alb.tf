@@ -9,6 +9,7 @@ resource "aws_alb" "airflow" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
     env        = "${terraform.workspace}"
     Name       = "${var.alb_airflow_name}"
   }
@@ -58,6 +59,7 @@ resource "aws_alb" "flower" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
     env        = "${terraform.workspace}"
     Name       = "${var.alb_flower_name}"
   }

@@ -32,6 +32,7 @@ resource "aws_db_instance" "rds" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
     env        = "${terraform.workspace}"
     Name       = "${var.rds_tag_Name}"
   }
