@@ -179,7 +179,8 @@ resource "aws_security_group" "airflow_redshift" {
     to_port   = 5439
     protocol  = "tcp"
 
-    security_groups = ["${aws_security_group.airflow_worker.id}"]
+    #redshift endpoint is accessable by any team @FE for data analytics
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
   egress {
