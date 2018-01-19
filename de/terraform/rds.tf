@@ -1,9 +1,5 @@
-locals {
-  rds_identifier = "tf-fngn-${terraform.workspace}-rds"
-}
-
 resource "aws_db_instance" "rds" {
-  identifier              = "${local.rds_identifier}"
+  identifier              = "${var.rds_identifier}"
   allocated_storage       = 20
   engine                  = "postgres"
   engine_version          = "9.6.2"

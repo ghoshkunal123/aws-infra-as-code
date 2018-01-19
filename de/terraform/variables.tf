@@ -48,7 +48,7 @@ variable "iam_instance_profile" {
 
 #rds
 variable "rds_instance_class" {}
-
+variable "rds_identifier" {}
 variable "rds_db_name" {}
 variable "rds_user" {}
 variable "rds_password" {}
@@ -59,7 +59,7 @@ variable "rds_subnet_group_name" {
 
 #redshift
 variable "rs_db_name" {}
-
+variable "rs_cluster_identifier" {}
 variable "rs_master_user" {}
 variable "rs_master_password" {}
 variable "rs_node_type" {}

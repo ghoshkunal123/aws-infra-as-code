@@ -15,11 +15,13 @@ ec2_user                = "etluser"
 ec2_worker_count  = "2"
 
 # rds
+rds_identifier           = "fngn-dataeng-airflow"
 rds_instance_class       = "db.t2.large"
 rds_db_name                  = "airflow"
 rds_user                  = "etluser"
 
 # redshift
+rs_cluster_identifier   = "fngn-dataeng-edw"
 rs_db_name              = "analytics"
 rs_master_user          = "admin"
 rs_node_type            = "ds2.xlarge"
@@ -51,7 +53,7 @@ tag_CostCenter      = "270"
 tag_launcher       = "Terraform"
 
 rds_tag_Name            = "fngn-dataeng-airflow"
-rs_tag_Name            = "fngn-dataeng-edw"
+rs_tag_Name            = "fngn-dataeng-redshift"
 ec2_master_tag_Name = "fngn-dataeng-airflow-master"
 ec2_worker_tag_Name = "fngn-dataeng-airflow-worker"
 
