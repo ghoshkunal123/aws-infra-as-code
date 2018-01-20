@@ -1,6 +1,56 @@
 resource "aws_redshift_subnet_group" "analytics" {
-  name       = "fngn-dataeng-redshift-us-west-1a"
+  name       = "${var.rs_subnet_group_name}"
   subnet_ids = ["${data.aws_subnet.private1.id}"]
+}
+
+resource "aws_redshift_parameter_group" "analytics" {
+  name   = "${var.rs_parameter_group_name}"
+  family = "redshift-1.0"
+
+  parameter {
+    name  = "datestyle"
+    value = "ISO,MDY"
+  }
+
+  parameter {
+    name  = "enable_user_activity_logging"
+    value = "true"
+  }
+
+  parameter {
+    name  = "extra_float_digits"
+    value = "0"
+  }
+
+  parameter { #in fact, this parameter is deprecated
+    name  = "max_cursor_result_set_size"
+    value = "0"
+  }
+
+  parameter {
+    name  = "query_group"
+    value = "default"
+  }
+
+  parameter {
+    name  = "require_ssl"
+    value = "true"
+  }
+
+  parameter {
+    name  = "search_path"
+    value = "$user,public"
+  }
+
+  parameter {
+    name  = "statement_timeout"
+    value = "0"
+  }
+
+  parameter {
+    name  = "use_fips_ssl"
+    value = "false"
+  }
 }
 
 resource "aws_redshift_cluster" "analytics" {
@@ -12,14 +62,14 @@ resource "aws_redshift_cluster" "analytics" {
   cluster_type                 = "${var.rs_cluster_type}"
   number_of_nodes              = "${var.rs_number_of_nodes}"
   preferred_maintenance_window = "Thu:11:30-Thu:12:00"
-  cluster_parameter_group_name = "de-parameter-group"
+  cluster_parameter_group_name = "${aws_redshift_parameter_group.analytics.name}"
   availability_zone            = "us-west-1a"
   vpc_security_group_ids       = ["${aws_security_group.airflow_redshift.id}"]
   cluster_subnet_group_name    = "${aws_redshift_subnet_group.analytics.id}"
 
-  lifecycle {
-    prevent_destroy = true
-  }
+#  lifecycle {
+#    prevent_destroy = true
+#  }
 
   publicly_accessible  = false
   encrypted            = true

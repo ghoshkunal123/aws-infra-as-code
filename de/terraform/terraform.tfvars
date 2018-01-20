@@ -27,6 +27,8 @@ rs_master_user          = "admin"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
 rs_number_of_nodes      = 2
+rs_subnet_group_name   = "fngn-dataeng-redshift-us-west-1a" #TBD: should I link it to workspace?
+rs_parameter_group_name  = "fngn-dataeng-redshift-parameter-group"
 
 #rabbitmq
 rabbitmq_user           = "etluser"

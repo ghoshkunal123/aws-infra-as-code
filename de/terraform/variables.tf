@@ -65,6 +65,8 @@ variable "rs_master_password" {}
 variable "rs_node_type" {}
 variable "rs_cluster_type" {}
 variable "rs_number_of_nodes" {}
+variable "rs_subnet_group_name" {}
+variable "rs_parameter_group_name" {}
 
 variable "rs_iam_role" {
   type = "map"
