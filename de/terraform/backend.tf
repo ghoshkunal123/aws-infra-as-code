@@ -6,6 +6,6 @@ terraform {
     region  = "us-west-1"
     encrypt = true
 
-    #    dynamodb_table = "finr-devops-tfstate-locks"
+    dynamodb_table = "finr-devops-tfstate-locks"
   }
 }
