@@ -22,8 +22,8 @@ resource "aws_redshift_parameter_group" "analytics" {
     value = "0"
   }
 
-  parameter { #in fact, this parameter is deprecated
-    name  = "max_cursor_result_set_size"
+  parameter {
+    name  = "max_cursor_result_set_size" #in fact, this parameter is deprecated
     value = "0"
   }
 
@@ -60,16 +60,16 @@ resource "aws_redshift_cluster" "analytics" {
   master_password              = "${var.rs_master_password}"
   node_type                    = "${var.rs_node_type}"
   cluster_type                 = "${var.rs_cluster_type}"
-  number_of_nodes              = "${var.rs_number_of_nodes}"
+  number_of_nodes              = "${lookup(var.rs_number_of_nodes, terraform.workspace)}"
   preferred_maintenance_window = "Thu:11:30-Thu:12:00"
   cluster_parameter_group_name = "${aws_redshift_parameter_group.analytics.name}"
   availability_zone            = "us-west-1a"
   vpc_security_group_ids       = ["${aws_security_group.airflow_redshift.id}"]
   cluster_subnet_group_name    = "${aws_redshift_subnet_group.analytics.id}"
 
-#  lifecycle {
-#    prevent_destroy = true
-#  }
+  lifecycle {
+    prevent_destroy = true
+  }
 
   publicly_accessible  = false
   encrypted            = true

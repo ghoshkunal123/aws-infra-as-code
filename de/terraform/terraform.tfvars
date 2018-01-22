@@ -10,9 +10,7 @@ ansible_airflow_directory = "../ansible"
 ansible_airflow_cfg_vars_file = "group_vars/airflow_cfg_vars.yml"
 
 # ec2
-ec2_instance_type       = "m4.large"
 ec2_user                = "etluser"
-ec2_worker_count  = "2"
 
 # rds
 rds_identifier           = "fngn-dataeng-airflow"
@@ -26,8 +24,7 @@ rs_db_name              = "analytics"
 rs_master_user          = "admin"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
-rs_number_of_nodes      = 2
-rs_subnet_group_name   = "fngn-dataeng-redshift-us-west-1a" #TBD: should I link it to workspace?
+rs_subnet_group_name   = "fngn-dataeng-redshift-sn-private1"
 rs_parameter_group_name  = "fngn-dataeng-redshift-parameter-group"
 
 #rabbitmq

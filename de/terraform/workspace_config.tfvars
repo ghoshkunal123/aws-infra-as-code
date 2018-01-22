@@ -45,6 +45,20 @@ ec2_key_name = {
        prod = "you need to set"
 }
 
+ec2_instance_type = {
+       finr = "m4.large"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+
+ec2_worker_count = {
+       finr = "3"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+
 # ec2 iam role
 iam_instance_profile  =  {
        finr = "iAirFlowDev"
@@ -52,9 +66,16 @@ iam_instance_profile  =  {
        test = "you need to set"
        prod = "you need to set"
 }
+
 # redshift iam role
 rs_iam_role      = {
        finr = "eRedshiftFinrAdmin"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+rs_number_of_nodes = {
+       finr = "2"
        dev = "you need to set"
        test = "you need to set"
        prod = "you need to set"
@@ -66,6 +87,8 @@ ec2_ami  = {
        test = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
        prod = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
 }
+
+# This is the S3 bucket to store data engineering airflow data and used by redshift
 s3_bucket_name = {
 # cannot create an s3 called com-fngn-finr-dataeng because it has already existed. 
 # so I name this s3 as com-fngn-finr-tf-dataeng
@@ -73,4 +96,12 @@ s3_bucket_name = {
        dev = "com-fngn-dev-dataeng"
        test = "com-fngn-test-dataeng"
        prod = "com-fngn-prod-dataeng"
+}
+# This is the S3 bucket to store remote terraform state files.
+# This S3 bucket should be encryption enable, better to have version enabled
+remote_state_s3_bucket_name = {
+       finr = "fe-finr-devops-private"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
 }

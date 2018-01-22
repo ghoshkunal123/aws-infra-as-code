@@ -27,6 +27,10 @@ variable "s3_bucket_name" {
   type = "map"
 }
 
+variable "remote_state_s3_bucket_name" {
+  type = "map"
+}
+
 #ec2
 variable "ec2_key_name" {
   type = "map"
@@ -34,8 +38,14 @@ variable "ec2_key_name" {
 
 variable "ec2_user" {}
 variable "ec2_password" {}
-variable "ec2_instance_type" {}
-variable "ec2_worker_count" {}
+
+variable "ec2_instance_type" {
+  type = "map"
+}
+
+variable "ec2_worker_count" {
+  type = "map"
+}
 
 variable "ec2_ami" {
   type = "map"
@@ -48,6 +58,7 @@ variable "iam_instance_profile" {
 
 #rds
 variable "rds_instance_class" {}
+
 variable "rds_identifier" {}
 variable "rds_db_name" {}
 variable "rds_user" {}
@@ -59,12 +70,17 @@ variable "rds_subnet_group_name" {
 
 #redshift
 variable "rs_db_name" {}
+
 variable "rs_cluster_identifier" {}
 variable "rs_master_user" {}
 variable "rs_master_password" {}
 variable "rs_node_type" {}
 variable "rs_cluster_type" {}
-variable "rs_number_of_nodes" {}
+
+variable "rs_number_of_nodes" {
+  type = "map"
+}
+
 variable "rs_subnet_group_name" {}
 variable "rs_parameter_group_name" {}
 

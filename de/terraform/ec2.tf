@@ -1,5 +1,5 @@
 resource "aws_instance" "master" {
-  instance_type = "${var.ec2_instance_type}"
+  instance_type = "${lookup(var.ec2_instance_type, terraform.workspace)}"
   ami           = "${lookup(var.ec2_ami, terraform.workspace)}"
 
   key_name               = "${lookup(var.ec2_key_name, terraform.workspace)}"
@@ -22,8 +22,8 @@ resource "aws_instance" "master" {
 }
 
 resource "aws_instance" "worker" {
-  count         = "${var.ec2_worker_count}"
-  instance_type = "${var.ec2_instance_type}"
+  count         = "${lookup(var.ec2_worker_count, terraform.workspace)}"
+  instance_type = "${lookup(var.ec2_instance_type, terraform.workspace)}"
   ami           = "${lookup(var.ec2_ami, terraform.workspace)}"
 
   key_name               = "${lookup(var.ec2_key_name, terraform.workspace)}"
