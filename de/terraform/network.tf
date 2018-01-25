@@ -17,6 +17,15 @@ output "vpc_cidr" {
   value = "${data.aws_vpc.vpc.cidr_block}"
 }
 
+# Route53
+data "aws_route53_zone" "primary" {
+  name = "${lookup(var.route53_domain_name, terraform.workspace)}"
+}
+
+output "route53_zone_id" {
+  value = "${data.aws_route53_zone.primary.zone_id}"
+}
+
 #subnet - private 1
 data "aws_subnet" "private1" {
   id = "${lookup(var.subnet_private1_id, terraform.workspace)}"

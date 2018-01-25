@@ -5,6 +5,12 @@ vpc_id = {
         test = "you need to set"
         prod = "you need to set"
 }
+route53_domain_name = {
+       finr = "fefinr.io."
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
 subnet_private1_id      = {
         finr  = "subnet-0fca106a"
         dev  = "you need to set"
@@ -16,12 +22,6 @@ subnet_private2_id      = {
         dev  = "you need to set"
         test = "you need to set"
         prod = "you need to set"
-}
-route53_hosted_zone_id = {
-       finr = "Z308WL0Y3G1YGT"
-       dev = "you need to set"
-       test = "you need to set"
-       prod = "you need to set"
 }
 rds_subnet_group_name    = {
        finr = "default-vpc-d671b7b3"
@@ -97,10 +97,19 @@ s3_bucket_name = {
        test = "com-fngn-test-dataeng"
        prod = "com-fngn-prod-dataeng"
 }
+
 # This is the S3 bucket to store remote terraform state files.
-# This S3 bucket should be encryption enable, better to have version enabled
-remote_state_s3_bucket_name = {
+# This S3 bucket should be pre-created, encryption enable, better to have version enabled
+backend_s3_bucket_name = {
        finr = "fe-finr-devops-private"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+# this is a dynamodb table which is used for state locking and consistency
+# this table should be pre-created, must have a primary key named LockID.
+backend_dynamodb_table_name = {
+       finr = "finr-devops-tfstate-locks"
        dev = "you need to set"
        test = "you need to set"
        prod = "you need to set"

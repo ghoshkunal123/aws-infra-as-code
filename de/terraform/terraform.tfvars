@@ -42,8 +42,8 @@ alb_timeout             = "5"
 alb_interval            = "30"
 
 #route53
-route53_flower_domain_name = "fngn-dataeng-flower"
-route53_airflow_domain_name = "fngn-dataeng-airflow"
+route53_flower_domain_name = "flower"
+route53_airflow_domain_name = "airflow"
 
 tag_app             = "de"
 tag_Project         = "ANLY-2018"

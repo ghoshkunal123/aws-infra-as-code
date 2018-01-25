@@ -15,11 +15,12 @@ resource "aws_alb" "airflow" {
   }
 }
 
-resource "aws_alb_listener" "airflow_http" {
+resource "aws_alb_listener" "airflow_https" {
   load_balancer_arn = "${aws_alb.airflow.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
   default_action {
     target_group_arn = "${aws_alb_target_group.airflow.arn}"
     type             = "forward"
@@ -65,10 +66,12 @@ resource "aws_alb" "flower" {
   }
 }
 
-resource "aws_alb_listener" "flower_http" {
+resource "aws_alb_listener" "flower_https" {
   load_balancer_arn = "${aws_alb.flower.arn}"
-  port              = "80"
-  protocol          = "HTTP"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-2016-08"
+  certificate_arn   = "arn:aws:acm:us-west-1:224919220385:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.flower.arn}"

@@ -1,5 +1,5 @@
 ---
 local_ansible_dir: /Users/lhu/Documents/source_code/ansible
 remote_home: /home/etluser
-git_commit_version: b5e0a036dd8b5bd10447fc83c1fb8d6a92e45142 #the commit on 12/29/2017 
+git_commit_version: 34755a29cb6de8351a660e549fd091ae28561bf3 #the commit on 1/19/2018
 git_checkout_dir: "{{ local_ansible_dir }}/files/de-datapipeline"

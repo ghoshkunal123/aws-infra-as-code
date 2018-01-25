@@ -27,7 +27,11 @@ variable "s3_bucket_name" {
   type = "map"
 }
 
-variable "remote_state_s3_bucket_name" {
+variable "backend_s3_bucket_name" {
+  type = "map"
+}
+
+variable "backend_dynamodb_table_name" {
   type = "map"
 }
 
@@ -106,13 +110,11 @@ variable "alb_timeout" {}
 variable "alb_interval" {}
 
 #route53
-variable "route53_airflow_domain_name" {}
-
-variable "route53_flower_domain_name" {}
-
-variable "route53_hosted_zone_id" {
+variable "route53_domain_name" {
   type = "map"
 }
+variable "route53_airflow_domain_name" {}
+variable "route53_flower_domain_name" {}
 
 #tags
 variable "tag_app" {}
