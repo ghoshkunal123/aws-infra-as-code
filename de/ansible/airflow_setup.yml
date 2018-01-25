@@ -13,7 +13,7 @@
 - hosts: master:workers
   remote_user: etluser
   become: yes
-  become_user: etluser #TBD: should I change it to root? 
+  become_user: etluser
 #  become_method: sudo
   gather_facts: no
   roles:
@@ -40,12 +40,13 @@
   become_user: etluser
   become_method: sudo
   gather_facts: no
-  vars_files: 
+  vars_files:
   - group_vars/airflow_cfg_vars.yml
 
   tasks:
   - name: modify parameters of remote airflow.cfg
-    template: src=templates/airflow.cfg.j2 dest={{ remote_home }}/airflow/airflow.cfg owner=etluser group=etluser mode=664
+    template: src="{{ git_checkout_dir }}/Airflow/airflow.cfg.j2" dest={{ remote_home }}/airflow/airflow.cfg owner=etluser group=etluser mode=664
+
 - hosts: master
   remote_user: etluser
   become: yes
@@ -65,6 +66,9 @@
   become_user: etluser
   become_method: sudo
   gather_facts: no
+  vars_files:
+  - group_vars/airflow_cfg_vars.yml
+  - group_vars/mssql_vars.yml
   pre_tasks:
   - name: Creates directory dags
     file: path="{{ remote_home }}/airflow/dags" state=directory
@@ -72,20 +76,18 @@
     file: path="{{ remote_home }}/airflow/logs" state=directory
   - name: Creates directory run
     file: path="{{ remote_home }}/airflow/run" state=directory mode=0777
-  - name: copy from local directory to remote
-    copy:
-      src: "{{ git_checkout_dir }}/Airflow/dags/"
-      dest: "{{ remote_home }}/airflow/dags/"
-      force: no
   - name: Creates directory /mnt/etl
     become_user: root
     file: path=/mnt/etl state=directory
   - name: Creates directory /mnt/etl/data
     become_user: root
-    file: path=/mnt/etl/data state=directory
-  - name: Creates directory /mnt/etl/tmp
+    file: path=/mnt/etl/data state=directory mode=0755
+  - name: Creates directory /mnt/etl/bin
     become_user: root
-    file: path=/mnt/etl/tmp state=directory
+    file: path=/mnt/etl/bin state=directory mode=0755
+  - name: Creates directory /mnt/etl/xforms
+    become_user: root
+    file: path=/mnt/etl/xforms state=directory mode=0755
   roles: 
     - microsoft-odbc-driver-setup
 ######### Setting up Systemd to Run Airflow: both master and workers
@@ -103,12 +105,10 @@
   - name: Creates directory /etc/sysconfig if not exist (should be new)
     become_user: root 
     file: path=/etc/sysconfig state=directory
-  - name: copy airflow files from source to remote /etc/sysconfig
-    become_user: root 
-    copy: #copy airflow (it is a file) to /etc/sysconfig (it is a directory)
-      src: "{{ git_checkout_dir }}/Airflow/airflow"
-      dest: /etc/sysconfig/
-      force: no
+  - name: modify parameters of remote env-properties
+    become_user: root
+    template: src="{{ git_checkout_dir }}/Airflow/env.properties.j2" dest=/etc/sysconfig/env.properties owner=root group=root mode=664
+
 ######### Setting up Airflow Services to Run on Machine Startup
 - hosts: master
   remote_user: etluser
