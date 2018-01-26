@@ -20,7 +20,7 @@ resource "aws_alb_listener" "airflow_https" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
+  certificate_arn   = "${lookup(var.alb_airflow_certificate_arn, terraform.workspace)}"
   default_action {
     target_group_arn = "${aws_alb_target_group.airflow.arn}"
     type             = "forward"
@@ -71,7 +71,7 @@ resource "aws_alb_listener" "flower_https" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:us-west-1:224919220385:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
+  certificate_arn   = "${lookup(var.alb_flower_certificate_arn, terraform.workspace)}"
 
   default_action {
     target_group_arn = "${aws_alb_target_group.flower.arn}"

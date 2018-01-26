@@ -114,3 +114,17 @@ backend_dynamodb_table_name = {
        test = "you need to set"
        prod = "you need to set"
 }
+
+alb_airflow_certificate_arn = {
+       finr = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+
+alb_flower_certificate_arn = {
+       finr = "arn:aws:acm:us-west-1:224919220385:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}

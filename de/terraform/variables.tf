@@ -104,6 +104,13 @@ variable "targetgroup_airflow_name" {}
 variable "alb_flower_name" {}
 variable "targetgroup_flower_name" {}
 
+variable "alb_airflow_certificate_arn" {
+  type = "map"
+}
+variable "alb_flower_certificate_arn" {
+  type = "map"
+}
+
 variable "alb_healthy_threshold" {}
 variable "alb_unhealthy_threshold" {}
 variable "alb_timeout" {}
