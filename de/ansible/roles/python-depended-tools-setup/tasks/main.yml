@@ -5,12 +5,13 @@
 - name: install pyodbc, pandas, boto3, awscli, flask-bcrypt using pip
   become_user: root
   pip:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
     state: present
   with_items:
-  - pyodbc
-  - psycopg2
-  - pandas
-  - boto3
-  - awscli
-  - flask-bcrypt
+    - { name: pyodbc, version: 4.0.17 }
+    - { name: psycopg2, version: 2.7.3.1 }
+    - { name: pandas, version: 0.20.3 }
+    - { name: boto3, version: 1.4.7 }
+    - { name: awscli, version: 1.11.168 }
+    - { name: flask-bcrypt, version: 0.7.1 }

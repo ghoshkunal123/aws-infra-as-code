@@ -11,14 +11,10 @@
 - name: Upgrade pip so that pip becomes 9.0.1
   pip:
     name: pip
-    extra_args: --upgrade
+    version: 9.0.1
 - name: I run this so that pip --version shows 9.0.1 not 8.X.X.
   become_user: root
   command: update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1 #TBD: should I make sure it run only once?
-- name: test pip --version
-  shell: pip --version
-  register: hello
-- debug: msg="{{ hello.stdout }}"
 - name: test python --version
   shell: python --version
   register: hello

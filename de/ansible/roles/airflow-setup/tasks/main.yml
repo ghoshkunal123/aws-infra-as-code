@@ -2,13 +2,14 @@
 - name: install airflow[s3, celery, flower]
   become_user: root
   pip:
-    name: "{{ item }}"
+    name: "{{ item.name }}"
+    version: "{{ item.version }}"
     state: present
   with_items:
-    - airflow
-    - s3
-    - celery
-    - flower #TBD
+    - { name: airflow, version: 1.8.0 }
+    - { name: s3, version: 3.0.0 }
+    - { name: celery, version: 4.1.0 }
+    - { name: flower, version: 0.9.2 }
 - name:
   command: airflow initdb
 - name: Clean artifact path
