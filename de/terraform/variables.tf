@@ -27,14 +27,6 @@ variable "s3_bucket_name" {
   type = "map"
 }
 
-variable "backend_s3_bucket_name" {
-  type = "map"
-}
-
-variable "backend_dynamodb_table_name" {
-  type = "map"
-}
-
 #ec2
 variable "ec2_key_name" {
   type = "map"
@@ -107,6 +99,7 @@ variable "targetgroup_flower_name" {}
 variable "alb_airflow_certificate_arn" {
   type = "map"
 }
+
 variable "alb_flower_certificate_arn" {
   type = "map"
 }
@@ -120,6 +113,7 @@ variable "alb_interval" {}
 variable "route53_domain_name" {
   type = "map"
 }
+
 variable "route53_airflow_domain_name" {}
 variable "route53_flower_domain_name" {}
 

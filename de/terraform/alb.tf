@@ -21,6 +21,7 @@ resource "aws_alb_listener" "airflow_https" {
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
   certificate_arn   = "${lookup(var.alb_airflow_certificate_arn, terraform.workspace)}"
+
   default_action {
     target_group_arn = "${aws_alb_target_group.airflow.arn}"
     type             = "forward"
