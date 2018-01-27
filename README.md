@@ -7,3 +7,6 @@ Terraform v0.11.0
 ansible --version  
 + ansible 2.4.2.0  
 + python version = 2.7.14
+
+Document and steps:
+https://confluence.fngn.com/display/DEVOPS/Infrastructure+As+Code+for+Redshift+Migration
