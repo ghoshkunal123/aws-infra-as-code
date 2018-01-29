@@ -98,23 +98,6 @@ s3_bucket_name = {
        prod = "com-fngn-prod-dataeng"
 }
 
-# This is the S3 bucket to store remote terraform state files.
-# This S3 bucket should be pre-created, encryption enable, better to have version enabled
-backend_s3_bucket_name = {
-       finr = "fe-finr-devops-private"
-       dev = "you need to set"
-       test = "you need to set"
-       prod = "you need to set"
-}
-# this is a dynamodb table which is used for state locking and consistency
-# this table should be pre-created, must have a primary key named LockID.
-backend_dynamodb_table_name = {
-       finr = "finr-devops-tfstate-locks"
-       dev = "you need to set"
-       test = "you need to set"
-       prod = "you need to set"
-}
-
 alb_airflow_certificate_arn = {
        finr = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
        dev = "you need to set"
