@@ -111,3 +111,9 @@ alb_flower_certificate_arn = {
        test = "you need to set"
        prod = "you need to set"
 }
+lambda_role = {
+       finr = "arn:aws:iam::224919220385:role/eLambdaExecutionFinrAdmin"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}

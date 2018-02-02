@@ -134,3 +134,7 @@ variable "ec2_tag_patch_group" {}
 variable "ansible_airflow_cfg_vars_file" {}
 
 variable "ansible_airflow_directory" {}
+
+variable "lambda_role" {
+  type = "map"
+}
