@@ -44,6 +44,8 @@ alb_interval            = "30"
 #route53
 route53_flower_domain_name = "flower"
 route53_airflow_domain_name = "airflow"
+route53_mssqldb_domain_name = "mssqldb-dataeng"
+on-promise_mssqldb_ip           = "10.80.0.65"
 
 tag_app             = "de"
 tag_Project         = "ANLY-2018"

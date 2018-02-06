@@ -21,3 +21,11 @@ resource "aws_route53_record" "flower" {
     evaluate_target_health = false
   }
 }
+
+resource "aws_route53_record" "mssqldb" {
+  zone_id = "${data.aws_route53_zone.primary.zone_id}"
+  name    = "${var.route53_mssqldb_domain_name}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${var.on-promise_mssqldb_ip}"]
+}
