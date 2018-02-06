@@ -154,6 +154,7 @@
             proxy_buffering off;
             client_max_body_size 0;
             proxy_read_timeout 36000s;
+            return 200 "healthy\n";
           }
   roles:
     - geerlingguy.nginx
