@@ -27,5 +27,5 @@ resource "aws_route53_record" "mssqldb" {
   name    = "${var.route53_mssqldb_domain_name}"
   type    = "A"
   ttl     = "300"
-  records = ["${var.on-promise_mssqldb_ip}"]
+  records = ["${lookup(var.on-promise_mssqldb_ip, terraform.workspace)}"]
 }

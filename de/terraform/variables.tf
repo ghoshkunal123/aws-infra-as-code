@@ -117,7 +117,10 @@ variable "route53_domain_name" {
 variable "route53_airflow_domain_name" {}
 variable "route53_flower_domain_name" {}
 variable "route53_mssqldb_domain_name" {}
-variable "on-promise_mssqldb_ip" {}
+
+variable "on-promise_mssqldb_ip" {
+  type = "map"
+}
 
 #tags
 variable "tag_app" {}
