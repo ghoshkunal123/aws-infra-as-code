@@ -118,6 +118,7 @@
   tags: service 
   roles:
     - airflow-master-enable
+
 - hosts: workers
   remote_user: etluser
   become_user: etluser
@@ -125,3 +126,34 @@
   gather_facts: no
   roles:
     - airflow-workers-enable
+
+- hosts: master
+  remote_user: etluser
+  become: yes
+  become_user: root
+  gather_facts: yes
+  tags: nginx
+  vars_files:
+  - group_vars/airflow_cfg_vars.yml
+  vars:
+    nginx_vhosts:
+      - listen: "80"
+        server_name: "airflow.{{ domain_name }}"
+        state: "present"
+        extra_parameters: |
+          location / {
+            proxy_pass_header Authorization;
+            proxy_pass http://localhost:8080;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto https;
+            proxy_http_version 1.1;
+            proxy_redirect off;
+            proxy_set_header Connection "";
+            proxy_buffering off;
+            client_max_body_size 0;
+            proxy_read_timeout 36000s;
+          }
+  roles:
+    - geerlingguy.nginx

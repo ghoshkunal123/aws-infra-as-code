@@ -30,7 +30,7 @@ resource "aws_alb_listener" "airflow_https" {
 
 resource "aws_alb_target_group" "airflow" {
   name     = "${var.targetgroup_airflow_name}"
-  port     = 8080
+  port     = 80
   protocol = "HTTP"
   vpc_id   = "${lookup(var.vpc_id, terraform.workspace)}"
 
@@ -39,7 +39,7 @@ resource "aws_alb_target_group" "airflow" {
     healthy_threshold   = "${var.alb_healthy_threshold}"
     unhealthy_threshold = "${var.alb_unhealthy_threshold}"
     timeout             = "${var.alb_timeout}"
-    path                = "/static/pin_100.png"
+    path                = "/"
     interval            = "${var.alb_interval}"
   }
 }
@@ -47,7 +47,7 @@ resource "aws_alb_target_group" "airflow" {
 resource "aws_alb_target_group_attachment" "airflow" {
   target_group_arn = "${aws_alb_target_group.airflow.arn}"
   target_id        = "${aws_instance.master.id}"
-  port             = 8080
+  port             = 80
 }
 
 resource "aws_alb" "flower" {

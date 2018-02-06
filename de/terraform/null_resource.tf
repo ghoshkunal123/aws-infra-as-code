@@ -16,6 +16,7 @@ resource "null_resource" "ansible" {
   provisioner "local-exec" {
     command = <<EOD
 cat <<EOF > ${var.ansible_airflow_directory}/${var.ansible_airflow_cfg_vars_file}
+domain_name: ${lookup(var.route53_domain_name, terraform.workspace)}
 s3_bucket_name: ${aws_s3_bucket.s3.bucket}
 rds_user: ${var.rds_user}
 rds_pw: ${var.rds_password}

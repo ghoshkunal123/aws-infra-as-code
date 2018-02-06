@@ -50,6 +50,14 @@ resource "aws_security_group" "airflow_master" {
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
+  # Nginx Ports
+  ingress {
+    from_port       = 80
+    to_port         = 80
+    protocol        = "tcp"
+    security_groups = ["${aws_security_group.airflow_alb.id}"]
+  }
+
   #Flower_Ports
   ingress {
     from_port       = 5555
