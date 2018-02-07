@@ -68,7 +68,6 @@
   gather_facts: no
   vars_files:
   - group_vars/airflow_cfg_vars.yml
-  - group_vars/mssql_vars.yml
   pre_tasks:
   - name: Creates directory dags
     file: path="{{ remote_home }}/airflow/dags" state=directory

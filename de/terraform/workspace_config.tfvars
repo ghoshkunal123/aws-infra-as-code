@@ -123,3 +123,15 @@ on-promise_mssqldb_ip = {
        test = "10.80.0.65"
        prod = "you need to set"
 }
+mssql_aux_db = {
+       finr = "prodcopy_corp_aux"
+       dev = "you need to set"
+       test = "feitest_aux_copy"
+       prod = "you need to set"
+}
+mssql_adv_db = {
+       finr = "prodcopy2"
+       dev = "you need to set"
+       test = "feitest_copy"
+       prod = "you need to set"
+}

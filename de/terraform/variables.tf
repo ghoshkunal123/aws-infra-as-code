@@ -143,3 +143,14 @@ variable "ansible_airflow_directory" {}
 variable "lambda_role" {
   type = "map"
 }
+
+variable "mssql_aux_db" {
+  type = "map"
+}
+
+variable "mssql_adv_db" {
+  type = "map"
+}
+
+variable "mssql_password" {}
+variable "rs_pw" {}

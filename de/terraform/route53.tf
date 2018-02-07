@@ -29,3 +29,7 @@ resource "aws_route53_record" "mssqldb" {
   ttl     = "300"
   records = ["${lookup(var.on-promise_mssqldb_ip, terraform.workspace)}"]
 }
+
+output "mssqldb_fqdn" {
+  value = "${aws_route53_record.mssqldb.fqdn}"
+}
