@@ -39,7 +39,7 @@ resource "aws_alb_target_group" "airflow" {
     healthy_threshold   = "${var.alb_healthy_threshold}"
     unhealthy_threshold = "${var.alb_unhealthy_threshold}"
     timeout             = "${var.alb_timeout}"
-    path                = "/"
+    path                = "/static/pin_100.png"
     interval            = "${var.alb_interval}"
   }
 }
