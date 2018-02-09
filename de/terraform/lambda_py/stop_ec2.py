@@ -26,8 +26,6 @@ def handler(event, context):
 
 # Manual invocation of the script (only used for testing)
 if __name__ == "__main__":
-    # Test data
     test = {}
     test["instanceid"] = "i-05ae43e692548ff47"
-    # Test function
     handler(test, None)
