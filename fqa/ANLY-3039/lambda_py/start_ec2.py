@@ -39,6 +39,6 @@ def handler(event, context):
 if __name__ == "__main__":
     # Test data
     test = {}
-    test["instanceid"] = "i-05ae43e692548ff47"
+    test["tag_group"] = "abb7"
     # Test function
     handler(test, None)
