@@ -12,7 +12,7 @@ terraform apply -var 'lambda_role=something'
 (after you run okta to obtain  temporary credential)
 
 2-1: to start all EC2 of abba5 group: 
-aws lambda invoke --function-name=fngn-fqa-abba-startEC2 --invocation-type=RequestResponse --payload '{"instanceid":"abba5"}' --log-type=Tail /dev/null | jq -r '.LogResult' | base64 --decode
+aws lambda invoke --function-name=fngn-fqa-abba-startEC2 --invocation-type=RequestResponse --payload '{"tag_group":"abba5"}' --log-type=Tail /dev/null | jq -r '.LogResult' | base64 --decode
 
 2-3: to stop all EC2 of abba6 group: 
-aws lambda invoke --function-name=fngn-fqa-abba-stopEC2 --invocation-type=RequestResponse --payload '{"instanceid":"abba6"}' --log-type=Tail /dev/null | jq -r '.LogResult' | base64 --decode
+aws lambda invoke --function-name=fngn-fqa-abba-stopEC2 --invocation-type=RequestResponse --payload '{"tag_group":"abba6"}' --log-type=Tail /dev/null | jq -r '.LogResult' | base64 --decode
