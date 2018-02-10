@@ -1,27 +1,36 @@
-resource "null_resource" "lambda" {
-  # this local-exec creates *_upload.zip to be used by the below lambda resources.
-  provisioner "local-exec" {
-    command = "cd lambda_py && zip ../lambda_func/stop_ec2_upload.zip stop_ec2.py && cd .."
-  }
-  provisioner "local-exec" {
-    command = "cd lambda_py && zip ../lambda_func/start_ec2_upload.zip start_ec2.py && cd .."
-  }
+locals {
+  src_dir  = "lambda_py"
+  dest_dir = "lambda_func"
 }
-resource "aws_lambda_function" "stop_ec2" {
-    depends_on = ["null_resource.lambda"]
-    function_name = "fngn-fqa-abba-stopEC2"
-    handler = "stop_ec2.handler"
-    runtime = "python3.6"
-    filename = "lambda_func/stop_ec2_upload.zip"
-    source_code_hash = "${base64sha256(file("lambda_func/stop_ec2_upload.zip"))}"
-    role = "${var.lambda_role}"
+
+data "archive_file" "start_ec2" {
+  type        = "zip"
+  source_file = "${local.src_dir}/start_ec2.py"
+  output_path = "${local.dest_dir}/start_ec2_upload.zip"
 }
+
+data "archive_file" "stop_ec2" {
+  type        = "zip"
+  source_file = "${local.src_dir}/stop_ec2.py"
+  output_path = "${local.dest_dir}/stop_ec2_upload.zip"
+}
+
 resource "aws_lambda_function" "start_ec2" {
-    depends_on = ["null_resource.lambda"]
-    function_name = "fngn-fqa-abba-startEC2"
-    handler = "start_ec2.handler"
-    runtime = "python3.6"
-    filename = "lambda_func/start_ec2_upload.zip"
-    source_code_hash = "${base64sha256(file("lambda_func/start_ec2_upload.zip"))}"
-    role = "${var.lambda_role}"
+  function_name    = "fngn-analytics-fqa-startEC2"
+  handler          = "start_ec2.handler"
+  runtime          = "python3.6"
+  filename         = "${local.dest_dir}/start_ec2_upload.zip"
+  source_code_hash = "${data.archive_file.start_ec2.output_base64sha256}"
+  role             = "${var.lambda_role}"
+  timeout          = 300
+}
+
+resource "aws_lambda_function" "stop_ec2" {
+  function_name    = "fngn-analytics-fqa-stopEC2"
+  handler          = "stop_ec2.handler"
+  runtime          = "python3.6"
+  filename         = "${local.dest_dir}/stop_ec2_upload.zip"
+  source_code_hash = "${data.archive_file.stop_ec2.output_base64sha256}"
+  role             = "${var.lambda_role}"
+  timeout          = 300
 }
