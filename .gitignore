@@ -1,0 +1,12 @@
+de/terraform/lambda_func/
+*.bk
+*.txt
+de/terraform/terraform.tfstate*
+de/ansible/files/
+de/ansible/aws_hosts
+de/ansible/group_vars/airflow_cfg_vars.yml
+fqa/ANLY-3039/terraform.tfstate
+fqa/ANLY-3039/terraform.tfstate.bk
+fqa/ANLY-3039/.terraform/
+fqa/ANLY-3039/lambda_func/
+fqa/ANLY-3039/terraform.tfstate.backup
