@@ -157,7 +157,7 @@ resource "aws_security_group" "airflow_rds" {
     to_port   = 5432
     protocol  = "tcp"
 
-    security_groups = ["${aws_security_group.airflow_master.id}"]
+    security_groups = ["${aws_security_group.airflow_master.id}", "${aws_security_group.airflow_worker.id}"]
   }
 
   egress {
