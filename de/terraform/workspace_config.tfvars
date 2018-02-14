@@ -79,7 +79,7 @@ rs_number_of_nodes = {
 ec2_ami  = {
        finr = "ami-e3797b83" #this is an encrypted AMI created by @lhu based on public unencrypted ubuntu 16.4 AMI"
        dev = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
-       test = "ami-02306362" #???TBD: this is not ubuntu 16.04. David will figure out what to use"
+       test = "ami-02306362" #this is an encrypted AMI created by @dchou based on public unencrypted ubuntu 16.4 AMI"
        prod = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
 }
 
