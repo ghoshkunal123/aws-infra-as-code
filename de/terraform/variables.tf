@@ -60,10 +60,6 @@ variable "rds_db_name" {}
 variable "rds_user" {}
 variable "rds_password" {}
 
-variable "rds_subnet_group_name" {
-  type = "map"
-}
-
 #redshift
 variable "rs_db_name" {}
 

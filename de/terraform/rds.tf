@@ -7,9 +7,9 @@ resource "aws_db_instance" "rds" {
   name                    = "${var.rds_db_name}"
   username                = "${var.rds_user}"
   password                = "${var.rds_password}"
-  db_subnet_group_name    = "${lookup(var.rds_subnet_group_name, terraform.workspace)}"
+  db_subnet_group_name    = "${aws_db_subnet_group.rds.name}"
   vpc_security_group_ids  = ["${aws_security_group.airflow_rds.id}"]
-  backup_retention_period = 0                                                           # day
+  backup_retention_period = 0                                        # day
   multi_az                = false
   publicly_accessible     = false
   storage_type            = "gp2"
@@ -22,6 +22,21 @@ resource "aws_db_instance" "rds" {
   lifecycle {
     prevent_destroy = true
   }
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
+    env        = "${terraform.workspace}"
+    Name       = "${var.rds_tag_Name}"
+  }
+}
+
+resource "aws_db_subnet_group" "rds" {
+  name       = "fngn-dataeng-rds-${data.aws_vpc.vpc.id}"
+  subnet_ids = ["${data.aws_subnet.private1.id}", "${data.aws_subnet.private2.id}"]
 
   tags = {
     app        = "${var.tag_app}"
