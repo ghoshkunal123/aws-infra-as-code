@@ -9,7 +9,7 @@ resource "null_resource" "ansible" {
   }
 
   provisioner "local-exec" {
-    command = "sleep 60 && ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}/setup_ssh_authorized_key.yml -e \"user=etluser\""
+    command = "if ${var.ssh_ec2};then sleep 60 && ansible-playbook -i ${var.ansible_airflow_directory}/aws_hosts -e ansible_python_interpreter=/usr/bin/python3 ${var.ansible_airflow_directory}/setup_ssh_authorized_key.yml -e \"user=etluser\";fi;"
   }
 
   # this local-exec creates ansible airflow vars file, which will be used by ansible jinja2 to create airflow.cfg
