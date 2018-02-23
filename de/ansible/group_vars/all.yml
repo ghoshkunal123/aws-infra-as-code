@@ -1,6 +1,5 @@
 ---
 #local_ansible_dir: "." #use current ansible folder as base
 remote_home: /home/etluser
-#git_commit_version: 991e0b4dda5f5073e601adec9f6822e053747220 # the commit on 1/25/2018
-git_commit_version: aed1ad4b6467d38101e82cf637919eea5e66df39 # the commit on 2/12/2018
+git_commit_version: 3f91c43229fb33da60ca7f9ec7ee10d61dee65b9 # the commit on 2/22/2018
 git_checkout_dir: "files/de-datapipeline"

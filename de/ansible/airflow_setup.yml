@@ -107,6 +107,12 @@
   - name: modify parameters of remote env-properties
     become_user: root
     template: src="{{ git_checkout_dir }}/Airflow/env.properties.j2" dest=/etc/sysconfig/env.properties owner=root group=root mode=664
+  - name: Creates directory /mnt/etl/config if not exist (should be new)
+    become_user: root
+    file: path=/mnt/etl/config state=directory
+  - name: modify parameters of remote etl.cfg
+    become_user: root
+    template: src="{{ git_checkout_dir }}/config/etl.cfg.j2" dest=/mnt/etl/config/etl.cfg owner=root group=root mode=664
 
 ######### Setting up Airflow Services to Run on Machine Startup
 - hosts: master

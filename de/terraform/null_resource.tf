@@ -27,13 +27,15 @@ rabbitmq_pw: ${var.rabbitmq_password}
 rabbitmq_host: ${aws_instance.master.private_ip}
 rs_host: ${aws_redshift_cluster.analytics.endpoint}
 rs_db_name: ${var.rs_db_name}
-ec2_role_arn: ${data.aws_iam_role.airflow.arn}
+rs_iam_role_arn: ${data.aws_iam_role.redshift.arn}
+rs_pw: ${var.rs_pw}
 env_name: ${lookup(var.airflow_env_properties, terraform.workspace)}
-mssql_host: ${aws_route53_record.mssqldb.fqdn}
 mssql_aux_db: ${lookup(var.mssql_aux_db, terraform.workspace)}
 mssql_adv_db: ${lookup(var.mssql_adv_db, terraform.workspace)}
 mssql_password: ${var.mssql_password}
-rs_pw: ${var.rs_pw}
+mssql_adv_host: ${aws_route53_record.mssqldb.fqdn}
+mssql_aux_host: ${aws_route53_record.mssqldb.fqdn}
+cron_schedule: ${lookup(var.cron_schedule, terraform.workspace)}
 EOF
 EOD
   }

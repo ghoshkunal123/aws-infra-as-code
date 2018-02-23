@@ -86,8 +86,8 @@ ec2_ami  = {
 # This is the S3 bucket to store data engineering airflow data and used by redshift
 s3_bucket_name = {
 # cannot create an s3 called com-fngn-finr-dataeng because it has already existed.
-# so I name this s3 as com-fngn-finr-tf-dataeng
-       finr = "com-fngn-finr-tf-dataeng"
+# so I name this s3 as com-fngn-finr-de
+       finr = "com-fngn-finr-de"
        dev = "com-fngn-dev-dataeng"
        test = "com-fngn-test-dataeng"
        prod = "com-fngn-prod-dataeng"
@@ -128,5 +128,23 @@ mssql_adv_db = {
        finr = "prodcopy2"
        dev = "you need to set"
        test = "feitest_copy"
+       prod = "you need to set"
+}
+mssql_aux_host = {
+       finr = "mssqldbprodcopy.fefinr.io"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+mssql_adv_host = {
+       finr = "mssqldbprodcopy.fefinr.io"
+       dev = "you need to set"
+       test = "you need to set"
+       prod = "you need to set"
+}
+cron_schedule = {
+       finr = "00 08 * * *"
+       dev = "you need to set"
+       test = "you need to set"
        prod = "you need to set"
 }

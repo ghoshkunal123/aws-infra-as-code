@@ -80,6 +80,8 @@ variable "rs_iam_role" {
   type = "map"
 }
 
+variable "rs_pw" {} #ec2 etl_user need it to login as etl_user of Redshift, it is different from redshift master user
+
 #rabbitmq
 variable "rabbitmq_user" {}
 
@@ -148,5 +150,16 @@ variable "mssql_adv_db" {
   type = "map"
 }
 
+variable "mssql_adv_host" {
+  type = "map"
+}
+
+variable "mssql_aux_host" {
+  type = "map"
+}
+
+variable "cron_schedule" {
+  type = "map"
+}
+
 variable "mssql_password" {}
-variable "rs_pw" {}
