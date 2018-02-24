@@ -87,6 +87,9 @@
   - name: Creates directory /mnt/etl/xforms
     become_user: root
     file: path=/mnt/etl/xforms state=directory mode=0755
+  - name: Creates directory /mnt/etl/tmp
+    become_user: root
+    file: path=/mnt/etl/tmp state=directory mode=0755
   roles: 
     - microsoft-odbc-driver-setup
 ######### Setting up Systemd to Run Airflow: both master and workers
