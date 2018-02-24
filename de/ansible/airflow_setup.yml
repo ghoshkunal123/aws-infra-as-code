@@ -15,14 +15,13 @@
   become: yes
   become_user: etluser
 #  become_method: sudo
-  gather_facts: yes
+  gather_facts: yes # get ansible_host in etc-hosts-setup
   roles:
     - etc-hosts-setup # root
     - python3-pip-setup # root
     - python-depended-tools-setup # root
     - airflow-setup #root
     - ssm-agent-setup #root
-  tags: hostname
 ######### Setting up RabbitMQ: master only
 - hosts: master
   remote_user: etluser
@@ -78,20 +77,31 @@
   - name: Creates directory run
     file: path="{{ remote_home }}/airflow/run" state=directory mode=0777
   - name: Creates directory /mnt/etl
-    become_user: root
     file: path=/mnt/etl state=directory
   - name: Creates directory /mnt/etl/data
-    become_user: root
     file: path=/mnt/etl/data state=directory mode=0755
   - name: Creates directory /mnt/etl/bin
-    become_user: root
     file: path=/mnt/etl/bin state=directory mode=0755
   - name: Creates directory /mnt/etl/xforms
-    become_user: root
     file: path=/mnt/etl/xforms state=directory mode=0755
   - name: Creates directory /mnt/etl/tmp
-    become_user: root
     file: path=/mnt/etl/tmp state=directory mode=0755
+  # if become_user is already etluser, then do not need below because the owner and group are already etluser. I just put it here in case 
+  - name: change ownership of /mnt/etl if not
+    become_user: root
+    file: path=/mnt/etl owner=etluser group=etluser mode=0755
+  - name: change ownership of /mnt/etl/data if not
+    file: path=/mnt/etl/data owner=etluser group=etluser mode=0755
+    become_user: root
+  - name: change ownership of /mnt/etl/bin if not
+    file: path=/mnt/etl/bin owner=etluser group=etluser mode=0755
+    become_user: root
+  - name: change ownership of /mnt/xforms if not
+    file: path=/mnt/etl/xforms owner=etluser group=etluser mode=0755
+    become_user: root
+  - name: change ownership of /mnt/etl/tmp if not
+    file: path=/mnt/etl/tmp owner=etluser group=etluser mode=0755
+    become_user: root
   roles: 
     - microsoft-odbc-driver-setup
 ######### Setting up Systemd to Run Airflow: both master and workers
