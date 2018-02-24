@@ -15,12 +15,14 @@
   become: yes
   become_user: etluser
 #  become_method: sudo
-  gather_facts: no
+  gather_facts: yes
   roles:
+    - etc-hosts-setup # root
     - python3-pip-setup # root
     - python-depended-tools-setup # root
     - airflow-setup #root
     - ssm-agent-setup #root
+  tags: hostname
 ######### Setting up RabbitMQ: master only
 - hosts: master
   remote_user: etluser
