@@ -16,31 +16,47 @@ data "archive_file" "stop_ec2" {
 }
 
 resource "aws_lambda_function" "start_ec2" {
-  function_name    = "fngn-analytics-dataeng-startEC2"
+  function_name    = "fngn-analytics-finr-dataeng-startEC2"
   handler          = "start_ec2.handler"
   runtime          = "python3.6"
   filename         = "${local.dest_dir}/start_ec2_upload.zip"
   source_code_hash = "${data.archive_file.start_ec2.output_base64sha256}"
   role             = "${lookup(var.lambda_role, terraform.workspace)}"
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${terraform.workspace}"
+  }
 }
 
 resource "aws_lambda_function" "stop_ec2" {
-  function_name    = "fngn-analytics-dataeng-stopEC2"
+  function_name    = "fngn-analytics-finr-dataeng-stopEC2"
   handler          = "stop_ec2.handler"
   runtime          = "python3.6"
   filename         = "${local.dest_dir}/stop_ec2_upload.zip"
   source_code_hash = "${data.archive_file.stop_ec2.output_base64sha256}"
   role             = "${lookup(var.lambda_role, terraform.workspace)}"
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    env        = "${terraform.workspace}"
+  }
 }
 
 resource "aws_cloudwatch_event_rule" "start_ec2_event" {
-  name                = "fngn-analytics-dataeng-startEC2-event"
+  name                = "fngn-analytics-finr-dataeng-startEC2-event"
   description         = "startEC2 event"
   schedule_expression = "cron(0 16 ? * * *)"
 }
 
 resource "aws_cloudwatch_event_rule" "stop_ec2_event" {
-  name                = "fngn-analytics-dataeng-stopEC2-event"
+  name                = "fngn-analytics-finr-dataeng-stopEC2-event"
   description         = "stopEC2 event"
   schedule_expression = "cron(0 4 ? * * *)"
 }
