@@ -25,7 +25,8 @@ rs_master_user          = "admin"
 rs_node_type            = "ds2.xlarge"
 rs_cluster_type         = "multi-node"
 rs_subnet_group_name   = "fngn-dataeng-redshift-sn-private1"
-rs_parameter_group_name  = "fngn-dataeng-redshift-parameter-group"
+# has to change the name as "analytics-finr..." so that supriya can define condition
+rs_parameter_group_name  = "analytics-finr-redshift-parameter-group"
 
 #rabbitmq
 rabbitmq_user           = "etluser"
