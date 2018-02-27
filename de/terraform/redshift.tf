@@ -1,6 +1,16 @@
 resource "aws_redshift_subnet_group" "analytics" {
   name       = "${var.rs_subnet_group_name}"
   subnet_ids = ["${data.aws_subnet.private1.id}"]
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
+    env        = "${terraform.workspace}"
+    Name       = "${var.rs_tag_Name}"
+  }
 }
 
 resource "aws_redshift_parameter_group" "analytics" {
@@ -76,7 +86,6 @@ resource "aws_redshift_cluster" "analytics" {
   enhanced_vpc_routing = false
   skip_final_snapshot  = true
   iam_roles            = ["${data.aws_iam_role.redshift.arn}"]
-
   tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"

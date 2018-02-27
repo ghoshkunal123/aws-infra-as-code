@@ -1,5 +1,5 @@
 resource "aws_security_group" "airflow_worker" {
-  name        = "tf_securityg_airflow_worker"
+  name        = "fngn-dataeng-airflow-worker"
   description = "Used by airflow master and workers instances"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
@@ -9,8 +9,8 @@ resource "aws_security_group" "airflow_worker" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
-    Name       = "tf_securityg_airflow"
-  }
+    Name       = "fngn-dataeng-airflow-worker"
+    }
 
   #ssh-only
   ingress {
@@ -19,7 +19,6 @@ resource "aws_security_group" "airflow_worker" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
-
   egress {
     from_port   = 0
     to_port     = 0
@@ -29,17 +28,17 @@ resource "aws_security_group" "airflow_worker" {
 }
 
 resource "aws_security_group" "airflow_master" {
-  name        = "tf_securityg_airflow_master"
+  name        = "fngn-dataeng-airflow-master"
   description = "Used by airflow master and workers instances"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {
+  tags = {     
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
-    Name       = "tf_securityg_airflow"
+    Name       = "fngn-dataeng-airflow-master"
   }
 
   #ssh-only
@@ -101,17 +100,17 @@ resource "aws_security_group" "airflow_master" {
 }
 
 resource "aws_security_group" "airflow_alb" {
-  name        = "tf_securityg_airflow_alb"
+  name        = "fngn-dataeng-airflow-alb"
   description = "Used by airflow alb"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {
+  tags = {     
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
-    Name       = "tf_https"
+    Name       = "fngn-dataeng-airflow-alb"
   }
 
   #http
@@ -139,17 +138,17 @@ resource "aws_security_group" "airflow_alb" {
 }
 
 resource "aws_security_group" "airflow_rds" {
-  name        = "tf_securityg_airflow_rds"
+  name        = "fngn-dataeng-airflow-rds"
   description = "Used by airflow rds"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {
+  tags = {     
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
-    Name       = "tf_PostgrePort"
+    Name       = "fngn-dataeng-airflow-rds"
   }
 
   ingress {
@@ -169,17 +168,17 @@ resource "aws_security_group" "airflow_rds" {
 }
 
 resource "aws_security_group" "airflow_redshift" {
-  name        = "tf_securityg_airflow_redshift"
+  name        = "fngn-dataeng-airflow-redshift"
   description = "Used by airflow redshift"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {
+  tags = {     
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
-    Name       = "tf_RedshiftPort"
+    Name       = "fngn-dataeng-airflow-redshift"
   }
 
   ingress {

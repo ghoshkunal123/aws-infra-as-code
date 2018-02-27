@@ -42,6 +42,16 @@ resource "aws_alb_target_group" "airflow" {
     path                = "/static/pin_100.png"
     interval            = "${var.alb_interval}"
   }
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
+    env        = "${terraform.workspace}"
+    Name       = "${var.alb_airflow_name}"
+  }
 }
 
 resource "aws_alb_target_group_attachment" "airflow" {
@@ -92,6 +102,16 @@ resource "aws_alb_target_group" "flower" {
     timeout             = "${var.alb_timeout}"
     path                = "/"
     interval            = "${var.alb_interval}"
+  }
+
+  tags = {
+    app        = "${var.tag_app}"
+    Project    = "${var.tag_Project}"
+    Owner      = "${var.tag_Owner}"
+    CostCenter = "${var.tag_CostCenter}"
+    launcher   = "${var.tag_launcher}"
+    env        = "${terraform.workspace}"
+    Name       = "${var.alb_flower_name}"
   }
 }
 
