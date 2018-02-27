@@ -64,44 +64,28 @@
 - hosts: master:workers
   remote_user: etluser
   become: yes
-  become_user: etluser
+  become_user: root
   become_method: sudo
   gather_facts: no
   vars_files:
   - group_vars/airflow_cfg_vars.yml
   pre_tasks:
   - name: Creates directory dags
-    file: path="{{ remote_home }}/airflow/dags" state=directory
+    file: path="{{ remote_home }}/airflow/dags" state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory logs
-    file: path="{{ remote_home }}/airflow/logs" state=directory
+    file: path="{{ remote_home }}/airflow/logs" state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory run
-    file: path="{{ remote_home }}/airflow/run" state=directory mode=0777
+    file: path="{{ remote_home }}/airflow/run" state=directory owner=etluser group=etluser mode=0777
   - name: Creates directory /mnt/etl
-    file: path=/mnt/etl state=directory
+    file: path=/mnt/etl state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory /mnt/etl/data
-    file: path=/mnt/etl/data state=directory mode=0755
+    file: path=/mnt/etl/data state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory /mnt/etl/bin
-    file: path=/mnt/etl/bin state=directory mode=0755
+    file: path=/mnt/etl/bin state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory /mnt/etl/xforms
-    file: path=/mnt/etl/xforms state=directory mode=0755
+    file: path=/mnt/etl/xforms state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory /mnt/etl/tmp
-    file: path=/mnt/etl/tmp state=directory mode=0755
-  # if become_user is already etluser, then do not need below because the owner and group are already etluser. I just put it here in case 
-  - name: change ownership of /mnt/etl if not
-    become_user: root
-    file: path=/mnt/etl owner=etluser group=etluser mode=0755
-  - name: change ownership of /mnt/etl/data if not
-    file: path=/mnt/etl/data owner=etluser group=etluser mode=0755
-    become_user: root
-  - name: change ownership of /mnt/etl/bin if not
-    file: path=/mnt/etl/bin owner=etluser group=etluser mode=0755
-    become_user: root
-  - name: change ownership of /mnt/xforms if not
-    file: path=/mnt/etl/xforms owner=etluser group=etluser mode=0755
-    become_user: root
-  - name: change ownership of /mnt/etl/tmp if not
-    file: path=/mnt/etl/tmp owner=etluser group=etluser mode=0755
-    become_user: root
+    file: path=/mnt/etl/tmp state=directory owner=etluser group=etluser mode=0755
   roles: 
     - microsoft-odbc-driver-setup
 ######### Setting up Systemd to Run Airflow: both master and workers
