@@ -163,6 +163,7 @@ variable "cron_schedule" {
 }
 
 variable "mssql_password" {}
-variable "ssh_ec2" {
+
+variable "new_deployment" {
   default = "false"
 }

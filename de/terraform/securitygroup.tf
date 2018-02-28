@@ -10,7 +10,7 @@ resource "aws_security_group" "airflow_worker" {
     CostCenter = "${var.tag_CostCenter}"
     env        = "${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-worker"
-    }
+  }
 
   #ssh-only
   ingress {
@@ -19,6 +19,7 @@ resource "aws_security_group" "airflow_worker" {
     protocol    = "tcp"
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -32,7 +33,7 @@ resource "aws_security_group" "airflow_master" {
   description = "Used by airflow master and workers instances"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {     
+  tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
@@ -104,7 +105,7 @@ resource "aws_security_group" "airflow_alb" {
   description = "Used by airflow alb"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {     
+  tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
@@ -142,7 +143,7 @@ resource "aws_security_group" "airflow_rds" {
   description = "Used by airflow rds"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {     
+  tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
@@ -172,7 +173,7 @@ resource "aws_security_group" "airflow_redshift" {
   description = "Used by airflow redshift"
   vpc_id      = "${data.aws_vpc.vpc.id}"
 
-  tags = {     
+  tags = {
     app        = "${var.tag_app}"
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
