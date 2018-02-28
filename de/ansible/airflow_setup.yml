@@ -108,7 +108,7 @@
     template: src="{{ git_checkout_dir }}/Airflow/env.properties.j2" dest=/etc/sysconfig/env.properties owner=root group=root mode=664
   - name: Creates directory /mnt/etl/config if not exist (should be new)
     become_user: root
-    file: path=/mnt/etl/config state=directory
+    file: path="/mnt/etl/config" state=directory owner=etluser group=etluser mode=0755
   - name: modify parameters of remote etl.cfg
     become_user: root
     template: src="{{ git_checkout_dir }}/config/etl.cfg.j2" dest=/mnt/etl/config/etl.cfg owner=root group=root mode=664
