@@ -12,6 +12,7 @@
     - { name: pyodbc, version: 4.0.17 }
     - { name: psycopg2, version: 2.7.3.1 }
     - { name: pandas, version: 0.20.3 }
+    - { name: boto, version: 2.48.0 }
     - { name: boto3, version: 1.4.7 }
     - { name: awscli, version: 1.11.168 }
     - { name: flask-bcrypt, version: 0.7.1 }
