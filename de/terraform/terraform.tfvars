@@ -56,5 +56,6 @@ rds_tag_Name            = "fngn-dataeng-airflow"
 rs_tag_Name            = "fngn-dataeng-redshift"
 ec2_master_tag_Name = "fngn-dataeng-airflow-master"
 ec2_worker_tag_Name = "fngn-dataeng-airflow-worker"
-
 ec2_tag_patch_group = "ANLY-2717-Ubuntu"
+ebs_master_tag_Name = "fngn-dataeng-airflow-master"
+ebs_worker_tag_Name = "fngn-dataeng-airflow-worker"

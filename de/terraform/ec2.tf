@@ -8,6 +8,7 @@ resource "aws_instance" "master" {
   subnet_id            = "${data.aws_subnet.private1.id}"
   iam_instance_profile = "${lookup(var.iam_instance_profile, terraform.workspace)}"
   user_data            = "${data.template_file.user_data.rendered}"
+  ebs_optimized        = true
 
   tags = {
     app           = "${var.tag_app}"
@@ -31,6 +32,7 @@ resource "aws_instance" "worker" {
   subnet_id              = "${data.aws_subnet.private1.id}"
   iam_instance_profile   = "${lookup(var.iam_instance_profile, terraform.workspace)}"
   user_data              = "${data.template_file.user_data.rendered}"
+  ebs_optimized          = true
 
   tags = {
     app           = "${var.tag_app}"
