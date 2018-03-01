@@ -167,3 +167,11 @@ variable "mssql_password" {}
 variable "new_deployment" {
   default = "false"
 }
+
+variable "lambda_start_ec2_time" {
+  type = "map"
+}
+
+variable "lambda_stop_ec2_time" {
+  type = "map"
+}

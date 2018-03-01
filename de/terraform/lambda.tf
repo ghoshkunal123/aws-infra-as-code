@@ -52,13 +52,13 @@ resource "aws_lambda_function" "stop_ec2" {
 resource "aws_cloudwatch_event_rule" "start_ec2_event" {
   name                = "fngn-analytics-dataeng-startEC2-event"
   description         = "startEC2 event"
-  schedule_expression = "cron(0 16 ? * * *)"
+  schedule_expression = "cron(0 ${lookup(var.lambda_start_ec2_time, terraform.workspace)} ? * * *)"
 }
 
 resource "aws_cloudwatch_event_rule" "stop_ec2_event" {
   name                = "fngn-analytics-dataeng-stopEC2-event"
   description         = "stopEC2 event"
-  schedule_expression = "cron(0 4 ? * * *)"
+  schedule_expression = "cron(0 ${lookup(var.lambda_stop_ec2_time, terraform.workspace)} ? * * *)"
 }
 
 resource "aws_cloudwatch_event_target" "stop_ec2_event_lambda_target" {

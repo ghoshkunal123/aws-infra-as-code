@@ -48,7 +48,7 @@ ec2_instance_type = {
 }
 
 ec2_worker_count = {
-       finr = "3"
+       finr = "2"
        dev = "you need to set"
        test = "3"
        prod = "you need to set"
@@ -70,7 +70,7 @@ rs_iam_role      = {
        prod = "you need to set"
 }
 rs_number_of_nodes = {
-       finr = "2"
+       finr = "6"
        dev = "you need to set"
        test = "2"
        prod = "you need to set"
@@ -142,9 +142,24 @@ mssql_adv_host = {
        test = "you need to set"
        prod = "you need to set"
 }
+#passed to ansible
 cron_schedule = {
        finr = "00 08 * * *"
        dev = "you need to set"
-       test = "you need to set"
+       test = "00 08 * * *"
+       prod = "you need to set"
+}
+
+lambda_start_ec2_time = {
+       finr = "16" #start at 16 UTC = 8AM PST
+       dev = "you need to set"
+       test = "16"
+       prod = "you need to set"
+}
+
+lambda_stop_ec2_time = {
+       finr = "4" #stop at 4 UTC= 8PM PST
+       dev = "you need to set"
+       test = "4"
        prod = "you need to set"
 }
