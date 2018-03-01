@@ -10,6 +10,11 @@ resource "aws_instance" "master" {
   user_data            = "${data.template_file.user_data.rendered}"
   ebs_optimized        = true
 
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "100"
+  }
+
   tags = {
     app           = "${var.tag_app}"
     Project       = "${var.tag_Project}"
@@ -34,6 +39,11 @@ resource "aws_instance" "worker" {
   user_data              = "${data.template_file.user_data.rendered}"
   ebs_optimized          = true
 
+  root_block_device {
+    volume_type = "gp2"
+    volume_size = "100"
+  }
+
   tags = {
     app           = "${var.tag_app}"
     Project       = "${var.tag_Project}"
@@ -52,6 +62,14 @@ output "airflow_master_ip" {
 
 output "airflow_worker_ip" {
   value = ["${aws_instance.worker.*.private_ip}"]
+}
+
+output "airflow_master_root_block_device" {
+  value = "${aws_instance.master.root_block_device}"
+}
+
+output "airflow_master_ebs_block_device" {
+  value = "${aws_instance.master.ebs_block_device}"
 }
 
 # this template implements user_data with file and arguments
