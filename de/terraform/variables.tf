@@ -132,8 +132,6 @@ variable "rs_tag_Name" {}
 variable "ec2_master_tag_Name" {}
 variable "ec2_worker_tag_Name" {}
 variable "ec2_tag_patch_group" {}
-variable "ebs_master_tag_Name" {}
-variable "ebs_worker_tag_Name" {}
 
 #ansible
 variable "ansible_airflow_cfg_vars_file" {}
@@ -177,7 +175,3 @@ variable "lambda_start_ec2_time" {
 variable "lambda_stop_ec2_time" {
   type = "map"
 }
-
-variable "ebs_master_tag_Name" {}
-
-variable "ebs_worker_tag_Name" {}
