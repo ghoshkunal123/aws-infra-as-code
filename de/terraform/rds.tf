@@ -2,7 +2,7 @@ resource "aws_db_instance" "rds" {
   identifier              = "${var.rds_identifier}"
   allocated_storage       = 20
   engine                  = "postgres"
-  engine_version          = "9.6.2"
+#  engine_version          = "9.6.2"
   instance_class          = "${var.rds_instance_class}"
   name                    = "${var.rds_db_name}"
   username                = "${var.rds_user}"

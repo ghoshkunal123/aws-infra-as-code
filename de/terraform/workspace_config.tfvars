@@ -50,8 +50,8 @@ ec2_instance_type = {
 ec2_worker_count = {
        finr = "2"
        dev = "you need to set"
-       test = "3"
-       prod = "you need to set"
+       test = "2"
+       prod = "2"
 }
 
 # ec2 iam role
@@ -73,7 +73,7 @@ rs_number_of_nodes = {
        finr = "6"
        dev = "you need to set"
        test = "2"
-       prod = "you need to set"
+       prod = "8"
 }
 # AMI used by EC2
 ec2_ami  = {
@@ -116,38 +116,34 @@ on-promise_mssqldb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
        dev = "you need to set"
        test = "10.80.0.65"
-       prod = "you need to set"
+       prod = "10.80.0.100"
 }
+
+on-promise_mssqlauxdb_ip = {
+       finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
+       dev = "you need to set"
+       test = "10.80.0.46"
+       prod = "10.80.0.52"
+}
+
 mssql_aux_db = {
        finr = "prodcopy_corp_aux"
        dev = "you need to set"
-       test = "feitest_aux_copy"
-       prod = "you need to set"
+       test = "aux"
+       prod = "aux"
 }
 mssql_adv_db = {
        finr = "prodcopy2"
        dev = "you need to set"
        test = "feitest_copy"
-       prod = "you need to set"
-}
-mssql_aux_host = {
-       finr = "mssqldbprodcopy.fefinr.io"
-       dev = "you need to set"
-       test = "you need to set"
-       prod = "you need to set"
-}
-mssql_adv_host = {
-       finr = "mssqldbprodcopy.fefinr.io"
-       dev = "you need to set"
-       test = "you need to set"
-       prod = "you need to set"
+       prod = "stage_advisor"
 }
 #passed to ansible
 cron_schedule = {
        finr = "00 08 * * *"
        dev = "you need to set"
-       test = "00 08 * * *"
-       prod = "you need to set"
+       test = "00 06 * * *"
+       prod = "00 02 * * *"
 }
 
 lambda_start_ec2_time = {

@@ -30,6 +30,18 @@ resource "aws_route53_record" "mssqldb" {
   records = ["${lookup(var.on-promise_mssqldb_ip, terraform.workspace)}"]
 }
 
+resource "aws_route53_record" "mssqlauxdb" {
+  zone_id = "${data.aws_route53_zone.primary.zone_id}"
+  name    = "${var.route53_mssqlauxdb_domain_name}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${lookup(var.on-promise_mssqlauxdb_ip, terraform.workspace)}"]
+}
+
 output "mssqldb_fqdn" {
   value = "${aws_route53_record.mssqldb.fqdn}"
+}
+
+output "mssqlauxdb_fqdn" {
+  value = "${aws_route53_record.mssqlauxdb.fqdn}"
 }

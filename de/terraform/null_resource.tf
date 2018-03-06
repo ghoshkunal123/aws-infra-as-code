@@ -38,7 +38,7 @@ mssql_aux_db: ${lookup(var.mssql_aux_db, terraform.workspace)}
 mssql_adv_db: ${lookup(var.mssql_adv_db, terraform.workspace)}
 mssql_password: ${var.mssql_password}
 mssql_adv_host: ${aws_route53_record.mssqldb.fqdn}
-mssql_aux_host: ${aws_route53_record.mssqldb.fqdn}
+mssql_aux_host: ${aws_route53_record.mssqlauxdb.fqdn}
 cron_schedule: ${lookup(var.cron_schedule, terraform.workspace)}
 EOF
 EOD
