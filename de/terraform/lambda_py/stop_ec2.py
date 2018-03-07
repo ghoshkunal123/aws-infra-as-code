@@ -10,7 +10,7 @@ def handler(event, context):
 
     target_instanceid = event['instanceid']
     tag_name='launcher'
-    tag_value='Terraform-ANLY-2820'
+    tag_value='Terraform-ANLY-2820-worker'
 
     ec2 = boto3.client('ec2')
 
