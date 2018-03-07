@@ -1,6 +1,5 @@
 #use s3 to store remote state
 terraform {
-  required_version = "0.11.0"
 
   # bucket and dynamodb_table should be pre-created
   backend "s3" {
