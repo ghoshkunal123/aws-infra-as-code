@@ -12,6 +12,13 @@ resource "aws_s3_bucket" "s3" {
       }
     }
   }
+  lifecycle_rule {
+    id      = "expire_after_7d"
+    enabled = true
+    expiration {
+      days = 7
+    }
+  }
 
   tags = {
     app        = "${var.tag_app}"
