@@ -112,7 +112,7 @@ lambda_role = {
        test = "arn:aws:iam::483936848441:role/eLambdaExecutionAnalyticsFinr"
        prod = "you need to set"
 }
-on-promise_mssqldb_ip = {
+on-promise_mssqladvdb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
        dev = "you need to set"
        test = "10.80.0.65"
