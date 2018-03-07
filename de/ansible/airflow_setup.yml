@@ -111,7 +111,10 @@
     file: path="/mnt/etl/config" state=directory owner=etluser group=etluser mode=0755
   - name: modify parameters of remote etl.cfg
     become_user: root
-    template: src="{{ git_checkout_dir }}/config/etl.cfg.j2" dest=/mnt/etl/config/etl.cfg owner=root group=root mode=664
+    template: src="{{ git_checkout_dir }}/config/etl.cfg.j2" dest=/mnt/etl/config/etl.cfg owner=etluser group=etluser mode=664
+  - name: set timezone to America/Los_Angeles # I put code here because it need to run as root
+    timezone:
+      name: America/Los_Angeles
 
 ######### Setting up Airflow Services to Run on Machine Startup
 - hosts: master
