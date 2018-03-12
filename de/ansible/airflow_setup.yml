@@ -6,7 +6,7 @@
     git:
       repo: git@gitlab.feicore.io:DataEngineering/de-datapipeline.git
       dest: "{{ git_checkout_dir }}"
-      update: no
+      update: yes
       version: "{{ git_commit_version }}"
     tags: gitlab
 ######## Upgrade OS and install required python packages
