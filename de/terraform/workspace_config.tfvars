@@ -159,3 +159,9 @@ lambda_stop_ec2_time = {
        test = "4"
        prod = "you need to set"
 }
+
+email_dist_list = {
+      finr = "feidataengineering@financialengines.com"
+      test = "feidataengineering@financialengines.com"
+      prod = "feidataengineering@financialengines.com, feidataengineering@fngn.pagerduty.com"
+}

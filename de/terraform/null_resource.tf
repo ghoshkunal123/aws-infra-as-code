@@ -40,6 +40,7 @@ mssql_password: ${var.mssql_password}
 mssql_adv_host: ${aws_route53_record.mssqladvdb.fqdn}
 mssql_aux_host: ${aws_route53_record.mssqlauxdb.fqdn}
 cron_schedule: ${lookup(var.cron_schedule, terraform.workspace)}
+dag_email_dist = ${lookup(var.email_dist_list, terraform.workspace)}
 EOF
 EOD
   }

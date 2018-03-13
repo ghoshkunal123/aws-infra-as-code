@@ -172,3 +172,7 @@ variable "lambda_start_ec2_time" {
 variable "lambda_stop_ec2_time" {
   type = "map"
 }
+
+variable "email_dist_list" {
+  type = "map"
+}
