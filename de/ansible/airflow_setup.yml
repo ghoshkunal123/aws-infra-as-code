@@ -1,14 +1,8 @@
 - name: a play that runs entirely on the ansible host
   hosts: 127.0.0.1
   connection: local
-  tasks:
-  - name: check out a git repository
-    git:
-      repo: git@gitlab.feicore.io:DataEngineering/de-datapipeline.git
-      dest: "{{ git_checkout_dir }}"
-      update: yes
-      version: "{{ git_commit_version }}"
-    tags: gitlab
+  roles:
+    - git-repo-pull
 ######## Upgrade OS and install required python packages
 - hosts: master:workers
   remote_user: etluser
@@ -97,7 +91,7 @@
     copy:
       src: "{{ item }}"
       dest: /etc/systemd/system
-      force: no
+      force: yes
     with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
       - "{{ git_checkout_dir }}/Airflow/airflow-*.service"
   - name: Creates directory /etc/sysconfig if not exist (should be new)
@@ -115,7 +109,11 @@
   - name: set timezone to America/Los_Angeles # I put code here because it need to run as root
     timezone:
       name: America/Los_Angeles
-
+- hosts: master:workers
+  remote_user: etluser
+  become: yes
+  roles:
+    - code-deploy
 ######### Setting up Airflow Services to Run on Machine Startup
 - hosts: master
   remote_user: etluser

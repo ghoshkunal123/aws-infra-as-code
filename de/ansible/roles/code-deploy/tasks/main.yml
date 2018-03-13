@@ -1,0 +1,41 @@
+---
+- name: copy de-datapipeline/Airflow/dags/*.py to /home/etluser/airflow/dags/
+  copy:
+    src: "{{ item }}"
+    dest: "{{ remote_home }}/airflow/dags/"
+    force: yes
+  with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
+    - "{{ git_checkout_dir }}/Airflow/dags/*.py"
+  tags: deploy
+- name: copy de-datapipeline/bin/*.py to /mnt/etl/bin/
+  copy:
+    src: "{{ item }}"
+    dest: "/mnt/etl/bin"
+    force: yes
+  with_fileglob:
+    - "{{ git_checkout_dir }}/bin/*.py"
+  tags: deploy
+- name: copy de-datapipeline/database/Redshift/Transformations/*.sql to /mnt/etl/xforms/
+  copy:
+    src: "{{ item }}"
+    dest: "/mnt/etl/xforms"
+    force: yes
+  with_fileglob:
+    - "{{ git_checkout_dir }}/database/Redshift/Transformations/*.sql"
+  tags: deploy
+- name: copy de-datapipeline/database/MSSQL/Transformations/*.sql to /mnt/etl/xforms/
+  copy:
+    src: "{{ item }}"
+    dest: "/mnt/etl/xforms"
+    force: yes
+  with_fileglob:
+    - "{{ git_checkout_dir }}/database/MSSQL/Transformations/*.sql"
+  tags: deploy
+- name: copy de-biscripts/sql/*.sql to /mnt/etl/xforms/
+  copy:
+    src: "{{ item }}"
+    dest: "/mnt/etl/xforms"
+    force: yes
+  with_fileglob:
+    - "{{ git_checkout_dir_biscripts }}/sql/*.sql"
+  tags: deploy2
