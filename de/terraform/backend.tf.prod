@@ -4,9 +4,10 @@ terraform {
   # bucket and dynamodb_table should be pre-created
   backend "s3" {
     bucket  = "com.fngn.prod.terraform.us-west-1"
-    key     = "aws-infra-as-code/de/terraform/terraform.tfstate"
+    key     = "terraform.tfstate"
     region  = "us-west-1"
     encrypt = true
+    workspace_key_prefix = "analytics_finr/aws-infra-as-code/de/terraform"
 
     dynamodb_table = "terraform-locks"
   }
