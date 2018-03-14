@@ -1,4 +1,13 @@
 ---
+- name: copy airflow files from Airflow/airflow-*.service to remote /etc/systemd/system
+  become_user: root
+  copy:
+    src: "{{ item }}"
+    dest: /etc/systemd/system
+    force: yes
+  with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
+    - "{{ git_checkout_dir }}/Airflow/airflow-*.service"
+  tags: deploy
 - name: copy de-datapipeline/Airflow/dags/*.py to /home/etluser/airflow/dags/
   copy:
     src: "{{ item }}"
@@ -38,4 +47,4 @@
     force: yes
   with_fileglob:
     - "{{ git_checkout_dir_biscripts }}/sql/*.sql"
-  tags: deploy2
+  tags: deploy

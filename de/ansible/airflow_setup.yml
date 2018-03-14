@@ -86,14 +86,6 @@
   tasks:
   - name: Creates directory /etc/systemd/system if not exist (should already be there)
     file: path=/etc/systemd/system state=directory
-  - name: copy airflow files from local git_checkout_dir to remote /etc/systemd/system
-    become_user: root 
-    copy:
-      src: "{{ item }}"
-      dest: /etc/systemd/system
-      force: yes
-    with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
-      - "{{ git_checkout_dir }}/Airflow/airflow-*.service"
   - name: Creates directory /etc/sysconfig if not exist (should be new)
     become_user: root 
     file: path=/etc/sysconfig state=directory
