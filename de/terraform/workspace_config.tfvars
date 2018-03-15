@@ -94,23 +94,23 @@ s3_bucket_name = {
 }
 
 alb_airflow_certificate_arn = {
-       finr = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
+       finr = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
        dev = "you need to set"
-       test = "arn:aws:acm:us-west-1:483936848441:certificate/302ba21b-0bfe-4753-b3c6-9beeccfb0738"
-       prod = "arn:aws:acm:us-west-1:584917584607:certificate/4ce2e2fb-25ed-4e05-b0ef-eb9588c233d2"
+       test = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/302ba21b-0bfe-4753-b3c6-9beeccfb0738"
+       prod = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/4ce2e2fb-25ed-4e05-b0ef-eb9588c233d2"
 }
 
 alb_flower_certificate_arn = {
-       finr = "arn:aws:acm:us-west-1:224919220385:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
+       finr = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
        dev = "you need to set"
-       test = "arn:aws:acm:us-west-1:483936848441:certificate/728e666f-296a-4343-a9dc-4581d34935d1"
-       prod = "arn:aws:acm:us-west-1:584917584607:certificate/233f63d6-4d88-4038-975e-38ed28161b91"
+       test = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/728e666f-296a-4343-a9dc-4581d34935d1"
+       prod = "arn:aws:acm:us-west-1:${data.aws_caller_identity.current.account_id}:certificate/233f63d6-4d88-4038-975e-38ed28161b91"
 }
 lambda_role = {
-       finr = "arn:aws:iam::224919220385:role/eLambdaExecutionFinrAdmin"
+       finr = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eLambdaExecutionFinrAdmin"
        dev = "you need to set"
-       test = "arn:aws:iam::483936848441:role/eLambdaExecutionAnalyticsFinr"
-       prod = "arn:aws:iam::584917584607:role/eLambdaExecutionAnalyticsFinr"
+       test = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eLambdaExecutionAnalyticsFinr"
+       prod = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/eLambdaExecutionAnalyticsFinr"
 }
 on-promise_mssqladvdb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
