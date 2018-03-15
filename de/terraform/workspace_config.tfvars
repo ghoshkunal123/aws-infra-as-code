@@ -3,25 +3,25 @@ vpc_id = {
         finr  = "vpc-d671b7b3"
         dev   = "you need to set"
         test = "vpc-56bf7531"
-        prod = "you need to set"
+        prod = "vpc-5057ea37"
 }
 route53_domain_name = {
        finr = "fefinr.io."
        dev = "you need to set"
        test = "feitest.io."
-       prod = "you need to set"
+       prod = "financialengines.io."
 }
 subnet_private1_id      = {
         finr  = "subnet-0fca106a"
         dev  = "you need to set"
         test = "subnet-6ffc4334"
-        prod = "you need to set"
+        prod = "subnet-12df9d75"
 }
 subnet_private2_id      = {
         finr  = "subnet-e206d3ba"
         dev  = "you need to set"
         test = "subnet-28630e4f"
-        prod = "you need to set"
+        prod = "subnet-df6ef184"
 }
 
 # here I map dev/test/prod to DEV/TST/PRD, because in de-datapipeline->Airflow->env.properties, DEV/TST/PRD is used instead of dev/test/prod
@@ -37,14 +37,14 @@ ec2_key_name = {
        finr = "finr_devops_keypair"
        dev = "you need to set"
        test = "analytics-test-devops-keypair"
-       prod = "you need to set"
+       prod = "analytics-prod-devops-keypair"
 }
 
 ec2_instance_type = {
        finr = "m4.large"
        dev = "you need to set"
        test = "m4.large"
-       prod = "you need to set"
+       prod = "m4.large"
 }
 
 ec2_worker_count = {
@@ -59,7 +59,7 @@ iam_instance_profile  =  {
        finr = "iAirFlowDev"
        dev = "you need to set"
        test = "iAirflowAnalyticsFinr"
-       prod = "you need to set"
+       prod = "iAirflowAnalyticsFinr"
 }
 
 # redshift iam role
@@ -67,7 +67,7 @@ rs_iam_role      = {
        finr = "eRedshiftFinrAdmin"
        dev = "you need to set"
        test = "eRedshiftAnalyticsFinr"
-       prod = "you need to set"
+       prod = "eRedshiftAnalyticsFinr"
 }
 rs_number_of_nodes = {
        finr = "6"
@@ -80,7 +80,7 @@ ec2_ami  = {
        finr = "ami-e3797b83" #this is an encrypted AMI created by @lhu based on public unencrypted ubuntu 16.4 AMI"
        dev = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
        test = "ami-02306362" #this is an encrypted AMI created by @dchou based on public unencrypted ubuntu 16.4 AMI"
-       prod = "you need to create/use an encrypted AMI baked from ubuntu 16.4"
+       prod = "ami-eaeccd8a" #the description said it is gp2 encrypted, need to confirm with @dchou, need to test
 }
 
 # This is the S3 bucket to store data engineering airflow data and used by redshift
@@ -97,20 +97,20 @@ alb_airflow_certificate_arn = {
        finr = "arn:aws:acm:us-west-1:224919220385:certificate/251d7808-1377-43f5-8081-17a37dea6f93"
        dev = "you need to set"
        test = "arn:aws:acm:us-west-1:483936848441:certificate/302ba21b-0bfe-4753-b3c6-9beeccfb0738"
-       prod = "you need to set"
+       prod = "arn:aws:acm:us-west-1:584917584607:certificate/4ce2e2fb-25ed-4e05-b0ef-eb9588c233d2"
 }
 
 alb_flower_certificate_arn = {
        finr = "arn:aws:acm:us-west-1:224919220385:certificate/c50c6cb9-432c-4e69-9541-5b9452fa310b"
        dev = "you need to set"
        test = "arn:aws:acm:us-west-1:483936848441:certificate/728e666f-296a-4343-a9dc-4581d34935d1"
-       prod = "you need to set"
+       prod = "arn:aws:acm:us-west-1:584917584607:certificate/233f63d6-4d88-4038-975e-38ed28161b91"
 }
 lambda_role = {
        finr = "arn:aws:iam::224919220385:role/eLambdaExecutionFinrAdmin"
        dev = "you need to set"
        test = "arn:aws:iam::483936848441:role/eLambdaExecutionAnalyticsFinr"
-       prod = "you need to set"
+       prod = "arn:aws:iam::584917584607:role/eLambdaExecutionAnalyticsFinr"
 }
 on-promise_mssqladvdb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
@@ -147,21 +147,22 @@ cron_schedule = {
 }
 
 lambda_start_ec2_time = {
-       finr = "16" #start at 16 UTC = 8AM PST
+       finr = "15" #start at 15 UTC = 8AM PST DST time
        dev = "you need to set"
-       test = "16"
-       prod = "you need to set"
+       test = "15"
+       prod = "15"
 }
 
 lambda_stop_ec2_time = {
-       finr = "4" #stop at 4 UTC= 8PM PST
+       finr = "3" #stop at 3 UTC= 8PM PST DST time
        dev = "you need to set"
-       test = "4"
-       prod = "you need to set"
+       test = "3"
+       prod = "3"
 }
 
 email_dist_list = {
       finr = "feidataengineering@financialengines.com"
+      dev = "you need to set"
       test = "feidataengineering@financialengines.com"
       prod = "feidataengineering@financialengines.com, feidataengineering@fngn.pagerduty.com"
 }
