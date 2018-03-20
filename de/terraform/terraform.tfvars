@@ -52,6 +52,7 @@ tag_Project         = "ANLY-2018"
 tag_Owner           = "feidataengineering@financialengines.com"
 tag_CostCenter      = "270"
 tag_launcher       = "Terraform-ANLY-2820"
+tag_office          = "analytics"
 
 rds_tag_Name            = "fngn-dataeng-airflow"
 rs_tag_Name            = "fngn-dataeng-redshift"

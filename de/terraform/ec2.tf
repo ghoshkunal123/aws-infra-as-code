@@ -21,7 +21,7 @@ resource "aws_instance" "master" {
     Owner         = "${var.tag_Owner}"
     CostCenter    = "${var.tag_CostCenter}"
     launcher      = "${var.tag_launcher}-master"
-    env           = "${terraform.workspace}"
+    env           = "${var.tag_office}-${terraform.workspace}"
     Name          = "${var.ec2_master_tag_Name}"
     "Patch Group" = "${var.ec2_tag_patch_group}"
   }
@@ -50,7 +50,7 @@ resource "aws_instance" "worker" {
     Owner         = "${var.tag_Owner}"
     CostCenter    = "${var.tag_CostCenter}"
     launcher      = "${var.tag_launcher}-worker"
-    env           = "${terraform.workspace}"
+    env           = "${var.tag_office}-${terraform.workspace}"
     Name          = "${var.ec2_worker_tag_Name}_${count.index}"
     "Patch Group" = "${var.ec2_tag_patch_group}"
   }

@@ -8,7 +8,7 @@ resource "aws_security_group" "airflow_worker" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-worker"
   }
 
@@ -38,7 +38,7 @@ resource "aws_security_group" "airflow_master" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-master"
   }
 
@@ -110,7 +110,7 @@ resource "aws_security_group" "airflow_alb" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-alb"
   }
 
@@ -148,7 +148,7 @@ resource "aws_security_group" "airflow_rds" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-rds"
   }
 
@@ -178,7 +178,7 @@ resource "aws_security_group" "airflow_redshift" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "fngn-dataeng-airflow-redshift"
   }
 

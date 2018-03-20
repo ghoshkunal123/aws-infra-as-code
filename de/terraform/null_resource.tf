@@ -13,7 +13,7 @@ resource "null_resource" "ansible" {
   }
 
   provisioner "local-exec" {
-    command = "aws redshift create-tags --resource-name arn:aws:redshift:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parametergroup:${aws_redshift_parameter_group.analytics.id} --tags Key=app,Value=${var.tag_app} Key=Project,Value=${var.tag_Project} Key=env,Value=${terraform.workspace} Key=Owner,Value=${var.tag_Owner} Key=CostCenter,Value=${var.tag_CostCenter} Key=Name,Value=${aws_redshift_parameter_group.analytics.id}"
+    command = "aws redshift create-tags --resource-name arn:aws:redshift:${var.aws_region}:${data.aws_caller_identity.current.account_id}:parametergroup:${aws_redshift_parameter_group.analytics.id} --tags Key=app,Value=${var.tag_app} Key=Project,Value=${var.tag_Project} Key=env,Value=${var.tag_office}-${terraform.workspace} Key=Owner,Value=${var.tag_Owner} Key=CostCenter,Value=${var.tag_CostCenter} Key=Name,Value=${aws_redshift_parameter_group.analytics.id}"
   }
 
   # this local-exec creates ansible airflow vars file, which will be used by ansible jinja2 to create airflow.cfg

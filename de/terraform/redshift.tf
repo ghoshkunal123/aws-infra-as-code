@@ -7,7 +7,7 @@ resource "aws_redshift_subnet_group" "analytics" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.rs_tag_Name}"
   }
 }
@@ -91,7 +91,7 @@ resource "aws_redshift_cluster" "analytics" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.rs_tag_Name}"
   }
 }

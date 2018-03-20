@@ -10,7 +10,7 @@ resource "aws_alb" "airflow" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.alb_airflow_name}"
   }
 }
@@ -49,7 +49,7 @@ resource "aws_alb_target_group" "airflow" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.alb_airflow_name}"
   }
 }
@@ -72,7 +72,7 @@ resource "aws_alb" "flower" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.alb_flower_name}"
   }
 }
@@ -110,7 +110,7 @@ resource "aws_alb_target_group" "flower" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.alb_flower_name}"
   }
 }

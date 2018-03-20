@@ -30,7 +30,7 @@ resource "aws_db_instance" "rds" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.rds_tag_Name}"
   }
 }
@@ -45,7 +45,7 @@ resource "aws_db_subnet_group" "rds" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     launcher   = "${var.tag_launcher}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     Name       = "${var.rds_tag_Name}"
   }
 }

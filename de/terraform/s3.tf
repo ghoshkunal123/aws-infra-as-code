@@ -27,7 +27,7 @@ resource "aws_s3_bucket" "s3" {
     Project    = "${var.tag_Project}"
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
-    env        = "${terraform.workspace}"
+    env        = "${var.tag_office}-${terraform.workspace}"
     launcher   = "${var.tag_launcher}"
   }
 }

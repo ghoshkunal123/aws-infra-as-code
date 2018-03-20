@@ -132,6 +132,7 @@ variable "tag_Project" {}
 variable "tag_Owner" {}
 variable "tag_CostCenter" {}
 variable "tag_launcher" {} #whether the resource is launched by Terraform or console, etc.
+variable "tag_office" {}
 variable "rds_tag_Name" {}
 variable "rs_tag_Name" {}
 variable "ec2_master_tag_Name" {}
