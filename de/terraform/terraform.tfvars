@@ -4,6 +4,7 @@ aws_region              = "us-west-1"
 finr_cidr_10  = "10.0.0.0/8"
 finr_cidr_172  = "172.24.0.0/22"
 finr_cidr_advisor_center_store = "172.21.0.0/16"
+finr_cidr_172_phx = "172.26.0.0/24"
 
 #ansible
 ansible_airflow_directory = "../ansible"

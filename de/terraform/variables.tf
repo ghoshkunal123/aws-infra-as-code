@@ -18,9 +18,10 @@ variable "airflow_env_properties" {
   type = "map"
 }
 
-variable "finr_cidr_10" {}
-variable "finr_cidr_172" {}
+variable "finr_cidr_10" {} #ethernet subnet
+variable "finr_cidr_172" {} #wireless subnet at sunnyvale
 variable "finr_cidr_advisor_center_store" {}
+variable "finr_cidr_172_phx" {} #wireless subnet at phoenix
 
 #s3
 variable "s3_bucket_name" {
