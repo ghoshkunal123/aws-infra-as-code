@@ -116,14 +116,14 @@ on-promise_mssqladvdb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
        dev = "you need to set"
        test = "10.80.0.65"
-       prod = "10.80.0.100"
+       prod = "10.10.0.100"
 }
 
 on-promise_mssqlauxdb_ip = {
        finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
        dev = "you need to set"
        test = "10.80.0.46"
-       prod = "10.80.0.52"
+       prod = "10.10.0.52"
 }
 
 mssql_aux_db = {
