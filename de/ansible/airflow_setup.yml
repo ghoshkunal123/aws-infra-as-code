@@ -103,6 +103,7 @@
       name: America/Los_Angeles
 - hosts: master:workers
   remote_user: etluser
+  become_user: etluser
   become: yes
   roles:
     - code-deploy
