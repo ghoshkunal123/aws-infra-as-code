@@ -147,17 +147,17 @@ cron_schedule = {
 }
 
 lambda_start_ec2_time = {
-       finr = "15" #start at 15 UTC = 8AM PST DST time
+       finr = "cron(50 12 ? * * *)" #5:50AM PST DST = 12:50PM UTC
        dev = "you need to set"
-       test = "15"
-       prod = "15"
+       test = "cron(50 12 ? * * *)"
+       prod = "cron(50 12 ? * * *)"
 }
 
 lambda_stop_ec2_time = {
-       finr = "3" #stop at 3 UTC= 8PM PST DST time
+       finr = "cron(0 0 ? * * *)" #5PM PST DST = 12AM (i.e. 0AM) UTC
        dev = "you need to set"
-       test = "3"
-       prod = "3"
+       test = "cron(0 0 ? * * *)"
+       prod = "cron(0 0 ? * * *)"
 }
 
 email_dist_list = {
