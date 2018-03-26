@@ -10,8 +10,9 @@ resource "aws_db_instance" "rds" {
   password                = "${var.rds_password}"
   db_subnet_group_name    = "${aws_db_subnet_group.rds.name}"
   vpc_security_group_ids  = ["${aws_security_group.airflow_rds.id}"]
-  backup_retention_period = 0                                        # day
-  multi_az                = false
+  backup_retention_period = 7                                                  # day
+  backup_window           = "07:00-09:00"                                      #UTC. i.e. PST DST 0AM-2AM or PST 11PM-1AM
+  multi_az                = "${lookup(var.rds_multi_az, terraform.workspace)}"
   publicly_accessible     = false
   storage_type            = "gp2"
   storage_encrypted       = true

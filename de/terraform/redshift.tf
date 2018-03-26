@@ -70,7 +70,7 @@ resource "aws_redshift_cluster" "analytics" {
   node_type                    = "${var.rs_node_type}"
   cluster_type                 = "${var.rs_cluster_type}"
   number_of_nodes              = "${lookup(var.rs_number_of_nodes, terraform.workspace)}"
-  preferred_maintenance_window = "Thu:11:30-Thu:12:00"
+  preferred_maintenance_window = "Sat:22:30-Sat:23:30"                                    #PST DST SAT3:30-4:30PM
   cluster_parameter_group_name = "${aws_redshift_parameter_group.analytics.name}"
   availability_zone            = "us-west-1a"
   vpc_security_group_ids       = ["${aws_security_group.airflow_redshift.id}"]

@@ -166,3 +166,10 @@ email_dist_list = {
       test = "feidataengineering@financialengines.com"
       prod = "feidataengineering@financialengines.com, feidataengineering@fngn.pagerduty.com"
 }
+
+rds_multi_az = {
+      finr = "false"
+      dev  = "you need to set"
+      test = "false"
+      prod = "true"
+}

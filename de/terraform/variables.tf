@@ -178,3 +178,7 @@ variable "lambda_stop_ec2_time" {
 variable "email_dist_list" {
   type = "map"
 }
+
+variable "rds_multi_az" {
+  type = "map"
+}
