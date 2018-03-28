@@ -112,18 +112,18 @@ lambda_role = {
        test = "arn:aws:iam::483936848441:role/eLambdaExecutionAnalyticsFinr"
        prod = "arn:aws:iam::584917584607:role/eLambdaExecutionAnalyticsFinr"
 }
-on-promise_mssqladvdb_ip = {
-       finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
+on-promise_mssqladvdb_dns = {
+       finr = "testcopydb.feitest.io"
        dev = "you need to set"
-       test = "10.80.0.65"
-       prod = "10.10.0.100"
+       test = "testcopydb.feitest.io"
+       prod = "advisordbstg-sjc.financialengines.io"
 }
 
-on-promise_mssqlauxdb_ip = {
-       finr = "10.80.0.65" # I do not know what to set here. They will not test it in FINR
+on-promise_mssqlauxdb_dns = {
+       finr = "testcopydb.feitest.io"
        dev = "you need to set"
-       test = "10.80.0.46"
-       prod = "10.10.0.52"
+       test = "advisordbphxtst.feitest.io"
+       prod = "auxdbprd.financialengines.io"
 }
 
 mssql_aux_db = {
