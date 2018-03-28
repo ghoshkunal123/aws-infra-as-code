@@ -37,8 +37,8 @@ env_name: ${lookup(var.airflow_env_properties, terraform.workspace)}
 mssql_aux_db: ${lookup(var.mssql_aux_db, terraform.workspace)}
 mssql_adv_db: ${lookup(var.mssql_adv_db, terraform.workspace)}
 mssql_password: ${var.mssql_password}
-mssql_adv_host: ${aws_route53_record.mssqladvdb.fqdn}
-mssql_aux_host: ${aws_route53_record.mssqlauxdb.fqdn}
+mssql_adv_host: ${lookup(var.on-promise_mssqladvdb_dns, terraform.workspace)}
+mssql_aux_host: ${lookup(var.on-promise_mssqlauxdb_dns, terraform.workspace)}
 cron_schedule: ${lookup(var.cron_schedule, terraform.workspace)}
 email_dist_list: ${lookup(var.email_dist_list, terraform.workspace)}
 EOF
