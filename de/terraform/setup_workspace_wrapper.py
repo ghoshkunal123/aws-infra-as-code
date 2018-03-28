@@ -7,6 +7,8 @@ from shutil import copyfile
 from subprocess import call
 from subprocess import Popen,PIPE
 
+#usage example: 
+#./setup_workspace_wrapper.py finr /Users/lhu/Downloads/awsokta-1.1.12-all.jar lhu uAnalyticsDevOps
 if len(sys.argv) != 5:
     print("wrong argument number")
     exit (1) 
