@@ -20,7 +20,6 @@ resource "aws_db_instance" "rds" {
   maintenance_window      = "Sun:23:30-Mon:00:00"
   availability_zone       = "us-west-1a"
   copy_tags_to_snapshot   = true
-  apply_immediately       = true
 
   lifecycle {
     prevent_destroy = true
