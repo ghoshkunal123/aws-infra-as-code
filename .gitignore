@@ -4,7 +4,6 @@ de/terraform/backend.tf
 *.txt
 de/terraform/terraform.tfstate*
 de/ansible/files/
-de/ansible/aws_hosts
 de/ansible/group_vars/airflow_cfg_vars.yml
 de/ansible/airflow_setup.retry
 de/ansible/aws_hosts
