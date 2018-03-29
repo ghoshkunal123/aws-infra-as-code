@@ -1,0 +1,8 @@
+[master]
+10.129.30.56 ansible_python_interpreter=/usr/bin/python3
+[workers]
+10.129.30.71 ansible_python_interpreter=/usr/bin/python3
+10.129.30.211 ansible_python_interpreter=/usr/bin/python3
+[local]
+localhost ansible_connection=local ansible_python_interpreter=/usr/bin/python
+
