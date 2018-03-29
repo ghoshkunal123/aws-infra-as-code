@@ -1,5 +1,0 @@
-mssql_host: mssqldbprodcopy.fefinr.io
-mssql_aux_db: prodcopy_corp_aux
-mssql_adv_db: prodcopy2
-mssql_password: W31c0m3!
-rs_pw: Summer2017
