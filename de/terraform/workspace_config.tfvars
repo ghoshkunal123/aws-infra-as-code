@@ -112,14 +112,14 @@ lambda_role = {
        test = "arn:aws:iam::483936848441:role/eLambdaExecutionAnalyticsFinr"
        prod = "arn:aws:iam::584917584607:role/eLambdaExecutionAnalyticsFinr"
 }
-on-promise_mssqladvdb_dns = {
+on-premise_mssqladvdb_dns = {
        finr = "testcopydb.feitest.io"
        dev = "you need to set"
        test = "testcopydb.feitest.io"
        prod = "advisordbstg-sjc.financialengines.io"
 }
 
-on-promise_mssqlauxdb_dns = {
+on-premise_mssqlauxdb_dns = {
        finr = "testcopydb.feitest.io"
        dev = "you need to set"
        test = "advisordbphxtst.feitest.io"
