@@ -8,20 +8,23 @@ pipeline {
       }
     }
     
-    post {
-      always {
-        archiveArtifacts artifacts: 'de/jenkins-test/src/*', fingerprint: true
-      }
-    }
     stage('test') {
       steps {
         echo 'this is test stage'
       }
     }
+
     stage('deploy') {
       steps {
         echo 'this deploy stage'
       }
     }
   }
+
+  post {
+    always {
+      archiveArtifacts artifacts: 'de/jenkins-test/src/*', fingerprint: true
+    }
+  }
+
 }
