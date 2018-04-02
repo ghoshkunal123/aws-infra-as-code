@@ -1,11 +1,11 @@
 # Python Program to find Area and Perimeter of a Rectangle using Functions
  
-def getRectangleArea(width, height):
+def getSquareArea(length):
  
     # calculate the area
-    return width * height
+    return length * length
 
-def getRectanglePerimeter(width, height):
+def getSquarePerimeter(length):
  
     # calculate the Perimeter
-    return 2 * (width + height)
+    return 4 * length

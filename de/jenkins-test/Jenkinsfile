@@ -7,7 +7,7 @@ pipeline {
         echo 'this is build stage, nothing to build for python'
       }
     }
-    
+
     stage('test') {
       steps {
         echo 'this is test stage'
