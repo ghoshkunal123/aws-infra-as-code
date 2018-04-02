@@ -1,4 +1,4 @@
-# Python Program to find Area of a Rectangle using Functions
+# Python Program to find Area and Perimeter of a Rectangle using Functions
  
 def getArea(width, height):
  
