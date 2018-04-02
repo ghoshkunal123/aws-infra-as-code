@@ -1,0 +1,14 @@
+job_name:
+  script:
+    - rake spec
+    - coverage
+  stage: test
+  only:
+    - master
+  except:
+    - develop
+  tags:
+    - ruby
+    - postgres
+  allow_failure: true
+
