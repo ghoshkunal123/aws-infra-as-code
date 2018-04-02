@@ -5,8 +5,6 @@ pipeline {
     stage('build') {
       steps {
         echo 'this is build stage, nothing to build for python'
-      }
-      steps {
         sh 'pwd'
       }
     }
@@ -14,8 +12,6 @@ pipeline {
     stage('test') {
       steps {
         echo 'this is test stage'
-      }
-      steps {
         sh 'src/integration_test.py'
       }
     }
