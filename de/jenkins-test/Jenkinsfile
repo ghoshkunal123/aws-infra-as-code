@@ -11,6 +11,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'this is test stage'
+        src/integration_test.py
       }
     }
 
