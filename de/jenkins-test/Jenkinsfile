@@ -2,23 +2,23 @@ pipeline {
   agent any
 
   stages {
-    stage('build') {
+    stage('Build') {
       steps {
-        echo 'this is build stage, nothing to build for python'
-        sh 'pwd'
+        echo 'This is build stage, nothing to build for python'
       }
     }
 
-    stage('test') {
+    stage('Test') {
       steps {
-        echo 'this is test stage'
+        echo 'This is test stage'
         sh '/usr/bin/python2.7 de/jenkins-test/src/integration_test.py'
+        sh 'py.test --junitxml results.xml de/jenkins-test/src/integration_test.py'
       }
     }
 
-    stage('deploy') {
+    stage('Deploy') {
       steps {
-        echo 'this deploy stage'
+        echo 'This deploy stage'
       }
     }
   }
