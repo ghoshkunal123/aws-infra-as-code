@@ -12,7 +12,7 @@ pipeline {
     stage('test') {
       steps {
         echo 'this is test stage'
-        sh 'src/integration_test.py'
+        sh 'de/jenkins-test/src/integration_test.py'
       }
     }
 
