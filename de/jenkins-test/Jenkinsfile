@@ -5,21 +5,29 @@ pipeline {
     stage('Build') {
       steps {
         echo 'This is build stage, nothing to build for python'
-        sh 'zip -r de/jenkins-test/dist/src_code_${env.BUILD_NUMBER}.zip de/jenkins-test/src'
+        sh 'mkdir -p de/jenkins-test/dist/'
+        sh 'zip -r de/jenkins-test/dist/src_code_${BUILD_NUMBER}.zip de/jenkins-test/src'
       }
-    }
-
-    stage('Test') {
-      steps {
-        echo 'This is test stage'
-        sh '/usr/bin/python2.7 de/jenkins-test/tst/integration_test.py'
+      post {
+        always {
+          archiveArtifacts artifacts: 'de/jenkins-test/src/*', fingerprint: true
+        }
       }
     }
 
     stage('Deploy') {
       steps {
         echo 'This deploy stage'
-        sh 'scp de/jenkins-test/dist/src_code_${env.BUILD_NUMBER}.zip etluser@10.128.32.204:/tmp'
+        sh 'scp de/jenkins-test/dist/src_code_${BUILD_NUMBER}.zip de/jenkins-test/deploy_folder/all/'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        echo 'This is test stage'
+        echo 'copy src code file from de/jenkins-test/deploy_folder/all/ to master and workers of test account'
+        echo 'copy tst file from de/jenkins-test/deploy_folder/all/ to one of workers of test account and run integration_test.py' 
+        sh '/usr/bin/python2.7 de/jenkins-test/tst/integration_test.py'
       }
     }
   }
