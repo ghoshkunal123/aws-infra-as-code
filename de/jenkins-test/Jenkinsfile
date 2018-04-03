@@ -5,20 +5,21 @@ pipeline {
     stage('Build') {
       steps {
         echo 'This is build stage, nothing to build for python'
+        sh 'zip -r de/jenkins-test/dist/src_code_${env.BUILD_NUMBER}.zip de/jenkins-test/src'
       }
     }
 
     stage('Test') {
       steps {
         echo 'This is test stage'
-        sh '/usr/bin/python2.7 de/jenkins-test/src/integration_test.py'
-        sh 'py.test --junitxml results.xml de/jenkins-test/src/integration_test.py'
+        sh '/usr/bin/python2.7 de/jenkins-test/tst/integration_test.py'
       }
     }
 
     stage('Deploy') {
       steps {
         echo 'This deploy stage'
+        sh 'scp de/jenkins-test/dist/src_code_${env.BUILD_NUMBER}.zip etluser@10.128.32.204:/tmp'
       }
     }
   }

@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+import sys
+sys.path.insert(0, '../src/')
+
 import unittest
 from rectangle import *
 from square import *
