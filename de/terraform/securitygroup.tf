@@ -119,7 +119,8 @@ resource "aws_security_group" "airflow_alb" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_advisor_center_store}"]
+    #in fact, only dataeng team will access
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
   #https
@@ -127,7 +128,8 @@ resource "aws_security_group" "airflow_alb" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}", "${var.finr_cidr_advisor_center_store}"]
+    #in fact, only dataeng team will access
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
   egress {
@@ -188,7 +190,7 @@ resource "aws_security_group" "airflow_redshift" {
     protocol  = "tcp"
 
     #redshift endpoint is accessable by any team @FE for data analytics
-    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
+    cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172_fe}", "${var.finr_cidr_192}"]
   }
 
   egress {

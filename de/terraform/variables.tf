@@ -21,7 +21,8 @@ variable "airflow_env_properties" {
 variable "finr_cidr_10" {} #ethernet subnet
 variable "finr_cidr_172" {} #wireless subnet at sunnyvale
 variable "finr_cidr_advisor_center_store" {}
-variable "finr_cidr_172_phx" {} #wireless subnet at phoenix
+variable "finr_cidr_172_fe" {} #wireless subnet of entire fe
+variable "finr_cidr_192" {} #do not know what this is
 
 #s3
 variable "s3_bucket_name" {
