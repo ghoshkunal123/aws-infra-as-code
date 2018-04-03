@@ -28,7 +28,7 @@ pipeline {
         echo 'This is test stage'
         echo 'copy src code file from de/jenkins-test/deploy_folder/all/ to master and workers of test account'
         echo 'copy tst file from de/jenkins-test/deploy_folder/all/ to one of workers of test account and run integration_test.py' 
-        sh '/usr/bin/python2.7 de/jenkins-test/tst/integration_test.py'
+        #sh '/usr/bin/python2.7 de/jenkins-test/tst/integration_test.py'
       }
     }
   }
