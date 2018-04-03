@@ -18,6 +18,7 @@ pipeline {
     stage('Deploy') {
       steps {
         echo 'This deploy stage'
+        sh 'mkdir -p de/jenkins-test/deploy_folder/all/'
         sh 'scp de/jenkins-test/dist/src_code_${BUILD_NUMBER}.zip de/jenkins-test/deploy_folder/all/'
       }
     }
