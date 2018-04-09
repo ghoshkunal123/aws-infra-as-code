@@ -147,10 +147,10 @@ cron_schedule = {
 }
 
 lambda_start_ec2_time = {
-       finr = "cron(50 12 ? * * *)" #5:50AM PST DST = 12:50PM UTC
+       finr = "cron(50 11 ? * * *)" #4:50AM PST DST = 11:50PM UTC
        dev = "you need to set"
-       test = "cron(50 12 ? * * *)"
-       prod = "cron(50 12 ? * * *)"
+       test = "cron(50 11 ? * * *)"
+       prod = "cron(50 11 ? * * *)"
 }
 
 lambda_stop_ec2_time = {
