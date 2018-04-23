@@ -70,7 +70,7 @@ rs_iam_role      = {
        prod = "eRedshiftAnalyticsFinr"
 }
 rs_number_of_nodes = {
-       finr = "6"
+       finr = "2"
        dev = "you need to set"
        test = "2"
        prod = "8"
@@ -154,10 +154,10 @@ lambda_start_ec2_time = {
 }
 
 lambda_stop_ec2_time = {
-       finr = "cron(0 0 ? * * *)" #5PM PST DST = 12AM (i.e. 0AM) UTC
+       finr = "cron(0 3 ? * * *)" #8PM PST DST = 3AM UTC
        dev = "you need to set"
-       test = "cron(0 0 ? * * *)"
-       prod = "cron(0 0 ? * * *)"
+       test = "cron(0 3 ? * * *)"
+       prod = "cron(0 3 ? * * *)"
 }
 
 email_dist_list = {
