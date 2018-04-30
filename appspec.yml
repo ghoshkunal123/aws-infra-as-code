@@ -1,0 +1,12 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /lisacodedeploy
+permissions:
+  - object: /lisacodedeploy/tst/html
+    pattern: "*.html"
+    except: [index.html]
+    mode: 400
+    type:
+      - file
