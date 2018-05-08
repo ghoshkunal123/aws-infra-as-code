@@ -3,3 +3,13 @@ os: linux
 files:
   - source: /test/
     destination: /lisacodedeploy2/test
+permissions:
+  - object: /lisacodedeploy2/test
+    pattern: "*.py"
+    mode: 755
+    type:
+      - file
+hooks:
+    AfterInstall:
+    - location: test/run_test.sh
+    - timeout 3600
