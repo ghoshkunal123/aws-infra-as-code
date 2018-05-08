@@ -4,6 +4,9 @@ files:
   - source: /test/
     destination: /lisacodedeploy2/test
 hooks:
+  BeforeInstall:
+    - location: 
+    - timeout: 3600
   AfterInstall:
     - location: test/run_test.sh
     - timeout: 3600
