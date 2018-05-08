@@ -5,7 +5,7 @@ files:
     destination: /lisacodedeploy2/test
 permissions:
   - object: /lisacodedeploy2/test
-    pattern: "*.py"
+    pattern: "*.*"
     mode: 755
     type:
       - file
