@@ -11,8 +11,8 @@ permissions:
       - file
 hooks:
     BeforeInstall:
-    - location: /lisacodedeploy2/test/run_test.sh
+    - location: test/run_test.sh
     - timeout: 3600
     AfterInstall:
-    - location: /lisacodedeploy2/test/run_test.sh
+    - location: test/run_test.sh
     - timeout: 3600
