@@ -3,7 +3,3 @@ os: linux
 files:
   - source: /test/
     destination: /lisacodedeploy2/test
-hooks:
-  AfterInstall:
-    - location: test/run_test.sh
-    - timeout: 3600
