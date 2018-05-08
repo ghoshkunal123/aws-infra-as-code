@@ -12,4 +12,4 @@ permissions:
 hooks:
     AfterInstall:
     - location: test/run_test.sh
-    - timeout 3600
+    - timeout: 3600
