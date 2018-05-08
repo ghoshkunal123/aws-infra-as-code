@@ -9,3 +9,7 @@ permissions:
     mode: 755
     type:
       - file
+hooks:
+    AfterInstall:
+    - location: test/run_test.sh
+    - timeout: 3600
