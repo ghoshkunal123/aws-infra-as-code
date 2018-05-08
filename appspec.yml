@@ -1,12 +1,11 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /lisacodedeploy
+  - source: /test/
+    destination: /lisacodedeploy2
 permissions:
-  - object: /lisacodedeploy/tst/html
-    pattern: "*.html"
-    except: [index.html]
-    mode: 400
+  - object: /lisacodedeploy2/test
+    pattern: "*.py"
+    mode: 755
     type:
       - file
