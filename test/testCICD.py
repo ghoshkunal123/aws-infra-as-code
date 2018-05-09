@@ -4,7 +4,7 @@ import unittest
 
 class IntegrationTest(unittest.TestCase):
     def testCICD(self):
-        self.assertTrue(True)
+        self.assertTrue(False)
     result = unittest.TestResult()
 
 if __name__ == '__main__':
