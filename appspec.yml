@@ -1,8 +1,8 @@
 version: 0.0
 os: linux
 files:
-  - source: /
-    destination: /lisacodedeploy2/
+  - source: test
+    destination: /lisacodedeploy2/test
 permissions:
   - object: /lisacodedeploy2/test
     pattern: "*.*"
