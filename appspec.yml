@@ -10,10 +10,7 @@ permissions:
     type:
       - file
 hooks:
-    BeforeInstall:
+  BeforeInstall:
     - location: test/run_test.sh
-    - timeout: 3600
-    - runas: root
-    AfterInstall:
-    - location: test/run_test.sh
-    - timeout: 3600
+      timeout: 300
+      runas: root
