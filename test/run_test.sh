@@ -1,2 +1,2 @@
 #!/bin/bash
-python test/testCICD.py
+python /lisacodedeploy2/test/testCICD.py
