@@ -1,3 +1,4 @@
 #!/bin/bash
-python ./testCICD.py
+#python ./testCICD.py
+pwd
 
