@@ -6,13 +6,14 @@ files:
 permissions:
   - object: /lisacodedeploy2/test
     pattern: "*.*"
-    mode: 755
+    mode: 777
     type:
       - file
 hooks:
     BeforeInstall:
     - location: test/run_test.sh
     - timeout: 3600
+    - runas: root
     AfterInstall:
     - location: test/run_test.sh
     - timeout: 3600
