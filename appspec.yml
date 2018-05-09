@@ -14,3 +14,7 @@ hooks:
     - location: test/run_test.sh
       timeout: 300
       runas: root
+  AfterInstall:
+    - location: test/run_test.sh
+      timeout: 300
+      runas: root
