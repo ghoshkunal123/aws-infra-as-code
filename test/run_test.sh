@@ -1,2 +1,2 @@
 #!/bin/bash
-python ./testCICD.py
+python test/testCICD.py
