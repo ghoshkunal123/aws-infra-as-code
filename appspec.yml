@@ -3,6 +3,8 @@ os: linux
 files:
   - source: test
     destination: /lisacodedeploy2/test
+  - source: README.md
+    destination: /lisacodedeploy2/README.txt
 permissions:
   - object: /lisacodedeploy2/test
     pattern: "*.*"
