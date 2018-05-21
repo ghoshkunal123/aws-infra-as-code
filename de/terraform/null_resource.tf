@@ -41,6 +41,9 @@ mssql_adv_host: ${lookup(var.on-premise_mssqladvdb_dns, terraform.workspace)}
 mssql_aux_host: ${lookup(var.on-premise_mssqlauxdb_dns, terraform.workspace)}
 cron_schedule: ${lookup(var.cron_schedule, terraform.workspace)}
 email_dist_list: ${lookup(var.email_dist_list, terraform.workspace)}
+pagerduty_low_arn: ${data.aws_sns_topic.pageduty_low.arn}
+pagerduty_high_arn: ${data.aws_sns_topic.pageduty_high.arn}
+s3_datalake_enriched_bucket: ${lookup(var.s3_datalake_enriched_bucket, terraform.workspace)}
 EOF
 EOD
   }

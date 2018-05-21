@@ -173,3 +173,10 @@ rds_multi_az = {
       test = "false"
       prod = "true"
 }
+
+s3_datalake_enriched_bucket = {
+      finr = "com-fngn-finr-datalake-enriched"
+      dev  = "you need to set"
+      test = "com-fngn-test-datalake-enriched"
+      prod = "com-fngn-prod-datalake-enriched"
+}

@@ -183,3 +183,15 @@ variable "email_dist_list" {
 variable "rds_multi_az" {
   type = "map"
 }
+
+variable "sns_pageduty_low_topic" {
+  default = "DataEng-PagerDuty-LowUrgency"
+}
+
+variable "sns_pageduty_high_topic" {
+  default = "DataEng-PagerDuty-HighUrgency"
+}
+
+variable "s3_datalake_enriched_bucket" {
+  type = "map"
+}

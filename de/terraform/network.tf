@@ -48,6 +48,7 @@ output "subnet_private2_cidr" {
   value = "${data.aws_subnet.private2.cidr_block}"
 }
 
+
 output "subnet_private2_az" {
   value = "${data.aws_subnet.private2.availability_zone}"
 }
@@ -73,4 +74,20 @@ data "aws_caller_identity" "current" {}
 
 output "account_id" {
   value = "${data.aws_caller_identity.current.account_id}"
+}
+
+data "aws_sns_topic" "pageduty_low" {
+  name = "${var.sns_pageduty_low_topic}"
+}
+
+output "aws_sns_arn_pageduty_low" {
+  value = "${data.aws_sns_topic.pageduty_low.arn}"
+}
+
+data "aws_sns_topic" "pageduty_high" {
+  name = "${var.sns_pageduty_high_topic}"
+}
+
+output "aws_sns_arn_pageduty_high" {
+  value = "${data.aws_sns_topic.pageduty_high.arn}"
 }
