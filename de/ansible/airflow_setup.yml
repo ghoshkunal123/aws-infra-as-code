@@ -80,8 +80,8 @@
     file: path=/mnt/etl/xforms state=directory owner=etluser group=etluser mode=0755
   - name: Creates directory /mnt/etl/tmp
     file: path=/mnt/etl/tmp state=directory owner=etluser group=etluser mode=0755
-  roles: 
-    - microsoft-odbc-driver-setup
+#  roles:
+#    - microsoft-odbc-driver-setup
 ######### Setting up Systemd to Run Airflow: both master and workers
   tasks:
   - name: Creates directory /etc/systemd/system if not exist (should already be there)
@@ -101,6 +101,7 @@
   - name: set timezone to America/Los_Angeles # I put code here because it need to run as root
     timezone:
       name: America/Los_Angeles
+  tags: update_j2
 - hosts: master:workers
   remote_user: etluser
   become_user: etluser

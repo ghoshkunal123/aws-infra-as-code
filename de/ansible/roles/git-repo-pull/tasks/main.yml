@@ -5,7 +5,7 @@
     dest: "{{ git_checkout_dir }}"
     update: yes
     version: "{{ git_commit_version }}"
-  tags: deploy
+  tags: deploy, git-repo-pull-de
 - name: check out git repository de-biscripts.git
   git:
     repo: git@gitlab.feicore.io:DataEngineering/de-biscripts.git

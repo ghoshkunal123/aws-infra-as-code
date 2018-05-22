@@ -16,29 +16,29 @@
   with_fileglob: #this line is a part of task, not copy module, pay attention to the indention
     - "{{ git_checkout_dir }}/Airflow/dags/*.py"
   tags: deploy
-- name: copy de-datapipeline/bin/*.py to /mnt/etl/bin/
+- name: copy de-datapipeline/src/bin/*.py to /mnt/etl/bin/
   copy:
     src: "{{ item }}"
     dest: "/mnt/etl/bin"
     force: yes
   with_fileglob:
-    - "{{ git_checkout_dir }}/bin/*.py"
+    - "{{ git_checkout_dir }}/src/bin/*.py"
   tags: deploy
-- name: copy de-datapipeline/database/Redshift/Transformations/*.sql to /mnt/etl/xforms/
+- name: copy de-datapipeline/src/database/Redshift/Transformations/*.sql to /mnt/etl/xforms/
   copy:
     src: "{{ item }}"
     dest: "/mnt/etl/xforms"
     force: yes
   with_fileglob:
-    - "{{ git_checkout_dir }}/database/Redshift/Transformations/*.sql"
+    - "{{ git_checkout_dir }}/src/database/Redshift/Transformations/*.sql"
   tags: deploy
-- name: copy de-datapipeline/database/MSSQL/Transformations/*.sql to /mnt/etl/xforms/
+- name: copy de-datapipeline/src/database/MSSQL/Transformations/*.sql to /mnt/etl/xforms/
   copy:
     src: "{{ item }}"
     dest: "/mnt/etl/xforms"
     force: yes
   with_fileglob:
-    - "{{ git_checkout_dir }}/database/MSSQL/Transformations/*.sql"
+    - "{{ git_checkout_dir }}/src/database/MSSQL/Transformations/*.sql"
   tags: deploy
 - name: copy de-biscripts/sql/*.sql to /mnt/etl/xforms/
   copy:
