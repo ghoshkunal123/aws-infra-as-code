@@ -140,6 +140,7 @@ variable "rs_tag_Name" {}
 variable "ec2_master_tag_Name" {}
 variable "ec2_worker_tag_Name" {}
 variable "ec2_tag_patch_group" {}
+variable "ec2_tag_codedeploy" {}
 
 #ansible
 variable "ansible_airflow_cfg_vars_file" {}

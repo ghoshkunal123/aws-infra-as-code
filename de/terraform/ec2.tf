@@ -24,6 +24,7 @@ resource "aws_instance" "master" {
     env           = "${var.tag_office}-${terraform.workspace}"
     Name          = "${var.ec2_master_tag_Name}"
     "Patch Group" = "${var.ec2_tag_patch_group}"
+    CodeDeploy   =  "${var.ec2_tag_codedeploy}"
   }
 }
 
@@ -53,6 +54,7 @@ resource "aws_instance" "worker" {
     env           = "${var.tag_office}-${terraform.workspace}"
     Name          = "${var.ec2_worker_tag_Name}_${count.index}"
     "Patch Group" = "${var.ec2_tag_patch_group}"
+    CodeDeploy   =  "${var.ec2_tag_codedeploy}"
   }
 }
 
