@@ -5,7 +5,6 @@
 locals {
   codedeploy_deployment_group_tagvalue = "${var.git_repo_full_name}"
   codedeploy_deployment_group_name     = "${var.git_repo_alias}"
-  codedeploy_application_name          = "analytics-${var.git_repo_alias}"
 }
 
 resource "aws_codedeploy_app" "finr" {

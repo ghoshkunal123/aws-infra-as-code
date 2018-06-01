@@ -3,7 +3,8 @@
 # Department: Data Engineering @ Analytics Office
 
 locals {
-  codepipeline_name = "${var.git_repo_full_name}"
+  codepipeline_name           = "${var.git_repo_full_name}"
+  codedeploy_application_name = "analytics-${var.git_repo_alias}"
 }
 
 resource "aws_codepipeline" "de" {
@@ -69,8 +70,8 @@ resource "aws_codepipeline" "de" {
       version         = "1"
 
       configuration {
-        ApplicationName     = "${var.codedeploy_test_application_name}"
-        DeploymentGroupName = "${var.codedeploy_test_deployment_group_name}"
+        ApplicationName     = "${local.codedeploy_application_name}"
+        DeploymentGroupName = "${local.codedeploy_deployment_group_name}"
       }
 
       role_arn = "${var.codedeploy_cross_account_test_arn_role}"
@@ -107,9 +108,11 @@ resource "aws_codepipeline" "de" {
       version         = "1"
 
       configuration {
-        ApplicationName     = "TestApplication"         #TBD: placeholder for real codedeploy at prod account,n/a yet
-        DeploymentGroupName = "TestDeploymentGroupName" #TBD: placeholder for real codedeploy at prod account,n/a yet
+        ApplicationName     = "${local.codedeploy_application_name}"
+        DeploymentGroupName = "${local.codedeploy_deployment_group_name}"
       }
+
+      role_arn = "${var.codedeploy_cross_account_prod_arn_role}"
     }
   }
 }
