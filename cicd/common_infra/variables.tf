@@ -1,5 +1,6 @@
 # Copyright 2018
 # Author: Lisa Hu
+# Department: Data Engineering @ Analytics Office
 
 variable "aws_region" {
   default = "us-west-1"

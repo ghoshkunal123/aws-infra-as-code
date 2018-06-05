@@ -1,3 +1,7 @@
+# Copyright 2018
+# Author: Lisa Hu
+# Department: Data Engineering @ Analytics Office
+
 from __future__ import print_function
 from boto3.session import Session
 

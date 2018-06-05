@@ -1,3 +1,7 @@
+# Copyright 2018
+# Author: Lisa Hu
+# Department: Data Engineering @ Analytics Office
+
 locals {
   src_dir  = "lambda_py"
   dest_dir = "lambda_func"
