@@ -33,3 +33,11 @@ data "aws_iam_role" "codedeploy_service_role" {
 output "AWSCodeDeployServiceRole_arn" {
   value = "${data.aws_iam_role.codedeploy_service_role.arn}"
 }
+
+data "aws_iam_role" "lambda_service_role" {
+  name = "eLambdaExecutionFinrAdmin"
+}
+
+output "LambdaServiceRole_arn" {
+  value = "${data.aws_iam_role.lambda_service_role.arn}"
+}

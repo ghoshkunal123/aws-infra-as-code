@@ -1,6 +1,5 @@
 # Copyright 2018
 # Author: Lisa Hu
-# Department: Data Engineering @ Analytics Office
 
 variable "aws_region" {
   default = "us-west-1"
@@ -12,6 +11,27 @@ variable "aws_profile" {
 
 variable "git_repo_full_name" {}
 variable "git_repo_alias" {}
+
+#tags
+variable "tag_app" {
+  default = "de"
+}
+
+variable "tag_Project" {
+  default = "ANLY-2018"
+}
+
+variable "tag_Owner" {
+  default = "feidataengineering@financialengines.com"
+}
+
+variable "tag_CostCenter" {
+  default = "270"
+}
+
+variable "tag_office" {
+  default = "analytics"
+}
 
 #codedeploy
 variable "codedeploy_service_role" {
@@ -58,4 +78,11 @@ variable "codedeploy_failure_sns_subscription_endpoint" {}
 #cloudwatch
 variable "cloudwatch_triggered_s3_object" {
   #  default "arn:aws:s3:::git-to-amazon-s3-outputbucket-1xatxah3q3bzb/AnalyticsDevOps/aws-infra-as-code/master/aws-infra-as-code.zip"  #  default = "arn:aws:s3:::git-to-amazon-s3-outputbucket-1xatxah3q3bzb/DataEngineering/de-datapipeline/master/de-datapipeline.zip"
+}
+
+variable "lambda_operate_ec2_file_name" {
+    default = "codepipeline_operate_ec2"
+}
+variable "lambda_operate_ec2_func_name" {
+    default = "fngn-analytics-finr-codepipeline-operate-EC2"
 }
