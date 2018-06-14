@@ -48,7 +48,6 @@ output "subnet_private2_cidr" {
   value = "${data.aws_subnet.private2.cidr_block}"
 }
 
-
 output "subnet_private2_az" {
   value = "${data.aws_subnet.private2.availability_zone}"
 }

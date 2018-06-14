@@ -62,3 +62,10 @@ ec2_master_tag_Name = "fngn-dataeng-airflow-master"
 ec2_worker_tag_Name = "fngn-dataeng-airflow-worker"
 ec2_tag_patch_group = "ANLY-2717-Ubuntu"
 ec2_tag_codedeploy = "de-datapipeline"
+
+#lambda
+lambda_monitor_dataeng_time = "cron(6 00 ? * * *)" #11:00PM PST DST = 6:00AM UTC
+
+#sns
+lambda_monitor_dataeng_failure_sns_topic_name = "analytics-monitor-dataeng-failure"
+lambda_monitor_dataeng_failure_sns_subscription_endpoint = "lhu@FinancialEngines.com"

@@ -180,3 +180,10 @@ s3_datalake_enriched_bucket = {
       test = "com-fngn-test-datalake-enriched"
       prod = "com-fngn-prod-datalake-enriched"
 }
+
+enable_monitor_dataeng = {
+      finr = 1
+      dev  = 0
+      test = 0
+      prod = 0
+}

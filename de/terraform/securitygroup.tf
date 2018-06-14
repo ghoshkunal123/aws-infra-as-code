@@ -116,18 +116,20 @@ resource "aws_security_group" "airflow_alb" {
 
   #http
   ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
+    from_port = 80
+    to_port   = 80
+    protocol  = "tcp"
+
     #in fact, only dataeng team will access
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }
 
   #https
   ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+    from_port = 443
+    to_port   = 443
+    protocol  = "tcp"
+
     #in fact, only dataeng team will access
     cidr_blocks = ["${var.finr_cidr_10}", "${var.finr_cidr_172}"]
   }

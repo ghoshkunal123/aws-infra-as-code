@@ -10,6 +10,10 @@ resource "aws_route53_record" "airflow" {
   }
 }
 
+output "airflow_url" {
+  value = "${aws_route53_record.airflow.fqdn}"
+}
+
 resource "aws_route53_record" "flower" {
   zone_id = "${data.aws_route53_zone.primary.zone_id}"
   name    = "${var.route53_flower_domain_name}"

@@ -196,3 +196,14 @@ variable "sns_pageduty_high_topic" {
 variable "s3_datalake_enriched_bucket" {
   type = "map"
 }
+
+variable "lambda_monitor_dataeng_time" {}
+
+#sns
+variable "lambda_monitor_dataeng_failure_sns_topic_name" {}
+
+variable "lambda_monitor_dataeng_failure_sns_subscription_endpoint" {}
+
+variable "enable_monitor_dataeng" {
+  type = "map"
+}
