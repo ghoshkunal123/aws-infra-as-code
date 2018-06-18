@@ -150,14 +150,14 @@ lambda_start_ec2_time = {
        finr = "cron(50 11 ? * * *)" #4:50AM PST DST = 11:50AM UTC
        dev = "you need to set"
        test = "cron(50 11 ? * * *)"
-       prod = "cron(50 10 ? * * *)"
+       prod = "cron(50 8 ? * * *)" #1:50AM PST DST = 8:50AM UTC
 }
 
 lambda_stop_ec2_time = {
        finr = "cron(0 15 ? * * *)" #8AM PST DST = 15AM UTC
        dev = "you need to set"
        test = "cron(0 15 ? * * *)"
-       prod = "cron(0 14 ? * * *)"
+       prod = "cron(10 16 ? * * *)" #16:10AM PST DST = 9:10AM UTC
 }
 
 email_dist_list = {
