@@ -1,3 +1,7 @@
+# Copyright 2018
+# Author: Lisa Hu
+# Department: Data Engineering @ Analytics Office
+
 # this file is to obtain more information from the existing resources
 provider "aws" {
   region  = "${var.aws_region}"

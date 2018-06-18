@@ -3,7 +3,6 @@
 # Department: Data Engineering @ Analytics Office
 
 variable "git_repo_full_name" {}
-
 variable "git_repo_alias" {}
 
 variable "aws_region" {
@@ -13,6 +12,21 @@ variable "aws_region" {
 variable "aws_profile" {
   default = "default"
 }
+
+#codedeploy
+variable "codedeploy_service_role" {
+  default = "AWSCodeDeployServiceRole"
+}
+
+variable "codedeploy_deployment_group_tagkey" {
+  default = "CodeDeploy"
+}
+
+variable "codedeploy_trigger_name" {
+  default = "codedeploy-failure"
+}
+
+variable "codedeploy_failure_sns_subscription_endpoint" {}
 
 #tags
 variable "tag_app" {
@@ -35,22 +49,6 @@ variable "tag_office" {
   default = "analytics"
 }
 
-#codedeploy
-variable "codedeploy_service_role" {
-  default = "AWSCodeDeployServiceRole"
-}
-
-variable "codedeploy_deployment_group_tagkey" {
-  default = "CodeDeploy"
-}
-
-variable "codedeploy_trigger_name" {
-  default = "codedeploy-failure"
-}
-
-variable "codedeploy_failure_sns_subscription_endpoint" {}
-
-# lambda
 variable "lambda_operate_ec2_file_name" {
   default = "codepipeline_operate_ec2"
 }

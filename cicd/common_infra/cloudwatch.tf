@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_event_rule" "trigger_codepipeline_de" {
-  name        = "trigger-codepipeline-de"
+  name        = "fngn-analytics-dataeng-trigger-codepipeline-event"
   description = "Event to trigger codepipeline-de upon S3 change"
 
   event_pattern = <<PATTERN

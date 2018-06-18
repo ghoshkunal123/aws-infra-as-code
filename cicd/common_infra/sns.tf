@@ -3,8 +3,8 @@
 # Department: Data Engineering @ Analytics Office
 
 locals {
-  codepipeline_approval_sns_topic_name = "codepipeline-approval-${var.git_repo_alias}"
-  codedeploy_failure_sns_topic_name    = "codedeploy-failure-${var.git_repo_alias}"
+  codepipeline_approval_sns_topic_name = "analytics-codepipeline-approval-${var.git_repo_alias}"
+  codedeploy_failure_sns_topic_name    = "analytics-codedeploy-failure-${var.git_repo_alias}"
 }
 
 resource "aws_sns_topic" "codepipeline_approval" {

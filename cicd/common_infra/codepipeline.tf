@@ -44,6 +44,22 @@ resource "aws_codepipeline" "de" {
     name = "Deploy-FINR-Account"
 
     action {
+      name            = "startEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StartEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      run_order = 1
+    }
+
+    action {
       name            = "deploy-finr-account"
       category        = "Deploy"
       owner           = "AWS"
@@ -55,11 +71,46 @@ resource "aws_codepipeline" "de" {
         ApplicationName     = "${aws_codedeploy_app.finr.name}"
         DeploymentGroupName = "${aws_codedeploy_deployment_group.finr.deployment_group_name}"
       }
+
+      run_order = 2
+    }
+
+    action {
+      name            = "stopEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StopEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      run_order = 3
     }
   }
 
   stage {
     name = "Deploy-TEST-Account"
+
+    action {
+      name            = "startEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StartEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      role_arn  = "${var.codedeploy_cross_account_test_arn_role}"
+      run_order = 1
+    }
 
     action {
       name            = "deploy-test-account"
@@ -74,7 +125,25 @@ resource "aws_codepipeline" "de" {
         DeploymentGroupName = "${local.codedeploy_deployment_group_name}"
       }
 
-      role_arn = "${var.codedeploy_cross_account_test_arn_role}"
+      role_arn  = "${var.codedeploy_cross_account_test_arn_role}"
+      run_order = 2
+    }
+
+    action {
+      name            = "stopEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StopEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      role_arn  = "${var.codedeploy_cross_account_test_arn_role}"
+      run_order = 3
     }
   }
 
@@ -100,6 +169,23 @@ resource "aws_codepipeline" "de" {
     name = "Deploy-PROD-Account"
 
     action {
+      name            = "startEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StartEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      role_arn  = "${var.codedeploy_cross_account_prod_arn_role}"
+      run_order = 1
+    }
+
+    action {
       name            = "deploy-prod-account"
       category        = "Deploy"
       owner           = "AWS"
@@ -112,7 +198,25 @@ resource "aws_codepipeline" "de" {
         DeploymentGroupName = "${local.codedeploy_deployment_group_name}"
       }
 
-      role_arn = "${var.codedeploy_cross_account_prod_arn_role}"
+      role_arn  = "${var.codedeploy_cross_account_prod_arn_role}"
+      run_order = 2
+    }
+
+    action {
+      name            = "stopEC2"
+      category        = "Invoke"
+      owner           = "AWS"
+      provider        = "Lambda"
+      input_artifacts = ["deploy"]
+      version         = "1"
+
+      configuration {
+        FunctionName   = "${var.lambda_operate_ec2_func_name}"
+        UserParameters = "{     \"Operation\": \"StopEC2\",     \"TagKey\": \"Name\",     \"TagValue\": \"fngn-dataeng-airflow-worker*\" }"
+      }
+
+      role_arn  = "${var.codedeploy_cross_account_prod_arn_role}"
+      run_order = 3
     }
   }
 }

@@ -82,8 +82,9 @@ variable "cloudwatch_triggered_s3_object" {
 }
 
 variable "lambda_operate_ec2_file_name" {
-    default = "codepipeline_operate_ec2"
+  default = "codepipeline_operate_ec2"
 }
+
 variable "lambda_operate_ec2_func_name" {
-    default = "fngn-analytics-finr-codepipeline-operate-EC2"
+  default = "fngn-analytics-finr-codepipeline-operate-EC2"
 }
