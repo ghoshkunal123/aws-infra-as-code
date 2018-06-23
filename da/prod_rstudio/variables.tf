@@ -64,7 +64,8 @@ variable "tag_env" {
 }
 
 variable "tag_ec2_Name" {
-  default = "fngn-datasci-rstudio"
+  #TBD: current lambda service role only have permission to start/stop ec2 tag Name is "*fngn-dataeng*" will rename later on.
+  default = "fngn-dataeng-rstudio"
 }
 
 variable "tag_SG_Name" {

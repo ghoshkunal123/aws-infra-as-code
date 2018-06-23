@@ -10,7 +10,7 @@ def handler(event, context):
 
     target_instanceid = event['instanceid']
     tag_name='Name'
-    tag_value='analytics-rstudio'
+    tag_value = os.environ['ec2_tag_Name']
 
     ec2 = boto3.client('ec2')
 

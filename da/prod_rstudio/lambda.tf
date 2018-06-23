@@ -31,6 +31,12 @@ resource "aws_lambda_function" "start_ec2" {
     CostCenter = "${var.tag_CostCenter}"
     env        = "${var.tag_env}"
   }
+
+  environment {
+    variables = {
+      ec2_tag_Name = "${var.tag_ec2_Name}"
+    }
+  }
 }
 
 resource "aws_lambda_function" "stop_ec2" {
@@ -47,6 +53,12 @@ resource "aws_lambda_function" "stop_ec2" {
     Owner      = "${var.tag_Owner}"
     CostCenter = "${var.tag_CostCenter}"
     env        = "${var.tag_env}"
+  }
+
+  environment {
+    variables = {
+      ec2_tag_Name = "${var.tag_ec2_Name}"
+    }
   }
 }
 
