@@ -21,22 +21,24 @@ import datetime
 
 print('Loading function')
 
-sts_client = boto3.client('sts')
-assumedRoleObject = sts_client.assume_role(
-    DurationSeconds=900,
-    RoleArn="arn:aws:iam::224919220385:role/eLambdaCrossAccountRole",
-    RoleSessionName="eLambdaCrossAccountRoleSession1"
-)
+def get_invoking_codepipeline():
+    sts_client = boto3.client('sts')
+    assumedRoleObject = sts_client.assume_role(
+        DurationSeconds=900,
+        RoleArn="arn:aws:iam::224919220385:role/eLambdaCrossAccountRole",
+        RoleSessionName="eLambdaCrossAccountRoleSession1"
+    )
 
-credentials = assumedRoleObject['Credentials']
+    credentials = assumedRoleObject['Credentials']
 
-print ("credentials = %s" % (credentials))
-code_pipeline = boto3.client(
-    'codepipeline',
-    aws_access_key_id = credentials['AccessKeyId'],
-    aws_secret_access_key = credentials['SecretAccessKey'],
-    aws_session_token = credentials['SessionToken'],
-)
+    print ("credentials = %s" % (credentials))
+    code_pipeline = boto3.client(
+        'codepipeline',
+        aws_access_key_id = credentials['AccessKeyId'],
+        aws_secret_access_key = credentials['SecretAccessKey'],
+        aws_session_token = credentials['SessionToken'],
+    )
+    return code_pipeline
 
 def get_user_params(job_data):
     try:
@@ -83,6 +85,7 @@ def put_job_failure(job, message):
     """
     print('Putting job failure')
     print(message)
+    code_pipeline = get_invoking_codepipeline()
     code_pipeline.put_job_failure_result(jobId=job, failureDetails={'message': message, 'type': 'JobFailed'})
  
 def put_job_success(job, message):
@@ -98,6 +101,7 @@ def put_job_success(job, message):
     """
     print('Putting job success')
     print(message)
+    code_pipeline = get_invoking_codepipeline()
     code_pipeline.put_job_success_result(jobId=job)
     
 def start_ec2(tag_key, tag_value):
