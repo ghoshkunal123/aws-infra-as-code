@@ -28,13 +28,17 @@ data "aws_ami" "windows" {
 
 data "template_file" "user_data" {
   template = "${file("analytics-rstudio-ec2user-data.txt.tpl")}"
+
+  vars {
+    computer_name = "${var.computer_name}"
+  }
 }
 
 #instance
 resource "aws_instance" "rstudio" {
   ami                    = "${data.aws_ami.windows.id}"
   instance_type          = "${var.ec2_instance_type}"
-  vpc_security_group_ids = ["${aws_security_group.rstudio.id}"]
+  vpc_security_group_ids = ["${aws_security_group.rstudio.id}", "${aws_security_group.allowLanDesk.id}", "${aws_security_group.fe-ad-comm.id}"]
   subnet_id              = "${data.aws_subnet.private1.id}"
   iam_instance_profile   = "${var.iam_instance_profile}"
   key_name               = "${var.ec2_key_name}"

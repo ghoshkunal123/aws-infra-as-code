@@ -37,12 +37,11 @@ variable "ec2_instance_type" {
   default = "m5.2xlarge"
 }
 
-# TBD: need to ask devopssec to create a different one
 variable "iam_instance_profile" {
-  default = "iAirflowAnalyticsFinr"
+  default = "iRStudioAnalyticsFinr"
 }
 
-#tags
+# tags
 variable "tag_app" {
   default = "analytics"
 }
@@ -68,10 +67,19 @@ variable "tag_ec2_Name" {
   default = "fngn-dataeng-rstudio"
 }
 
-variable "tag_SG_Name" {
+variable "tag_SG_Name_rstudio" {
   default = "analytics-rstudio"
 }
 
+variable "tag_SG_Name_allowLanDesk" {
+  default = "analytics-allowLanDesk"
+}
+
+variable "tag_SG_Name_fe-ad-comm" {
+  default = "analytics-fe-ad-communication"
+}
+
+# lambda
 variable "lambda_role_name" {
   default = "eLambdaExecutionAnalyticsFinr"
 }
@@ -82,4 +90,9 @@ variable "lambda_start_ec2_time" {
 
 variable "lambda_stop_ec2_time" {
   default = "cron(0 2 ? * * *)" #2AM UTC = 7PM PT
+}
+
+# user-data
+variable "computer_name" {
+  default = "anly-rstudio"
 }
