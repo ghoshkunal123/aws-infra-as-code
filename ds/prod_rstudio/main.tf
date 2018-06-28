@@ -1,12 +1,10 @@
 terraform {
   backend "s3" {
-    bucket     = "com.fngn.prod.terraform.us-west-1"
-    key        = "analytics_finr/aws-infra-as-code/da/rstudio/terraform.tfstate"
-    region     = "us-west-1"
-    encrypt    = true
-    lock_table = "terraform-locks"
-
-    #    dynamodb_table = "terraform-locks" #TBD: I do not have permission to write new item.
+    bucket         = "com.fngn.prod.terraform.us-west-1"
+    key            = "analytics_finr/aws-infra-as-code/ds/rstudio/terraform.tfstate"
+    region         = "us-west-1"
+    encrypt        = true
+    dynamodb_table = "terraform-locks"
   }
 }
 
