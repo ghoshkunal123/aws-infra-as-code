@@ -1,7 +1,7 @@
 <powershell>
   start-sleep -s 60
   # The DNS servers that we want to use
-  $newDNSServers = "10.131.14.220","10.131.15.221"
+  $newDNSServers = ${dns_servers}
   # Get all network adapters that already have DNS servers set
   $adapters = Get-WmiObject Win32_NetworkAdapterConfiguration | Where-Object {$_.DNSServerSearchOrder -ne $null}
  

@@ -4,7 +4,7 @@ provider "aws" {
   profile = "${var.aws_profile}"
 
   allowed_account_ids = [
-    "584917584607",
+    "584917584607"
   ]
 }
 

@@ -31,6 +31,7 @@ data "template_file" "user_data" {
 
   vars {
     computer_name = "${var.computer_name}"
+    dns_servers   = "${lookup(var.dns_servers, var.aws_region)}"
   }
 }
 
@@ -44,8 +45,8 @@ resource "aws_instance" "rstudio" {
   key_name               = "${var.ec2_key_name}"
   ebs_optimized          = true
 
-  #  monitoring             = true #TBD: comment it since I do not have permission for EC2:MonitorInstances
-  #TBD: I do not know which code is to :
+  monitoring = true
+
   # Running SSM agent, virus scanner installed (sentialone), pathing schedule set.
   user_data = "${data.template_file.user_data.rendered}"
 

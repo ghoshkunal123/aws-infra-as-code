@@ -63,8 +63,7 @@ variable "tag_env" {
 }
 
 variable "tag_ec2_Name" {
-  #TBD: current lambda service role only have permission to start/stop ec2 tag Name is "*fngn-dataeng*" will rename later on.
-  default = "fngn-dataeng-rstudio"
+  default = "fngn-datasci-rstudio"
 }
 
 variable "tag_SG_Name_rstudio" {
@@ -95,4 +94,13 @@ variable "lambda_stop_ec2_time" {
 # user-data
 variable "computer_name" {
   default = "anly-rstudio"
+}
+
+variable "dns_servers" {
+  type = "map"
+
+  default = {
+    us-west-1 = "\"10.131.14.220\",\"10.131.15.221\""
+    us-east-1 = "You need to set it"
+  }
 }
