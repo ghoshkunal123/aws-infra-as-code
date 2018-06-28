@@ -31,7 +31,6 @@ def get_invoking_codepipeline():
 
     credentials = assumedRoleObject['Credentials']
 
-    print ("credentials = %s" % (credentials))
     code_pipeline = boto3.client(
         'codepipeline',
         aws_access_key_id = credentials['AccessKeyId'],
