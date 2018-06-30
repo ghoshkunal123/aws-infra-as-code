@@ -2,6 +2,10 @@
 provider "aws" {
   region  = "${var.aws_region}"
   profile = "${var.aws_profile}"
+
+  allowed_account_ids = [
+    "483936848441",
+  ]
 }
 
 data "aws_caller_identity" "current" {}

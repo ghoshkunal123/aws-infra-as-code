@@ -70,10 +70,15 @@ variable "codedeploy_cross_account_prod_arn_role" {
   default = "arn:aws:iam::584917584607:role/eCodePipelineCrossAccountRole"
 }
 
+variable "lambda_enable_codepipeline_time" {}
+
+variable "lambda_disable_codepipeline_time" {}
+
 #sns
 variable "codepipeline_approval_ext_link" {}
 
-variable "codepipeline_approval_sns_subscription_endpoint" {}
+variable "codepipeline_approval_sns_subscription_endpoint1" {}
+variable "codepipeline_approval_sns_subscription_endpoint2" {}
 variable "codedeploy_failure_sns_subscription_endpoint" {}
 
 #cloudwatch
@@ -81,10 +86,20 @@ variable "cloudwatch_triggered_s3_object" {
   #  default "arn:aws:s3:::git-to-amazon-s3-outputbucket-1xatxah3q3bzb/AnalyticsDevOps/aws-infra-as-code/master/aws-infra-as-code.zip"  #  default = "arn:aws:s3:::git-to-amazon-s3-outputbucket-1xatxah3q3bzb/DataEngineering/de-datapipeline/master/de-datapipeline.zip"
 }
 
+#TBD: will change name to operate_ec2.py
 variable "lambda_operate_ec2_file_name" {
   default = "codepipeline_operate_ec2"
 }
 
 variable "lambda_operate_ec2_func_name" {
   default = "fngn-analytics-finr-codepipeline-operate-EC2"
+}
+
+#TBD: will change name to operate_codepipeline.py
+variable "lambda_operate_codepipeline_file_name" {
+  default = "codepipeline_operate_codepipeline"
+}
+
+variable "lambda_operate_codepipeline_func_name" {
+  default = "fngn-analytics-finr-codepipeline-operate-codepipeline"
 }

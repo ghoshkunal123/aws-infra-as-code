@@ -11,7 +11,11 @@ resource "aws_sns_topic" "codepipeline_approval" {
   name = "${local.codepipeline_approval_sns_topic_name}"
 
   provisioner "local-exec" {
-    command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.codepipeline_approval_sns_subscription_endpoint}"
+    command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.codepipeline_approval_sns_subscription_endpoint1}"
+  }
+
+  provisioner "local-exec" {
+    command = "aws sns subscribe --topic-arn ${self.arn} --protocol email --notification-endpoint ${var.codepipeline_approval_sns_subscription_endpoint2}"
   }
 }
 
