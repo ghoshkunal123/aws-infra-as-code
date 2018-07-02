@@ -57,10 +57,10 @@ resource "aws_instance" "rstudio" {
     env        = "${var.tag_env}"
   }
 
-  #  lifecycle { #TDB: not sure whether I need it, so comment it
-  #    ignore_changes = ["user_data", "tags"]
-  #  }
-  #
+  lifecycle {
+    prevent_destroy = true
+  }
+
   #  root_block_device {
   #    volume_size           = "100"
   #    volume_type           = "gp2"
