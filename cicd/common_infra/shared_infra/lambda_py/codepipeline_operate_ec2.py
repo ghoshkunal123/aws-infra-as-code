@@ -22,6 +22,13 @@ import datetime
 print('Loading function')
 
 def get_invoking_codepipeline():
+    account_alias = os.environ['account_alias']
+
+    if account_alias == "finr":
+        code_pipeline = boto3.client('codepipeline')
+        return code_pipeline
+
+    # account_alias must be one of test and prod 
     sts_client = boto3.client('sts')
     assumedRoleObject = sts_client.assume_role(
         DurationSeconds=900,
@@ -155,6 +162,10 @@ def stop_ec2(tag_key, tag_value):
 def lambda_handler(event, context):
 
     try:
+        account_alias = os.environ['account_alias']
+        if account_alias not in ["finr", "test", "prod"]:
+            raise ValueError('account_alias is not finr, test or prod')
+
      # Extract the Job ID
         print("here is event:")
         print (event)

@@ -8,7 +8,7 @@ provider "aws" {
   profile = "${var.aws_profile}"
 
   allowed_account_ids = [
-    "584917584607",
+    "${var.allowed_account_id}",
   ]
 }
 
@@ -24,12 +24,4 @@ data "aws_iam_role" "codedeploy_service_role" {
 
 output "AWSCodeDeployServiceRole_arn" {
   value = "${data.aws_iam_role.codedeploy_service_role.arn}"
-}
-
-data "aws_iam_role" "lambda_service_role" {
-  name = "eLambdaExecutionAnalyticsFinr"
-}
-
-output "LambdaServiceRole_arn" {
-  value = "${data.aws_iam_role.lambda_service_role.arn}"
 }

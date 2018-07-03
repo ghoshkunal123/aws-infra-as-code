@@ -30,16 +30,8 @@ output "eCodepipeline_path" {
   value = "${data.aws_iam_role.codepipeline_service_role.path}"
 }
 
-data "aws_iam_role" "codedeploy_service_role" {
-  name = "AWSCodeDeployServiceRole"
-}
-
-output "AWSCodeDeployServiceRole_arn" {
-  value = "${data.aws_iam_role.codedeploy_service_role.arn}"
-}
-
 data "aws_iam_role" "lambda_service_role" {
-  name = "eLambdaExecutionFinrAdmin"
+  name = "eLambdaExecutionFinrAdmin" # lambda service role for codepipeline
 }
 
 output "LambdaServiceRole_arn" {

@@ -3,19 +3,19 @@
 # Department: Data Engineering @ Analytics Office
 
 locals {
-  codedeploy_failure_sns_topic_name    = "analytics-failure-${var.git_repo_alias}"
+  codedeploy_failure_sns_topic_name    = "analytics-codedeploy-failure-${var.git_repo_alias}"
   codedeploy_deployment_group_tagvalue = "${var.git_repo_full_name}"
   codedeploy_deployment_group_name     = "${var.git_repo_alias}"
   codedeploy_application_name          = "analytics-${var.git_repo_alias}"
 }
 
-resource "aws_codedeploy_app" "test" {
+resource "aws_codedeploy_app" "de" {
   name = "${local.codedeploy_application_name}"
 }
 
 # create a deployment group
-resource "aws_codedeploy_deployment_group" "test" {
-  app_name               = "${aws_codedeploy_app.test.name}"
+resource "aws_codedeploy_deployment_group" "de" {
+  app_name               = "${aws_codedeploy_app.de.name}"
   deployment_group_name  = "${local.codedeploy_deployment_group_name}"
   service_role_arn       = "${data.aws_iam_role.codedeploy_service_role.arn}"
   deployment_config_name = "CodeDeployDefault.AllAtOnce"
@@ -29,7 +29,7 @@ resource "aws_codedeploy_deployment_group" "test" {
   trigger_configuration {
     trigger_events     = ["DeploymentFailure"]
     trigger_name       = "${var.codedeploy_trigger_name}"
-    trigger_target_arn = "${aws_sns_topic.codedeploy_failure_test.arn}"
+    trigger_target_arn = "${aws_sns_topic.codedeploy_failure_de.arn}"
   }
 
   # trigger a rollback on deployment failure event
@@ -42,7 +42,7 @@ resource "aws_codedeploy_deployment_group" "test" {
   }
 }
 
-resource "aws_sns_topic" "codedeploy_failure_test" {
+resource "aws_sns_topic" "codedeploy_failure_de" {
   name = "${local.codedeploy_failure_sns_topic_name}"
 
   provisioner "local-exec" {

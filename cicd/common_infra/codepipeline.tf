@@ -3,11 +3,12 @@
 # Department: Data Engineering @ Analytics Office
 
 locals {
-  codepipeline_name           = "${var.git_repo_full_name}"
-  codedeploy_application_name = "analytics-${var.git_repo_alias}"
-  stage_name_finr             = "Deploy-FINR-Account"             #TBD: if this name is changed, eLambdaExecutionFinrAdmin.json.tpl should be changed too.
-  stage_name_test             = "Deploy-TEST-Account"
-  stage_name_prod             = "Deploy-PROD-Account"
+  codepipeline_name                = "${var.git_repo_full_name}"
+  codedeploy_application_name      = "analytics-${var.git_repo_alias}"
+  codedeploy_deployment_group_name = "${var.git_repo_alias}"
+  stage_name_finr                  = "Deploy-FINR-Account"             #TBD: if this name is changed, eLambdaExecutionFinrAdmin.json.tpl should be changed too.
+  stage_name_test                  = "Deploy-TEST-Account"
+  stage_name_prod                  = "Deploy-PROD-Account"
 }
 
 resource "aws_codepipeline" "de" {
@@ -71,10 +72,9 @@ resource "aws_codepipeline" "de" {
       version         = "1"
 
       configuration {
-        ApplicationName     = "${aws_codedeploy_app.finr.name}"
-        DeploymentGroupName = "${aws_codedeploy_deployment_group.finr.deployment_group_name}"
+        ApplicationName     = "${local.codedeploy_application_name}"
+        DeploymentGroupName = "${local.codedeploy_deployment_group_name}"
       }
-
       run_order = 2
     }
 
